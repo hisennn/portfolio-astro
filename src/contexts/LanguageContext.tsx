@@ -27,12 +27,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.documentElement.setAttribute("data-theme", "dark");
     if (savedLanguage) {
       setLanguageState(savedLanguage);
+      document.documentElement.setAttribute("lang", savedLanguage === "en" ? "en" : "pt-BR");
     }
   }, []);
 
   const setLanguage = (lang: string) => {
     setLanguageState(lang);
     localStorage.setItem("language", lang);
+    document.documentElement.setAttribute("lang", lang === "en" ? "en" : "pt-BR");
   };
 
   const toggleTheme = () => {

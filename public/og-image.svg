@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Gabriel Lemes</title>
+  <desc id="desc">Portfolio de Gabriel Lemes, web developer.</desc>
+  <rect width="1200" height="630" fill="#0a0a0b"/>
+  <path d="M0 496h1200v134H0z" fill="#111113"/>
+  <path d="M80 96h1040v438H80z" fill="none" stroke="#2a2a2e" stroke-width="2"/>
+  <path d="M80 188h1040" stroke="#2a2a2e" stroke-width="2"/>
+  <circle cx="124" cy="142" r="9" fill="#b84040"/>
+  <circle cx="156" cy="142" r="9" fill="#ccbc9d"/>
+  <circle cx="188" cy="142" r="9" fill="#6d8f6f"/>
+  <text x="120" y="320" fill="#efedea" font-family="Arial, sans-serif" font-size="82" font-weight="700">Gabriel Lemes</text>
+  <text x="124" y="382" fill="#999894" font-family="Arial, sans-serif" font-size="34">Web Developer</text>
+  <text x="124" y="456" fill="#b84040" font-family="Arial, sans-serif" font-size="28">gabrielninth.com</text>
+</svg>

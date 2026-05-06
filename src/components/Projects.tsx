@@ -49,7 +49,7 @@ const projects = [
   {
     name: 'Baltimore Re-Construction Website',
     url: 'https://baltimorereconstruction.com/',
-    tech: ['Squarespace'],
+    tech: ['Astro', 'Tailwind', 'Cloudflare'],
     descKey: 'baltre' as const
   },
   {
