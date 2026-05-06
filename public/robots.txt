@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gabrielninth.com/sitemap.xml
+Sitemap: https://gabriellemes.com/sitemap.xml
