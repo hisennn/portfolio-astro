@@ -114,7 +114,7 @@ export default function Projects() {
                         <span className="project-link-text text-[19px] md:text-[22px] font-body font-semibold tracking-tight leading-tight">
                           {project.name}
                           <BoxIcon
-                            name="bx-link-external"
+                            name="bx-arrow-up-right-stroke"
                             size={15}
                             className="project-link-icon shrink-0"
                           />

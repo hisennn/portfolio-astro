@@ -62,7 +62,7 @@ export default function Hero() {
 
         <div className="flex flex-col gap-2">
           <p className="flex flex-wrap items-center gap-2 text-[16px] font-body text-[var(--text-secondary)]">
-            <BoxIcon name="bx-message-rounded-detail" size={16} />
+            <BoxIcon name="bx-message-circle-detail" size={16} />
             <span>
               {texts[lang].portuguese}{' '}
               <span className="text-[var(--text-muted)]">{texts[lang].native}</span>
@@ -104,13 +104,13 @@ export default function Hero() {
             download="Gabriel Lemes Currículo.pdf"
             className="flex items-center gap-2 text-base font-body text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
           >
-            <BoxIcon name="bx-download" size={17} />
+            <BoxIcon name="bx-arrow-to-bottom-stroke" size={17} />
             {texts[lang].downloadResume}
           </a>
         </div>
 
         <p className="-mt-2 flex items-center gap-2 text-sm font-body text-[var(--text-muted)]">
-          <BoxIcon name="bx-map" size={14} />
+          <BoxIcon name="bx-location-pin" size={14} />
           {texts[lang].location}
         </p>
       </div>
