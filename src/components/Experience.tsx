@@ -22,15 +22,15 @@ const experiences = [
     date: { pt: 'out 2025 - presente', en: 'oct 2025 - present' },
     items: {
       pt: [
-        'Criei a landing page do site da empresa usando Astro, Tailwind e Cloudflare, com foco em SEO',
         'Desenvolvo o BRC Client Portal para organizar clientes, obras, arquivos e comunicação com clientes',
+        'Criei o site da empresa usando Astro, Tailwind e Cloudflare e cuidei da parte de SEO',
         'Ajudo com planilhas e organização interna',
         'Colaboro com ideias para otimizar processos e organizar o fluxo de trabalho',
         'Apoio em marketing e divulgação'
       ],
       en: [
-        'Built the company landing page using Astro, Tailwind, and Cloudflare, with a focus on SEO',
         'Developing the BRC Client Portal to organize clients, jobs, files, and client communication',
+        'Built the company website using Astro, Tailwind, and Cloudflare and handled SEO',
         'Helping with spreadsheets and internal organization',
         'Collaborating with ideas to optimize processes and organize workflow',
         'Supporting marketing and outreach'
