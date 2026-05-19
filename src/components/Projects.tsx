@@ -13,6 +13,8 @@ const texts = {
       'Ferramenta para salvar e organizar coordenadas no Minecraft, com uma experiência simples de lista e consulta rápida.',
     baltre:
       'Site institucional para a Baltimore Re-Construction apresentar serviços, áreas atendidas e canais de contato.',
+    isaPsi:
+      'Site institucional para Isadora Tomazini Psicóloga apresentar atendimento presencial e online, áreas de atuação, informações profissionais e contato com formulário.',
     ana:
       'Portfólio profissional para arquiteta, com foco em apresentação visual dos projetos e contato direto.',
     previewTitle: 'portal / overview',
@@ -29,6 +31,8 @@ const texts = {
       'Tool for saving and organizing Minecraft coordinates, with a simple list-based flow for quick lookup.',
     baltre:
       'Company website for Baltimore Re-Construction, focused on services, service areas, and contact paths.',
+    isaPsi:
+      'Professional website for Isadora Tomazini Psicóloga, presenting in-person and online care, practice areas, professional information, and a contact form.',
     ana:
       'Professional portfolio for an architect, focused on presenting project work clearly and making contact easy.',
     previewTitle: 'portal / overview',
@@ -51,6 +55,12 @@ const projects = [
     url: 'https://baltimorereconstruction.com/',
     tech: ['Astro', 'Tailwind', 'Cloudflare'],
     descKey: 'baltre' as const
+  },
+  {
+    name: 'Isadora Tomazini Psicóloga',
+    url: 'https://isadoratomazini.com.br/',
+    tech: ['Astro', 'Cloudflare Pages Functions', 'Mailgun'],
+    descKey: 'isaPsi' as const
   },
   {
     name: 'Ana Zabala Portfolio',
