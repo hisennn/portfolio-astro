@@ -23,7 +23,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language");
     setIsDarkTheme(true);
-    localStorage.setItem("theme", "dark");
     document.documentElement.setAttribute("data-theme", "dark");
     if (savedLanguage) {
       setLanguageState(savedLanguage);
@@ -38,11 +37,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   };
 
   const toggleTheme = () => {
-    const newTheme = !isDarkTheme;
-    setIsDarkTheme(newTheme);
-    const themeValue = newTheme ? "dark" : "light";
-    localStorage.setItem("theme", themeValue);
-    document.documentElement.setAttribute("data-theme", themeValue);
   };
 
   return (
@@ -50,4 +44,4 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       {children}
     </LanguageContext.Provider>
   );
-} 
+}

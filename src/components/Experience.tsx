@@ -88,44 +88,48 @@ export default function Experience() {
           {texts[lang].title}
         </h2>
 
-        <div className="flex flex-col divide-y divide-[var(--border)] border-t border-[var(--border)] pt-2">
-          {experiences.map((exp) => (
-            <div key={exp.company} className="flex flex-col gap-5 py-8">
-              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                <div className="flex min-w-0 flex-col gap-1">
-                  <h3 className="text-[20px] md:text-[23px] font-body font-semibold text-[var(--text-primary)] tracking-tight leading-tight">
-                    {exp.role[lang]}
-                  </h3>
+        <div className="border-t border-[var(--border)] pt-10">
+          <div className="flex flex-col gap-12 border-l border-[var(--border)] pl-6 sm:pl-8 ml-1.5 relative w-full">
+            {experiences.map((exp) => (
+              <div key={exp.company} className="relative flex flex-col gap-4">
+                <div className="absolute -left-[31px] sm:-left-[39px] top-2.5 w-3 h-3 bg-[var(--bg-primary)] border-2 border-[var(--accent)] rounded-full transition-transform duration-300 hover:scale-125" />
+                
+                <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between w-full">
+                  <div className="flex min-w-0 flex-col gap-1">
+                    <h3 className="text-[20px] md:text-[22px] font-body font-semibold text-[var(--text-primary)] tracking-tight leading-tight">
+                      {exp.role[lang]}
+                    </h3>
 
-                  <span className="text-[17px] md:text-[19px] font-body font-medium tracking-normal leading-tight text-[var(--accent)]">
-                    {exp.company}
+                    <span className="text-[16px] md:text-[18px] font-body font-medium tracking-normal leading-tight text-[var(--accent)]">
+                      {exp.company}
+                    </span>
+
+                    {(exp.locationDetails || ('type' in exp && exp.type)) && (
+                      <div className="flex flex-wrap items-center gap-1.5 text-[13px] font-heading font-bold tracking-normal text-[var(--text-secondary)] opacity-85">
+                        {exp.locationDetails && <span>{exp.locationDetails[lang]}</span>}
+                        {exp.locationDetails && 'type' in exp && exp.type && (
+                          <span>·</span>
+                        )}
+                        {'type' in exp && exp.type && <span>{texts[lang][exp.type]}</span>}
+                      </div>
+                    )}
+                  </div>
+
+                  <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-[var(--text-muted)] bg-[var(--bg-secondary)] px-2 py-1 select-none md:shrink-0 md:mt-1 self-start md:self-auto">
+                    {exp.date[lang]}
                   </span>
-
-                  {(exp.locationDetails || ('type' in exp && exp.type)) && (
-                    <div className="flex flex-wrap items-center gap-1.5 text-[14px] font-heading font-semibold tracking-normal text-[var(--text-secondary)] opacity-85">
-                      {exp.locationDetails && <span>{exp.locationDetails[lang]}</span>}
-                      {exp.locationDetails && 'type' in exp && exp.type && (
-                        <span>·</span>
-                      )}
-                      {'type' in exp && exp.type && <span>{texts[lang][exp.type]}</span>}
-                    </div>
-                  )}
                 </div>
 
-                <span className="text-[12px] font-heading font-semibold tracking-normal text-[var(--text-muted)] whitespace-nowrap md:shrink-0 md:pt-1.5">
-                  {exp.date[lang]}
-                </span>
+                <ul className="text-[15px] font-body font-normal text-[var(--text-secondary)] leading-relaxed space-y-2.5">
+                  {exp.items[lang].map((item, i) => (
+                    <li key={i} className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-[9px] before:w-1.5 before:h-1.5 before:border before:border-[var(--text-muted)]/60 before:bg-transparent">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <ul className="text-[16px] font-body font-normal text-[var(--text-secondary)] leading-relaxed space-y-2 list-disc list-outside ml-4 marker:text-[var(--text-muted)]">
-                {exp.items[lang].map((item, i) => (
-                  <li key={i} className="pl-1">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

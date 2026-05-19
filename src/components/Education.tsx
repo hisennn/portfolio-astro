@@ -5,27 +5,21 @@ import { useLanguage } from '../hooks/useLanguage';
 const texts = {
   pt: {
     title: 'Formação',
-    text: 'Estou no sexto e último semestre de Análise e Desenvolvimento de Sistemas. Também continuo aprendendo através de cursos online para melhorar minhas habilidades.',
-    formal: 'Formal',
-    online: 'Cursos online',
+    text: 'Estou no sexto e último semestre de Análise e Desenvolvimento de Sistemas. Também continuo aprendendo para melhorar minhas habilidades.',
+    status: 'Em andamento',
     uni: 'Claretiano',
     uniDate: 'jan 2024 - jul 2026',
     uniCourse: 'Análise e Desenvolvimento de Sistemas',
-    uniType: 'Tecnólogo',
-    course: 'Front End e UX/UI Design',
-    courseProvider: 'Origamid'
+    uniType: 'Tecnólogo'
   },
   en: {
     title: 'Education',
-    text: 'Sixth and final semester of Systems Analysis and Development. Also learning through online courses to improve my skills.',
-    formal: 'Formal',
-    online: 'Online courses',
+    text: 'Sixth and final semester of Systems Analysis and Development. Also continuing to learn to improve my skills.',
+    status: 'In progress',
     uni: 'Claretiano',
     uniDate: 'jan 2024 - jul 2026',
     uniCourse: 'Systems Analysis and Development',
-    uniType: 'Associate Degree',
-    course: 'Front End and UX/UI Design',
-    courseProvider: 'Origamid'
+    uniType: 'Associate Degree'
   }
 } as const;
 
@@ -44,9 +38,9 @@ export default function Education() {
             {texts[lang].text}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 items-baseline mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 items-baseline">
             <span className="col-span-1 text-[13px] font-heading font-semibold uppercase tracking-[0.06em] text-[var(--text-muted)]">
-              {texts[lang].formal}
+              {texts[lang].status}
             </span>
             <div className="flex flex-col gap-2">
               <h3 className="text-xl md:text-2xl font-body font-normal tracking-tight text-[var(--text-primary)]">
@@ -59,20 +53,6 @@ export default function Education() {
                 <span className="hidden sm:inline text-[var(--text-muted)]">/</span>
                 <span>{texts[lang].uniDate}</span>
               </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 items-baseline opacity-70 mt-8 md:mt-4">
-            <span className="col-span-1 text-[13px] font-heading font-semibold uppercase tracking-[0.06em] text-[var(--text-muted)]">
-              {texts[lang].online}
-            </span>
-            <div className="flex flex-col gap-2">
-              <h3 className="text-lg md:text-xl font-body font-normal tracking-tight text-[var(--text-primary)]">
-                {texts[lang].course}
-              </h3>
-              <p className="font-heading font-semibold text-[13px] text-[var(--text-muted)]">
-                {texts[lang].courseProvider}
-              </p>
             </div>
           </div>
         </div>
