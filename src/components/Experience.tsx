@@ -22,14 +22,14 @@ const experiences = [
     date: { pt: 'out 2025 - presente', en: 'oct 2025 - present' },
     items: {
       pt: [
-        'Criei o site da empresa usando Squarespace, com foco em SEO',
+        'Criei a landing page do site da empresa usando Astro, Tailwind e Cloudflare, com foco em SEO',
         'Desenvolvo o BRC Client Portal para organizar clientes, obras, arquivos e comunicação com clientes',
         'Ajudo com planilhas e organização interna',
         'Colaboro com ideias para otimizar processos e organizar o fluxo de trabalho',
         'Apoio em marketing e divulgação'
       ],
       en: [
-        'Built the company website using Squarespace, with a focus on SEO',
+        'Built the company landing page using Astro, Tailwind, and Cloudflare, with a focus on SEO',
         'Developing the BRC Client Portal to organize clients, jobs, files, and client communication',
         'Helping with spreadsheets and internal organization',
         'Collaborating with ideas to optimize processes and organize workflow',
