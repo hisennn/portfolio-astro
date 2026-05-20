@@ -78,21 +78,21 @@ const projects = [
 
 export default function Projects() {
   const { lang } = useLanguage();
-
+ 
   const handleCardLight = (event: MouseEvent<HTMLElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     event.currentTarget.style.setProperty('--project-light-x', `${event.clientX - rect.left}px`);
     event.currentTarget.style.setProperty('--project-light-y', `${event.clientY - rect.top}px`);
   };
-
+ 
   return (
-    <section>
+    <section className="border-t border-[var(--border)] pt-12 md:pt-16">
       <div className="flex flex-col gap-8">
         <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tight text-[var(--text-primary)]">
           {texts[lang].title}
         </h2>
-
-        <div className="border-t border-[var(--border)] pt-8">
+ 
+        <div className="w-full">
           <div className="project-card-grid">
             {projects.map((project) => {
               const isLinked = 'url' in project && project.url;
@@ -105,7 +105,7 @@ export default function Projects() {
                     rel: 'noopener noreferrer'
                   }
                 : {};
-
+ 
               return (
                 <CardElement
                   key={project.name}
@@ -118,67 +118,73 @@ export default function Projects() {
                   onMouseMove={handleCardLight}
                   {...cardProps}
                 >
-                  <div className="project-card-body">
-                    {isLinked ? (
-                      <span className="project-link-shell">
-                        <span className="project-link-text text-[19px] md:text-[22px] font-body font-semibold tracking-tight leading-tight">
+                  <div className="project-card-body h-full justify-between">
+                    <div className="flex flex-col gap-4">
+                      {isLinked ? (
+                        <span className="project-link-shell">
+                          <span className="project-link-text text-[18px] md:text-[20px] font-body font-semibold tracking-tight leading-tight">
+                            {project.name}
+                            <BoxIcon
+                              name="bx-arrow-up-right-stroke"
+                              size={15}
+                              className="project-link-icon shrink-0"
+                            />
+                          </span>
+                          <span aria-hidden="true" className="project-link-bar" />
+                        </span>
+                      ) : (
+                        <span className="project-link-static text-[18px] md:text-[20px] font-body font-semibold tracking-tight leading-tight">
                           {project.name}
-                          <BoxIcon
-                            name="bx-arrow-up-right-stroke"
-                            size={15}
-                            className="project-link-icon shrink-0"
-                          />
                         </span>
-                        <span aria-hidden="true" className="project-link-bar" />
-                      </span>
-                    ) : (
-                      <span className="project-link-static text-[19px] md:text-[22px] font-body font-semibold tracking-tight leading-tight">
-                        {project.name}
-                      </span>
-                    )}
-
-                    <p className="project-card-copy">
-                      {texts[lang][project.descKey]}
-                    </p>
-
-                    {isFeatured && (
-                      <div className="project-card-preview" aria-hidden="true">
-                        <div className="project-card-preview-head">
-                          <span />
-                          <span />
-                          <span />
-                          <strong>{texts[lang].previewTitle}</strong>
+                      )}
+ 
+                      <p className="project-card-copy text-[14px] md:text-[15px] leading-relaxed">
+                        {texts[lang][project.descKey]}
+                      </p>
+ 
+                      {isFeatured && (
+                        <div className="project-card-preview mt-4 border border-[var(--border)]" aria-hidden="true">
+                          <div className="project-card-preview-head bg-[var(--bg-secondary)]/50 px-4 py-2 border-b border-[var(--border)] flex items-center gap-2">
+                            <div className="flex gap-1.5">
+                              <span className="w-2.5 h-2.5 rounded-full bg-[#e46f61] opacity-90" />
+                              <span className="w-2.5 h-2.5 rounded-full bg-[#d8ad4f] opacity-90" />
+                              <span className="w-2.5 h-2.5 rounded-full bg-[#63b876] opacity-90" />
+                            </div>
+                            <strong className="text-[10px] font-heading font-bold tracking-[0.12em] uppercase text-[var(--text-muted)] ml-2">
+                              {texts[lang].previewTitle}
+                            </strong>
+                          </div>
+                          <div className="project-card-preview-grid grid grid-cols-2 gap-2 p-3 bg-[var(--bg-primary)]">
+                            <span className="flex items-center gap-2.5 border border-[var(--border-subtle)] bg-[var(--card-bg)] px-3 py-2 text-xs font-heading font-semibold text-[var(--text-secondary)] rounded-sm">
+                              <BoxIcon name="bx-user" size={14} className="text-[var(--accent)]" />
+                              {texts[lang].clients}
+                            </span>
+                            <span className="flex items-center gap-2.5 border border-[var(--border-subtle)] bg-[var(--card-bg)] px-3 py-2 text-xs font-heading font-semibold text-[var(--text-secondary)] rounded-sm">
+                              <BoxIcon name="bx-layout" size={14} className="text-[var(--accent)]" />
+                              {texts[lang].projects}
+                            </span>
+                            <span className="flex items-center gap-2.5 border border-[var(--border-subtle)] bg-[var(--card-bg)] px-3 py-2 text-xs font-heading font-semibold text-[var(--text-secondary)] rounded-sm">
+                              <BoxIcon name="bx-folder" size={14} className="text-[var(--accent)]" />
+                              {texts[lang].files}
+                            </span>
+                            <span className="flex items-center gap-2.5 border border-[var(--border-subtle)] bg-[var(--card-bg)] px-3 py-2 text-xs font-heading font-semibold text-[var(--text-secondary)] rounded-sm">
+                              <BoxIcon name="bx-broadcast" size={14} className="text-[var(--accent)]" />
+                              {texts[lang].realtime}
+                            </span>
+                          </div>
                         </div>
-                        <div className="project-card-preview-grid">
-                          <span>
-                            <BoxIcon name="bx-user" size={15} />
-                            {texts[lang].clients}
+                      )}
+                    </div>
+ 
+                    <div className="project-card-footer">
+                      <div className="project-card-tech">
+                        {project.tech.map((item, index) => (
+                          <span key={item}>
+                            {item}
+                            {index < project.tech.length - 1 ? ',' : ''}
                           </span>
-                          <span>
-                            <BoxIcon name="bx-layout" size={15} />
-                            {texts[lang].projects}
-                          </span>
-                          <span>
-                            <BoxIcon name="bx-folder" size={15} />
-                            {texts[lang].files}
-                          </span>
-                          <span>
-                            <BoxIcon name="bx-broadcast" size={15} />
-                            {texts[lang].realtime}
-                          </span>
-                        </div>
+                        ))}
                       </div>
-                    )}
-                  </div>
-
-                  <div className="project-card-footer">
-                    <div className="project-card-tech">
-                      {project.tech.map((item, index) => (
-                        <span key={item}>
-                          {item}
-                          {index < project.tech.length - 1 ? ',' : ''}
-                        </span>
-                      ))}
                     </div>
                   </div>
                 </CardElement>
