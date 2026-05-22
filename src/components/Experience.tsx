@@ -18,7 +18,7 @@ const texts = {
 const experiences = [
   {
     company: 'Baltimore Re-Construction, LLC',
-    role: { pt: 'Assistente Operacional', en: 'Operations Assistant' },
+    role: { pt: 'Operations & Web Developer', en: 'Operations & Web Developer' },
     date: { pt: 'out 2025 - presente', en: 'oct 2025 - present' },
     items: {
       pt: [
@@ -83,53 +83,51 @@ export default function Experience() {
 
   return (
     <section>
-      <div className="flex flex-col gap-8">
-        <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tight text-[var(--text-primary)]">
+      <div className="flex flex-col gap-6">
+        <h2 className="text-xs font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
           {texts[lang].title}
         </h2>
 
-        <div className="border-t border-[var(--border)] pt-10">
-          <div className="flex flex-col gap-12 border-l border-[var(--border)] pl-6 sm:pl-8 ml-1.5 relative w-full">
-            {experiences.map((exp) => (
-              <div key={exp.company} className="relative flex flex-col gap-4">
-                <div className="absolute -left-[31px] sm:-left-[39px] top-2.5 w-3 h-3 bg-[var(--bg-primary)] border-2 border-[var(--accent)] rounded-full transition-transform duration-300 hover:scale-125" />
-                
-                <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between w-full">
-                  <div className="flex min-w-0 flex-col gap-1">
-                    <h3 className="text-[20px] md:text-[22px] font-body font-semibold text-[var(--text-primary)] tracking-tight leading-tight">
-                      {exp.role[lang]}
-                    </h3>
+        <div className="experience-timeline relative ml-0.5 flex flex-col gap-10 pl-6">
+          {experiences.map((exp) => (
+            <div key={exp.company} className="group relative flex flex-col gap-3">
+              <div className="experience-timeline-dot absolute left-[-24px] top-[9px] h-[9px] w-[9px] -translate-x-1/2 rounded-full transition-all duration-300 group-hover:scale-125" />
 
-                    <span className="text-[16px] md:text-[18px] font-body font-medium tracking-normal leading-tight text-[var(--accent)]">
-                      {exp.company}
-                    </span>
+              <div className="flex flex-col gap-1.5 md:flex-row md:items-start md:justify-between w-full">
+                <div className="flex min-w-0 flex-col gap-0.5">
+                  <h3 className="text-[17px] font-body font-medium text-[var(--text-primary)] tracking-tight leading-snug">
+                    {exp.role[lang]}
+                  </h3>
 
-                    {(exp.locationDetails || ('type' in exp && exp.type)) && (
-                      <div className="flex flex-wrap items-center gap-1.5 text-[13px] font-heading font-bold tracking-normal text-[var(--text-secondary)] opacity-85">
-                        {exp.locationDetails && <span>{exp.locationDetails[lang]}</span>}
-                        {exp.locationDetails && 'type' in exp && exp.type && (
-                          <span>·</span>
-                        )}
-                        {'type' in exp && exp.type && <span>{texts[lang][exp.type]}</span>}
-                      </div>
-                    )}
-                  </div>
-
-                  <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-[var(--text-muted)] bg-[var(--bg-secondary)] px-2 py-1 select-none md:shrink-0 md:mt-1 self-start md:self-auto">
-                    {exp.date[lang]}
+                  <span className="text-[16px] font-body font-normal text-[var(--text-secondary)]">
+                    {exp.company}
                   </span>
+
+                  {(exp.locationDetails || ('type' in exp && exp.type)) && (
+                    <div className="flex flex-wrap items-center gap-1 text-[13px] font-body font-normal text-[var(--text-muted)]">
+                      {exp.locationDetails && <span>{exp.locationDetails[lang]}</span>}
+                      {exp.locationDetails && 'type' in exp && exp.type && (
+                        <span>·</span>
+                      )}
+                      {'type' in exp && exp.type && <span>{texts[lang][exp.type]}</span>}
+                    </div>
+                  )}
                 </div>
 
-                <ul className="text-[15px] font-body font-normal text-[var(--text-secondary)] leading-relaxed space-y-2.5">
-                  {exp.items[lang].map((item, i) => (
-                    <li key={i} className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-[9px] before:w-1.5 before:h-1.5 before:border before:border-[var(--text-muted)]/60 before:bg-transparent">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <span className="text-[12px] font-body font-normal text-[var(--text-muted)] md:shrink-0 md:mt-0.5 self-start">
+                  {exp.date[lang]}
+                </span>
               </div>
-            ))}
-          </div>
+
+              <ul className="text-[15px] font-body font-normal text-[var(--text-secondary)] leading-[1.7] space-y-1.5">
+                {exp.items[lang].map((item, i) => (
+                  <li key={i} className="relative pl-4 before:content-['–'] before:absolute before:left-0 before:text-[var(--text-muted)]">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>

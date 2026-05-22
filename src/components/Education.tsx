@@ -28,29 +28,29 @@ export default function Education() {
 
   return (
     <section>
-      <div className="flex flex-col gap-8">
-        <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tight text-[var(--text-primary)]">
+      <div className="flex flex-col gap-6">
+        <h2 className="text-xs font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
           {texts[lang].title}
         </h2>
 
-        <div className="flex flex-col border-t border-[var(--border)] pt-8">
-          <p className="text-[var(--text-secondary)] font-body text-lg md:text-xl font-normal leading-relaxed max-w-2xl mb-12 break-words">
+        <div className="flex flex-col gap-6">
+          <p className="text-[var(--text-secondary)] font-body text-base font-normal leading-[1.7] max-w-[680px]">
             {texts[lang].text}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 items-baseline">
-            <span className="col-span-1 text-[13px] font-heading font-semibold uppercase tracking-[0.06em] text-[var(--text-muted)]">
+          <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-3 items-baseline">
+            <span className="text-[13px] font-body font-medium text-[var(--text-muted)]">
               {texts[lang].status}
             </span>
-            <div className="flex flex-col gap-2">
-              <h3 className="text-xl md:text-2xl font-body font-normal tracking-tight text-[var(--text-primary)]">
+            <div className="flex flex-col gap-1">
+              <h3 className="text-[17px] font-body font-medium tracking-tight text-[var(--text-primary)]">
                 {texts[lang].uniCourse}
               </h3>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 font-heading font-semibold text-[14px] text-[var(--text-muted)]">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 font-body font-normal text-[13px] text-[var(--text-muted)]">
                 <span>{texts[lang].uni}</span>
-                <span className="hidden sm:inline text-[var(--text-muted)]">/</span>
+                <span className="hidden sm:inline">·</span>
                 <span>{texts[lang].uniType}</span>
-                <span className="hidden sm:inline text-[var(--text-muted)]">/</span>
+                <span className="hidden sm:inline">·</span>
                 <span>{texts[lang].uniDate}</span>
               </div>
             </div>

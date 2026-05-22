@@ -18,11 +18,11 @@ export default function About() {
 
   return (
     <section>
-      <div className="flex flex-col gap-6">
-        <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tight text-[var(--text-primary)]">
+      <div className="flex flex-col gap-4">
+        <h2 className="text-xs font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
           {texts[lang].title}
         </h2>
-        <p className="max-w-full text-[var(--text-secondary)] text-[17px] md:text-[18px] font-body font-normal leading-relaxed break-words">
+        <p className="max-w-[680px] text-[var(--text-secondary)] text-base font-body font-normal leading-[1.7]">
           {texts[lang].about}
         </p>
       </div>

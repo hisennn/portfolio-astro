@@ -2,13 +2,12 @@
 
 import { useLanguage } from '../hooks/useLanguage';
 import BoxIcon from './BoxIcon';
-import type { MouseEvent } from 'react';
 
 const texts = {
   pt: {
     title: 'Projetos',
     brcPortal:
-      'Portal fechado para a Baltimore Re-Construction gerenciar clientes, projetos, etapas, arquivos, comentários e escolhas de materiais em tempo real.',
+      'Portal fechado para a Baltimore Re-Construction gerenciar clientes, obras, etapas, arquivos, comentários, escolhas de materiais, assinatura de contratos e consultas administrativas sobre projetos.',
     coord:
       'Ferramenta para salvar e organizar coordenadas no Minecraft, com uma experiência simples de lista e consulta rápida.',
     baltre:
@@ -26,7 +25,7 @@ const texts = {
   en: {
     title: 'Projects',
     brcPortal:
-      'Private portal for Baltimore Re-Construction to manage clients, projects, phases, files, comments, and material selections in real time.',
+      'Private portal for Baltimore Re-Construction to manage clients, projects, phases, files, comments, material selections, contract signing, and admin questions about project data.',
     coord:
       'Tool for saving and organizing Minecraft coordinates, with a simple list-based flow for quick lookup.',
     baltre:
@@ -46,7 +45,7 @@ const texts = {
 const projects = [
   {
     name: 'BRC Client Portal',
-    tech: ['React Router 7', 'TypeScript', 'Cloudflare Workers', 'Neon', 'Drizzle', 'Ably'],
+    tech: ['React Router 7', 'TypeScript', 'Cloudflare Workers', 'Neon', 'Drizzle', 'Ably', 'SignWell'],
     descKey: 'brcPortal' as const,
     variant: 'featured' as const
   },
@@ -79,16 +78,10 @@ const projects = [
 export default function Projects() {
   const { lang } = useLanguage();
  
-  const handleCardLight = (event: MouseEvent<HTMLElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    event.currentTarget.style.setProperty('--project-light-x', `${event.clientX - rect.left}px`);
-    event.currentTarget.style.setProperty('--project-light-y', `${event.clientY - rect.top}px`);
-  };
- 
   return (
-    <section className="border-t border-[var(--border)] pt-12 md:pt-16">
-      <div className="flex flex-col gap-8">
-        <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tight text-[var(--text-primary)]">
+    <section>
+      <div className="flex flex-col gap-6">
+        <h2 className="text-xs font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
           {texts[lang].title}
         </h2>
  
@@ -115,60 +108,59 @@ export default function Projects() {
                     isLinked ? 'project-card-linked' : '',
                     !isLinked ? 'project-card-hoverable' : ''
                   ].filter(Boolean).join(' ')}
-                  onMouseMove={handleCardLight}
                   {...cardProps}
                 >
                   <div className="project-card-body h-full justify-between">
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-3">
                       {isLinked ? (
                         <span className="project-link-shell">
-                          <span className="project-link-text text-[18px] md:text-[20px] font-body font-semibold tracking-tight leading-tight">
+                          <span className="project-link-text text-[17px] font-body font-medium tracking-tight leading-snug">
                             {project.name}
                             <BoxIcon
                               name="bx-arrow-up-right-stroke"
-                              size={15}
+                              size={13}
                               className="project-link-icon shrink-0"
                             />
                           </span>
                           <span aria-hidden="true" className="project-link-bar" />
                         </span>
                       ) : (
-                        <span className="project-link-static text-[18px] md:text-[20px] font-body font-semibold tracking-tight leading-tight">
+                        <span className="project-link-static text-[17px] font-body font-medium tracking-tight leading-snug">
                           {project.name}
                         </span>
                       )}
  
-                      <p className="project-card-copy text-[14px] md:text-[15px] leading-relaxed">
+                      <p className="project-card-copy text-[15px] leading-[1.65]">
                         {texts[lang][project.descKey]}
                       </p>
  
                       {isFeatured && (
-                        <div className="project-card-preview mt-4 border border-[var(--border)]" aria-hidden="true">
-                          <div className="project-card-preview-head bg-[var(--bg-secondary)]/50 px-4 py-2 border-b border-[var(--border)] flex items-center gap-2">
+                        <div className="project-card-preview" aria-hidden="true">
+                          <div className="project-card-preview-head">
                             <div className="flex gap-1.5">
-                              <span className="w-2.5 h-2.5 rounded-full bg-[#e46f61] opacity-90" />
-                              <span className="w-2.5 h-2.5 rounded-full bg-[#d8ad4f] opacity-90" />
-                              <span className="w-2.5 h-2.5 rounded-full bg-[#63b876] opacity-90" />
+                              <span />
+                              <span />
+                              <span />
                             </div>
-                            <strong className="text-[10px] font-heading font-bold tracking-[0.12em] uppercase text-[var(--text-muted)] ml-2">
+                            <strong>
                               {texts[lang].previewTitle}
                             </strong>
                           </div>
-                          <div className="project-card-preview-grid grid grid-cols-2 gap-2 p-3 bg-[var(--bg-primary)]">
-                            <span className="flex items-center gap-2.5 border border-[var(--border-subtle)] bg-[var(--card-bg)] px-3 py-2 text-xs font-heading font-semibold text-[var(--text-secondary)] rounded-sm">
-                              <BoxIcon name="bx-user" size={14} className="text-[var(--accent)]" />
+                          <div className="project-card-preview-grid">
+                            <span>
+                              <BoxIcon name="bx-user" size={13} className="text-[var(--text-muted)]" />
                               {texts[lang].clients}
                             </span>
-                            <span className="flex items-center gap-2.5 border border-[var(--border-subtle)] bg-[var(--card-bg)] px-3 py-2 text-xs font-heading font-semibold text-[var(--text-secondary)] rounded-sm">
-                              <BoxIcon name="bx-layout" size={14} className="text-[var(--accent)]" />
+                            <span>
+                              <BoxIcon name="bx-layout" size={13} className="text-[var(--text-muted)]" />
                               {texts[lang].projects}
                             </span>
-                            <span className="flex items-center gap-2.5 border border-[var(--border-subtle)] bg-[var(--card-bg)] px-3 py-2 text-xs font-heading font-semibold text-[var(--text-secondary)] rounded-sm">
-                              <BoxIcon name="bx-folder" size={14} className="text-[var(--accent)]" />
+                            <span>
+                              <BoxIcon name="bx-folder" size={13} className="text-[var(--text-muted)]" />
                               {texts[lang].files}
                             </span>
-                            <span className="flex items-center gap-2.5 border border-[var(--border-subtle)] bg-[var(--card-bg)] px-3 py-2 text-xs font-heading font-semibold text-[var(--text-secondary)] rounded-sm">
-                              <BoxIcon name="bx-broadcast" size={14} className="text-[var(--accent)]" />
+                            <span>
+                              <BoxIcon name="bx-broadcast" size={13} className="text-[var(--text-muted)]" />
                               {texts[lang].realtime}
                             </span>
                           </div>

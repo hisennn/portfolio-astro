@@ -22,11 +22,18 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language");
-    setIsDarkTheme(true);
-    document.documentElement.setAttribute("data-theme", "dark");
     if (savedLanguage) {
       setLanguageState(savedLanguage);
       document.documentElement.setAttribute("lang", savedLanguage === "en" ? "en" : "pt-BR");
+    }
+
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+      setIsDarkTheme(false);
+      document.documentElement.setAttribute("data-theme", "light");
+    } else {
+      setIsDarkTheme(true);
+      document.documentElement.setAttribute("data-theme", "dark");
     }
   }, []);
 
@@ -37,6 +44,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   };
 
   const toggleTheme = () => {
+    setIsDarkTheme((prev) => {
+      const next = !prev;
+      const theme = next ? "dark" : "light";
+      localStorage.setItem("theme", theme);
+      document.documentElement.setAttribute("data-theme", theme);
+      return next;
+    });
   };
 
   return (
