@@ -84,7 +84,7 @@ export default function Experience() {
   return (
     <section>
       <div className="flex flex-col gap-6">
-        <h2 className="text-xs font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
+        <h2 className="text-[15px] font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
           {texts[lang].title}
         </h2>
 
