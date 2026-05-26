@@ -42,6 +42,13 @@
   --project-card-bg: #0d0d0d;
 }
 
+.theme-loading,
+.theme-loading *,
+.theme-loading *::before,
+.theme-loading *::after {
+  transition: none !important;
+}
+
 body {
   background: var(--bg-primary);
   color: var(--text-primary);

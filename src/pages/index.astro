@@ -36,7 +36,7 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark" class="theme-loading">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,6 +61,23 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
     <title>{title}</title>
+    <script is:inline>
+      (function() {
+        var root = document.documentElement;
+        try {
+          var t = localStorage.getItem('theme');
+          root.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+        } catch (_) {
+          root.setAttribute('data-theme', 'dark');
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+          requestAnimationFrame(function() {
+            root.classList.remove('theme-loading');
+          });
+        });
+      })();
+    </script>
     <link rel="canonical" href={siteUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -74,16 +91,6 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="antialiased">
-    <script is:inline>
-      (function() {
-        var t = localStorage.getItem('theme');
-        if (t === 'light' || t === 'dark') {
-          document.documentElement.setAttribute('data-theme', t);
-        } else {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
-      })();
-    </script>
     <App client:load />
   </body>
 </html>
