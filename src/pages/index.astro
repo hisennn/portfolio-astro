@@ -17,12 +17,12 @@ const jsonLd = {
     "@type": "PostalAddress",
     addressLocality: "Batatais",
     addressRegion: "SP",
-    addressCountry: "BR"
+    addressCountry: "BR",
   },
   email: "mailto:gabrielsilvarz@outlook.com",
   sameAs: [
     "https://www.linkedin.com/in/gabrieldslemes/",
-    "https://github.com/Hisennn"
+    "https://github.com/Hisennn",
   ],
   knowsAbout: [
     "Frontend Development",
@@ -30,8 +30,8 @@ const jsonLd = {
     "TypeScript",
     "Astro",
     "Next.js",
-    "Cloudflare"
-  ]
+    "Cloudflare",
+  ],
 };
 ---
 
@@ -55,45 +55,69 @@ const jsonLd = {
     <meta property="og:url" content={siteUrl} />
     <meta property="og:image" content={imageUrl} />
     <meta property="og:image:type" content="image/svg+xml" />
-    <meta property="og:image:alt" content="Gabriel Lemes web developer portfolio" />
+    <meta
+      property="og:image:alt"
+      content="Gabriel Lemes web developer portfolio"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
     <title>{title}</title>
     <script is:inline>
-      (function() {
+      (function () {
         var root = document.documentElement;
         try {
-          var t = localStorage.getItem('theme');
-          root.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+          var t = localStorage.getItem("theme");
+          root.setAttribute("data-theme", t === "light" ? "light" : "dark");
         } catch (_) {
-          root.setAttribute('data-theme', 'dark');
+          root.setAttribute("data-theme", "dark");
         }
 
-        function enableTransitions() {
-          requestAnimationFrame(function() {
-            root.classList.remove('theme-loading');
+        // Enable transitions after page load
+        function unlockTransitions() {
+          requestAnimationFrame(function () {
+            root.classList.remove("theme-loading");
           });
         }
 
-        if (document.readyState === 'loading') {
-          window.addEventListener('DOMContentLoaded', enableTransitions, { once: true });
+        // Try multiple strategies to ensure transitions unlock
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", unlockTransitions);
         } else {
-          enableTransitions();
+          unlockTransitions();
         }
+
+        // Fallback: always unlock after 100ms
+        setTimeout(unlockTransitions, 100);
       })();
     </script>
     <link rel="canonical" href={siteUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&display=swap"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2.2" />
     <link rel="sitemap" href="/sitemap.xml" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    <link rel="stylesheet" href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" />
-    <link rel="stylesheet" href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css" />
-    <link rel="stylesheet" href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css"
+    />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="antialiased">
