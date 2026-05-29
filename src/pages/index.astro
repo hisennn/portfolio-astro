@@ -71,11 +71,17 @@ const jsonLd = {
           root.setAttribute('data-theme', 'dark');
         }
 
-        window.addEventListener('DOMContentLoaded', function() {
+        function enableTransitions() {
           requestAnimationFrame(function() {
             root.classList.remove('theme-loading');
           });
-        });
+        }
+
+        if (document.readyState === 'loading') {
+          window.addEventListener('DOMContentLoaded', enableTransitions, { once: true });
+        } else {
+          enableTransitions();
+        }
       })();
     </script>
     <link rel="canonical" href={siteUrl} />
