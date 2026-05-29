@@ -51,7 +51,9 @@ const skills = [
   { name: 'Cloudflare', icon: 'devicon-cloudflare-plain' },
   { name: 'Git', icon: 'devicon-git-plain' },
   { name: 'GitHub', icon: 'devicon-github-original' },
-  { name: 'Figma', icon: 'devicon-figma-plain' }
+  { name: 'Figma', icon: 'devicon-figma-plain' },
+  { name: 'Claude', iconSrc: '/icons/claude.svg' },
+  { name: 'ChatGPT', iconSrc: '/icons/openai.svg' }
 ];
 
 const SkillItem = ({ skill }: { skill: typeof skills[0] }) => {
@@ -68,9 +70,20 @@ const SkillItem = ({ skill }: { skill: typeof skills[0] }) => {
       className="group relative flex flex-col items-center justify-center p-1.5"
       onMouseMove={handleMouseMove}
     >
-      <i
-        className={`${skill.icon} text-[28px] text-[var(--text-muted)] transition-opacity duration-200 group-hover:text-[var(--text-secondary)]`}
-      ></i>
+      {'iconSrc' in skill ? (
+        <span
+          aria-hidden="true"
+          className="size-7 bg-[var(--text-muted)] transition-all duration-200 group-hover:scale-110 group-hover:bg-[var(--text-secondary)]"
+          style={{
+            WebkitMask: `url(${skill.iconSrc}) center / contain no-repeat`,
+            mask: `url(${skill.iconSrc}) center / contain no-repeat`
+          }}
+        />
+      ) : (
+        <i
+          className={`${skill.icon} text-[28px] text-[var(--text-muted)] transition-all duration-200 group-hover:scale-110 group-hover:text-[var(--text-secondary)]`}
+        ></i>
+      )}
       <span 
         ref={tooltipRef}
         className="opacity-0 group-hover:opacity-100 fixed z-50 text-[11px] font-body font-medium text-[var(--text-primary)] bg-[var(--bg-secondary)] px-1.5 py-0.5 border border-[var(--border)] pointer-events-none transition-opacity duration-150 whitespace-nowrap"

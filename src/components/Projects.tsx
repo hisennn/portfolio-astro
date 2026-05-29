@@ -8,6 +8,8 @@ const texts = {
     title: 'Projetos',
     brcPortal:
       'Portal fechado para a Baltimore Re-Construction gerenciar clientes, obras, etapas, arquivos, comentários, escolhas de materiais, assinatura de contratos e consultas administrativas sobre projetos.',
+    kiromilog:
+      'Aplicativo social para acompanhar anime e mangá, com listas pessoais, favoritos, busca de títulos, personagens e usuários, perfis, follows, mensagens e upload de avatar.',
     coord:
       'Ferramenta para salvar e organizar coordenadas no Minecraft, com uma experiência simples de lista e consulta rápida.',
     baltre:
@@ -17,15 +19,22 @@ const texts = {
     ana:
       'Portfólio profissional para arquiteta, com foco em apresentação visual dos projetos e contato direto.',
     previewTitle: 'portal / overview',
+    kiromilogPreviewTitle: 'tracker / social',
     clients: 'clientes',
     projects: 'projetos',
     files: 'arquivos',
-    realtime: 'tempo real'
+    realtime: 'tempo real',
+    anime: 'anime',
+    manga: 'mangá',
+    favorites: 'favoritos',
+    messages: 'mensagens'
   },
   en: {
     title: 'Projects',
     brcPortal:
       'Private portal for Baltimore Re-Construction to manage clients, projects, phases, files, comments, material selections, contract signing, and admin questions about project data.',
+    kiromilog:
+      'Social app for tracking anime and manga, with personal lists, favorites, title, character and user search, profiles, follows, messages, and avatar uploads.',
     coord:
       'Tool for saving and organizing Minecraft coordinates, with a simple list-based flow for quick lookup.',
     baltre:
@@ -35,10 +44,15 @@ const texts = {
     ana:
       'Professional portfolio for an architect, focused on presenting project work clearly and making contact easy.',
     previewTitle: 'portal / overview',
+    kiromilogPreviewTitle: 'tracker / social',
     clients: 'clients',
     projects: 'projects',
     files: 'files',
-    realtime: 'real time'
+    realtime: 'real time',
+    anime: 'anime',
+    manga: 'manga',
+    favorites: 'favorites',
+    messages: 'messages'
   }
 } as const;
 
@@ -48,6 +62,13 @@ const projects = [
     tech: ['React Router 7', 'TypeScript', 'Cloudflare Workers', 'Neon', 'Drizzle', 'Ably', 'SignWell'],
     descKey: 'brcPortal' as const,
     variant: 'featured' as const
+  },
+  {
+    name: 'Kiromilog',
+    url: 'https://kiromilog.vercel.app/',
+    tech: ['Next.js 16', 'TypeScript', 'Neon Auth', 'Neon Postgres', 'Drizzle', 'UploadThing', 'Pusher', 'Jikan API'],
+    descKey: 'kiromilog' as const,
+    variant: 'kiromilog' as const
   },
   {
     name: 'Baltimore Re-Construction Website',
@@ -77,19 +98,21 @@ const projects = [
 
 export default function Projects() {
   const { lang } = useLanguage();
- 
+
   return (
     <section>
       <div className="flex flex-col gap-6">
         <h2 className="text-[15px] font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
           {texts[lang].title}
         </h2>
- 
+
         <div className="w-full">
           <div className="project-card-grid">
             {projects.map((project) => {
               const isLinked = 'url' in project && project.url;
+              const hasPreview = 'variant' in project && ['featured', 'kiromilog'].includes(project.variant);
               const isFeatured = 'variant' in project && project.variant === 'featured';
+              const isKiromilog = 'variant' in project && project.variant === 'kiromilog';
               const CardElement = isLinked ? 'a' : 'article';
               const cardProps = isLinked
                 ? {
@@ -98,13 +121,13 @@ export default function Projects() {
                     rel: 'noopener noreferrer'
                   }
                 : {};
- 
+
               return (
                 <CardElement
                   key={project.name}
                   className={[
                     'project-card',
-                    isFeatured ? 'project-card-featured' : '',
+                    hasPreview ? 'project-card-featured' : '',
                     isLinked ? 'project-card-linked' : '',
                     !isLinked ? 'project-card-hoverable' : ''
                   ].filter(Boolean).join(' ')}
@@ -129,11 +152,11 @@ export default function Projects() {
                           {project.name}
                         </span>
                       )}
- 
+
                       <p className="project-card-copy text-[15px] leading-[1.65]">
                         {texts[lang][project.descKey]}
                       </p>
- 
+
                       {isFeatured && (
                         <div className="project-card-preview" aria-hidden="true">
                           <div className="project-card-preview-head">
@@ -142,9 +165,7 @@ export default function Projects() {
                               <span />
                               <span />
                             </div>
-                            <strong>
-                              {texts[lang].previewTitle}
-                            </strong>
+                            <strong>{texts[lang].previewTitle}</strong>
                           </div>
                           <div className="project-card-preview-grid">
                             <span>
@@ -166,8 +187,54 @@ export default function Projects() {
                           </div>
                         </div>
                       )}
+
+                      {isKiromilog && (
+                        <div className="project-card-preview project-card-preview-kiromilog" aria-hidden="true">
+                          <div className="project-card-preview-head">
+                            <div className="flex gap-1.5">
+                              <span />
+                              <span />
+                              <span />
+                            </div>
+                            <strong>{texts[lang].kiromilogPreviewTitle}</strong>
+                          </div>
+                          <div className="kiromilog-preview-body">
+                            <div className="kiromilog-preview-main">
+                              <img
+                                src="/sbqd-cape.webp"
+                                alt=""
+                                className="kiromilog-preview-cover"
+                                loading="lazy"
+                              />
+                              <div className="kiromilog-preview-copy">
+                                <span />
+                                <span />
+                                <span />
+                              </div>
+                            </div>
+                            <div className="kiromilog-preview-grid">
+                              <span>
+                                <BoxIcon name="bx-tv" size={13} className="text-[var(--text-muted)]" />
+                                {texts[lang].anime}
+                              </span>
+                              <span>
+                                <BoxIcon name="bx-book-open" size={13} className="text-[var(--text-muted)]" />
+                                {texts[lang].manga}
+                              </span>
+                              <span>
+                                <BoxIcon name="bx-heart" size={13} className="text-[var(--text-muted)]" />
+                                {texts[lang].favorites}
+                              </span>
+                              <span>
+                                <BoxIcon name="bx-message-circle" size={13} className="text-[var(--text-muted)]" />
+                                {texts[lang].messages}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
- 
+
                     <div className="project-card-footer">
                       <div className="project-card-tech">
                         {project.tech.map((item, index) => (
