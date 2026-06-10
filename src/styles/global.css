@@ -27,6 +27,9 @@
   --border-subtle: #f0f0f0;
   --project-card-bg: #fbfbfb;
   --project-preview-bg: #f7f7f7;
+  --brc-accent: #147d73;
+  --brc-accent-surface: rgba(20, 125, 115, 0.08);
+  --brc-accent-border: rgba(20, 125, 115, 0.22);
   --font-heading: "Urbanist", sans-serif;
   --font-body: "Hanken Grotesk", sans-serif;
 }
@@ -42,6 +45,9 @@
   --border-subtle: #161616;
   --project-card-bg: #0d0d0d;
   --project-preview-bg: #121212;
+  --brc-accent: #66b3a6;
+  --brc-accent-surface: rgba(102, 179, 166, 0.1);
+  --brc-accent-border: rgba(102, 179, 166, 0.25);
 }
 
 .theme-loading,
@@ -76,6 +82,11 @@ main,
 .kiromilog-preview-cover,
 .kiromilog-preview-copy span,
 .kiromilog-preview-grid span,
+.brc-preview-nav-item,
+.brc-preview-card,
+.brc-preview-badge,
+.brc-preview-skeleton,
+.brc-preview-progress-fill,
 .project-card-footer,
 [class*="text-[var(--"],
 [class*="bg-[var(--"],
@@ -533,6 +544,141 @@ a {
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.02em;
+}
+
+/* BRC Client Portal preview */
+.brc-preview-body {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+}
+
+.brc-preview-sidebar {
+  border-right: 1px solid var(--border);
+  padding: 0.4rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brc-preview-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.28rem 0.55rem;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+.brc-preview-nav-active {
+  background: var(--brc-accent-surface);
+  color: var(--brc-accent);
+  box-shadow: inset 2px 0 0 var(--brc-accent);
+}
+
+.brc-preview-nav-label {
+  display: block;
+  height: 0.32rem;
+  width: 2.6rem;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.28;
+}
+
+.brc-preview-nav-active .brc-preview-nav-label {
+  opacity: 0.55;
+}
+
+.brc-preview-main {
+  padding: 0.55rem;
+}
+
+.brc-preview-card {
+  border: 1px solid var(--border);
+  padding: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.48rem;
+  background: var(--bg-primary);
+}
+
+.brc-preview-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.brc-preview-card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.brc-preview-skeleton {
+  display: block;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-muted) 25%, transparent);
+  height: 0.38rem;
+}
+
+.brc-preview-card-name {
+  width: 4.5rem;
+  height: 0.45rem;
+  background: color-mix(in srgb, var(--text-secondary) 42%, transparent);
+}
+
+.brc-preview-badge {
+  padding: 0.12rem 0.42rem;
+  background: var(--brc-accent-surface);
+  color: var(--brc-accent);
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 999px;
+  border: 1px solid var(--brc-accent-border);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.brc-preview-card-sub {
+  width: 3rem;
+}
+
+.brc-preview-progress-track {
+  height: 3px;
+  background: color-mix(in srgb, var(--text-muted) 18%, transparent);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.brc-preview-progress-fill {
+  height: 100%;
+  width: 62%;
+  background: var(--brc-accent);
+  border-radius: 999px;
+}
+
+.brc-preview-stats {
+  display: flex;
+  gap: 0.55rem;
+  padding-top: 0.1rem;
+}
+
+.brc-preview-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.brc-stat-icon {
+  color: var(--text-muted);
+}
+
+.brc-preview-stat-label {
+  width: 1.6rem;
 }
 
 .project-card-footer {

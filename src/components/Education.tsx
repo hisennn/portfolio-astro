@@ -5,19 +5,17 @@ import { useLanguage } from '../hooks/useLanguage';
 const texts = {
   pt: {
     title: 'Formação',
-    text: 'Estou no sexto e último semestre de Análise e Desenvolvimento de Sistemas. Também continuo aprendendo para melhorar minhas habilidades.',
-    status: 'Em andamento',
+    status: 'Concluído',
     uni: 'Claretiano',
-    uniDate: 'jan 2024 - jul 2026',
+    uniDate: 'jan 2024 - jun 2026',
     uniCourse: 'Análise e Desenvolvimento de Sistemas',
     uniType: 'Tecnólogo'
   },
   en: {
     title: 'Education',
-    text: 'Sixth and final semester of Systems Analysis and Development. Also continuing to learn to improve my skills.',
-    status: 'In progress',
+    status: 'Completed',
     uni: 'Claretiano',
-    uniDate: 'jan 2024 - jul 2026',
+    uniDate: 'Jan 2024 - Jun 2026',
     uniCourse: 'Systems Analysis and Development',
     uniType: 'Associate Degree'
   }
@@ -34,9 +32,6 @@ export default function Education() {
         </h2>
 
         <div className="flex flex-col gap-6">
-          <p className="text-[var(--text-secondary)] font-body text-base font-normal leading-[1.7] max-w-[680px]">
-            {texts[lang].text}
-          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-3 items-baseline">
             <span className="text-[13px] font-body font-medium text-[var(--text-muted)]">

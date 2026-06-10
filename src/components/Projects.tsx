@@ -20,6 +20,7 @@ const texts = {
       'Portfólio profissional para arquiteta, com foco em apresentação visual dos projetos e contato direto.',
     previewTitle: 'portal / overview',
     kiromilogPreviewTitle: 'tracker / social',
+    brcBadge: 'Ativo',
     clients: 'clientes',
     projects: 'projetos',
     files: 'arquivos',
@@ -45,6 +46,7 @@ const texts = {
       'Professional portfolio for an architect, focused on presenting project work clearly and making contact easy.',
     previewTitle: 'portal / overview',
     kiromilogPreviewTitle: 'tracker / social',
+    brcBadge: 'Active',
     clients: 'clients',
     projects: 'projects',
     files: 'files',
@@ -59,7 +61,7 @@ const texts = {
 const projects = [
   {
     name: 'BRC Client Portal',
-    tech: ['React Router 7', 'TypeScript', 'Cloudflare Workers', 'Neon', 'Drizzle', 'Ably', 'SignWell'],
+    tech: ['React Router 7', 'TypeScript', 'Cloudflare Workers', 'Neon', 'Drizzle', 'Zod', 'Ably', 'Vite', 'SignWell'],
     descKey: 'brcPortal' as const,
     variant: 'featured' as const
   },
@@ -158,7 +160,7 @@ export default function Projects() {
                       </p>
 
                       {isFeatured && (
-                        <div className="project-card-preview" aria-hidden="true">
+                        <div className="project-card-preview project-card-preview-brc" aria-hidden="true">
                           <div className="project-card-preview-head">
                             <div className="flex gap-1.5">
                               <span />
@@ -167,23 +169,43 @@ export default function Projects() {
                             </div>
                             <strong>{texts[lang].previewTitle}</strong>
                           </div>
-                          <div className="project-card-preview-grid">
-                            <span>
-                              <BoxIcon name="bx-user" size={13} className="text-[var(--text-muted)]" />
-                              {texts[lang].clients}
-                            </span>
-                            <span>
-                              <BoxIcon name="bx-layout" size={13} className="text-[var(--text-muted)]" />
-                              {texts[lang].projects}
-                            </span>
-                            <span>
-                              <BoxIcon name="bx-folder" size={13} className="text-[var(--text-muted)]" />
-                              {texts[lang].files}
-                            </span>
-                            <span>
-                              <BoxIcon name="bx-broadcast" size={13} className="text-[var(--text-muted)]" />
-                              {texts[lang].realtime}
-                            </span>
+                          <div className="brc-preview-body">
+                            <div className="brc-preview-sidebar">
+                              {(['bx-layout', 'bx-user', 'bx-folder', 'bx-file-blank'] as const).map((icon, i) => (
+                                <div key={icon} className={`brc-preview-nav-item${i === 0 ? ' brc-preview-nav-active' : ''}`}>
+                                  <BoxIcon name={icon} size={10} />
+                                  <span className="brc-preview-nav-label" />
+                                </div>
+                              ))}
+                            </div>
+                            <div className="brc-preview-main">
+                              <div className="brc-preview-card">
+                                <div className="brc-preview-card-header">
+                                  <div className="brc-preview-card-title-row">
+                                    <span className="brc-preview-skeleton brc-preview-card-name" />
+                                    <span className="brc-preview-badge">{texts[lang].brcBadge}</span>
+                                  </div>
+                                  <span className="brc-preview-skeleton brc-preview-card-sub" />
+                                </div>
+                                <div className="brc-preview-progress-track">
+                                  <div className="brc-preview-progress-fill" />
+                                </div>
+                                <div className="brc-preview-stats">
+                                  <span>
+                                    <BoxIcon name="bx-layer" size={10} className="brc-stat-icon" />
+                                    <span className="brc-preview-skeleton brc-preview-stat-label" />
+                                  </span>
+                                  <span>
+                                    <BoxIcon name="bx-folder" size={10} className="brc-stat-icon" />
+                                    <span className="brc-preview-skeleton brc-preview-stat-label" />
+                                  </span>
+                                  <span>
+                                    <BoxIcon name="bx-broadcast" size={10} className="brc-stat-icon" />
+                                    <span className="brc-preview-skeleton brc-preview-stat-label" />
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       )}
