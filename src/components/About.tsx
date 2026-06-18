@@ -5,11 +5,11 @@ import { useLanguage } from '../hooks/useLanguage';
 const texts = {
   pt: {
     title: 'Sobre',
-    about: 'Sou desenvolvedor web. Trabalho com sites, interfaces e sistemas, do institucional a projetos mais completos como o BRC Client Portal, um sistema de gestão de obras e clientes. Gosto de construir coisas organizadas e diretas de usar.'
+    about: 'Sou desenvolvedor full-stack com experiência em construir e manter aplicações web em produção usando TypeScript, JavaScript, React, Node.js, PostgreSQL e Cloudflare.'
   },
   en: {
     title: 'About',
-    about: "I'm a web developer. I work on websites, interfaces, and systems, from simple institutional sites to more complete builds like BRC Client Portal, a project and client management system. I like things organized and easy to use."
+    about: 'Full-stack web developer with experience building and maintaining production web applications using TypeScript, JavaScript, React, Node.js, PostgreSQL, and Cloudflare.'
   }
 } as const;
 

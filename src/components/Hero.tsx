@@ -7,7 +7,7 @@ const texts = {
   pt: {
     greeting: 'Olá, sou',
     name: 'Gabriel Lemes',
-    role: 'Desenvolvedor Web',
+    role: 'Desenvolvedor Web Full-stack',
     location: 'Batatais, SP, Brasil',
     downloadResume: 'Currículo',
     portuguese: 'Português',
@@ -18,7 +18,7 @@ const texts = {
   en: {
     greeting: "Hi, I'm",
     name: 'Gabriel Lemes',
-    role: 'Web Developer',
+    role: 'Full-stack Web Developer',
     location: 'Batatais, SP, Brazil',
     downloadResume: 'Resume',
     portuguese: 'Portuguese',

@@ -14,10 +14,10 @@ const texts = {
   en: {
     title: 'Education',
     status: 'Completed',
-    uni: 'Claretiano',
-    uniDate: 'Jan 2024 - Jun 2026',
+    uni: 'Claretiano Brazil',
+    uniDate: 'Jan. 2024 - Jun. 2026',
     uniCourse: 'Systems Analysis and Development',
-    uniType: 'Associate Degree'
+    uniType: 'Undergraduate Degree (Technologist)'
   }
 } as const;
 

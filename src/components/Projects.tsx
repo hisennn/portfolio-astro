@@ -7,13 +7,13 @@ const texts = {
   pt: {
     title: 'Projetos',
     brcPortal:
-      'Portal fechado para a Baltimore Re-Construction gerenciar clientes, obras, etapas, arquivos, comentários, escolhas de materiais, assinatura de contratos e consultas administrativas sobre projetos.',
+      'Portal full-stack privado para gerenciar clientes, obras, etapas, arquivos, comentários, escolhas de materiais, assinatura de contratos e dados de projetos. Inclui atualizações em tempo real com Ably, assinatura com SignWell e protótipo de chamada por voz com LiveKit.',
     kiromilog:
       'Aplicativo social para acompanhar anime e mangá, com listas pessoais, favoritos, busca de títulos, personagens e usuários, perfis, follows, mensagens e upload de avatar.',
     coord:
       'Ferramenta para salvar e organizar coordenadas no Minecraft, com uma experiência simples de lista e consulta rápida.',
     baltre:
-      'Site institucional para a Baltimore Re-Construction apresentar serviços, áreas atendidas e canais de contato.',
+      'Site responsivo para a Baltimore Re-Construction apresentar serviços, áreas atendidas e canais de contato, com deploy na Cloudflare e otimização para busca.',
     isaPsi:
       'Site institucional para Isadora Tomazini Psicóloga apresentar atendimento presencial e online, áreas de atuação, informações profissionais e contato com formulário.',
     ana:
@@ -33,13 +33,13 @@ const texts = {
   en: {
     title: 'Projects',
     brcPortal:
-      'Private portal for Baltimore Re-Construction to manage clients, projects, phases, files, comments, material selections, contract signing, and admin questions about project data.',
+      'Private full-stack portal for managing clients, projects, phases, files, comments, material selections, contract signing, and project data. Includes real-time updates with Ably, contract signing with SignWell, and a LiveKit voice-call prototype.',
     kiromilog:
       'Social app for tracking anime and manga, with personal lists, favorites, title, character and user search, profiles, follows, messages, and avatar uploads.',
     coord:
       'Tool for saving and organizing Minecraft coordinates, with a simple list-based flow for quick lookup.',
     baltre:
-      'Company website for Baltimore Re-Construction, focused on services, service areas, and contact paths.',
+      'Responsive company website for Baltimore Re-Construction, focused on services, service areas, and contact paths, deployed on Cloudflare and optimized for search.',
     isaPsi:
       'Professional website for Isadora Tomazini Psicóloga, presenting in-person and online care, practice areas, professional information, and a contact form.',
     ana:
@@ -61,7 +61,7 @@ const texts = {
 const projects = [
   {
     name: 'BRC Client Portal',
-    tech: ['React Router 7', 'TypeScript', 'Cloudflare Workers', 'Neon', 'Drizzle', 'Zod', 'Ably', 'Vite', 'SignWell'],
+    tech: ['React Router 7', 'TypeScript', 'Cloudflare Workers', 'Neon Postgres', 'Drizzle ORM', 'Zod', 'Ably', 'SignWell', 'LiveKit', 'Vite'],
     descKey: 'brcPortal' as const,
     variant: 'featured' as const
   },

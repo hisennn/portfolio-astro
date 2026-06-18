@@ -22,18 +22,16 @@ const experiences = [
     date: { pt: 'out 2025 - presente', en: 'oct 2025 - present' },
     items: {
       pt: [
-        'Desenvolvo o BRC Client Portal para organizar clientes, obras, arquivos e comunicação com clientes',
-        'Criei o site da empresa usando Astro, Tailwind e Cloudflare e cuidei da parte de SEO',
-        'Ajudo com planilhas e organização interna',
-        'Colaboro com ideias para otimizar processos e organizar o fluxo de trabalho',
-        'Apoio em marketing e divulgação'
+        'Desenvolvo e mantenho o BRC Client Portal para organizar clientes, obras, arquivos e comunicação com clientes',
+        'Cuido do site da empresa, incluindo manutenção, deploy na Cloudflare, atualizações de conteúdo e SEO técnico',
+        'Mantenho planilhas e organização interna para manter dados de obras e clientes consistentes',
+        'Apoio em marketing, divulgação e ideias para otimizar processos'
       ],
       en: [
-        'Developing the BRC Client Portal to organize clients, jobs, files, and client communication',
-        'Built the company website using Astro, Tailwind, and Cloudflare and handled SEO',
-        'Helping with spreadsheets and internal organization',
-        'Collaborating with ideas to optimize processes and organize workflow',
-        'Supporting marketing and outreach'
+        'Develop and maintain the BRC Client Portal to organize clients, projects, files, and client communication',
+        'Manage the company website, including maintenance, Cloudflare deployment, content updates, and technical SEO',
+        'Maintain spreadsheets and internal workflows to keep project and client data consistent',
+        'Support marketing, outreach, and ideas to improve internal processes'
       ]
     },
     locationDetails: { pt: 'Baltimore, MD, EUA', en: 'Baltimore, MD, USA' },
@@ -45,32 +43,29 @@ const experiences = [
     date: { pt: 'abr 2025 - presente', en: 'apr 2025 - present' },
     items: {
       pt: [
-        'Criação e manutenção de sites e pequenos sistemas web',
-        'Layouts responsivos e ajustes usando HTML, CSS, JavaScript e React',
-        'Atendimento a clientes de forma independente'
+        'Construo aplicações web responsivas em React e TypeScript a partir dos requisitos do cliente',
+        'Defino escopo, gerencio ciclos de revisão e entrego projetos de forma independente'
       ],
       en: [
-        'Building and maintaining websites and small web systems',
-        'Responsive layouts and adjustments using HTML, CSS, JavaScript and React',
-        'Handling clients independently'
+        'Build responsive React and TypeScript web applications from client requirements through delivery',
+        'Scope implementation work, manage revision cycles, and deliver projects independently'
       ]
     },
-    locationDetails: null
+    locationDetails: { pt: 'Brasil', en: 'Brazil' },
+    type: 'remote' as const
   },
   {
     company: 'Trail Dev',
-    role: { pt: 'Estagiário', en: 'Intern' },
+    role: { pt: 'Estagiário em Desenvolvimento de Software', en: 'Software Development Intern' },
     date: { pt: 'mar 2025 - jul 2025', en: 'mar 2025 - jul 2025' },
     items: {
       pt: [
-        'Acompanhei o dia a dia de um escritório de programação',
-        'Converti um site de Ruby on Rails para Next.js (Pluralsign)',
-        'Ajustes em site com Strapi para gestão de conteúdos (Inovaice)'
+        'Reconstruí um site Ruby on Rails em Next.js para a Pluralsign, preservando páginas e funcionalidades',
+        'Atualizei um site com Strapi para a Inovaice, apoiando gestão de conteúdo e ajustes de frontend'
       ],
       en: [
-        'Followed the daily routine of a software development office',
-        'Converted a website from Ruby on Rails to Next.js (Pluralsign)',
-        'Adjustments to a Strapi site for content management (Inovaice)'
+        'Rebuilt a Ruby on Rails website in Next.js for Pluralsign, preserving its existing pages and functionality',
+        'Updated a Strapi-based website for Inovaice to support content management and frontend adjustments'
       ]
     },
     locationDetails: { pt: 'Batatais, SP, BR', en: 'Batatais, SP, BR' },
