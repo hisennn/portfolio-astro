@@ -74,21 +74,18 @@ const jsonLd = {
           root.setAttribute("data-theme", "dark");
         }
 
-        // Enable transitions after page load
         function unlockTransitions() {
           requestAnimationFrame(function () {
             root.classList.remove("theme-loading");
           });
         }
 
-        // Try multiple strategies to ensure transitions unlock
         if (document.readyState === "loading") {
           document.addEventListener("DOMContentLoaded", unlockTransitions);
         } else {
           unlockTransitions();
         }
 
-        // Fallback: always unlock after 100ms
         setTimeout(unlockTransitions, 100);
       })();
     </script>

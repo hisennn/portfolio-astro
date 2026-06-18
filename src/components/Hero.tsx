@@ -30,6 +30,10 @@ const texts = {
 
 export default function Hero() {
   const { lang } = useLanguage();
+  const resumeHref =
+    lang === 'en' ? '/gabriel-lemes-resume.pdf' : '/gabriel_curriculo.pdf';
+  const resumeDownloadName =
+    lang === 'en' ? 'Gabriel Lemes Resume.pdf' : 'Gabriel Lemes Currículo.pdf';
 
   return (
     <section className="hero-intro">
@@ -98,8 +102,8 @@ export default function Hero() {
             GitHub
           </a>
           <a
-            href="/gabriel_curriculo.pdf"
-            download="Gabriel Lemes Currículo.pdf"
+            href={resumeHref}
+            download={resumeDownloadName}
             className="hero-action-link"
           >
             <BoxIcon name="bx-arrow-to-bottom-stroke" size={16} />
