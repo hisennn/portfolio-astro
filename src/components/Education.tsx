@@ -7,7 +7,6 @@ const texts = {
     title: 'Formação',
     status: 'Concluído',
     uni: 'Claretiano',
-    uniDate: 'jan 2024 - jun 2026',
     uniCourse: 'Análise e Desenvolvimento de Sistemas',
     uniType: 'Tecnólogo'
   },
@@ -15,7 +14,6 @@ const texts = {
     title: 'Education',
     status: 'Completed',
     uni: 'Claretiano Brazil',
-    uniDate: 'Jan. 2024 - Jun. 2026',
     uniCourse: 'Systems Analysis and Development',
     uniType: 'Undergraduate Degree (Technologist)'
   }
@@ -45,8 +43,6 @@ export default function Education() {
                 <span>{texts[lang].uni}</span>
                 <span className="hidden sm:inline">·</span>
                 <span>{texts[lang].uniType}</span>
-                <span className="hidden sm:inline">·</span>
-                <span>{texts[lang].uniDate}</span>
               </div>
             </div>
           </div>
