@@ -31,9 +31,11 @@ const texts = {
 export default function Hero() {
   const { lang } = useLanguage();
   const resumeHref =
-    lang === 'en' ? '/gabriel-lemes-resume.pdf' : '/gabriel_curriculo.pdf';
+    lang === 'en'
+      ? '/gabriel-lemes-resume-eng.pdf'
+      : '/gabriel-lemes-resume-ptbr.pdf';
   const resumeDownloadName =
-    lang === 'en' ? 'Gabriel Lemes Resume.pdf' : 'Gabriel Lemes Currículo.pdf';
+    lang === 'en' ? 'Gabriel Lemes Resume.pdf' : 'Gabriel Lemes Curriculo.pdf';
 
   return (
     <section className="hero-intro">
