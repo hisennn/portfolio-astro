@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'sha256-IKwHHtSdl9focHdN/Dw/j8qnWhqoJ4R2p/2PXl7KTXE=' 'sha256-FxCMvWkxGeXDfsuu7CYgfY0H8/TEvH0YF9unePLLGeM=' 'sha256-QzWFZi+FLIx23tnm9SBU4aEgx4x8DsuASP07mfqol/c=' 'sha256-SaCkFfPruIdTXT8/97JArQmGxiJAL2o4bBDvSgJ5y3Q='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdn.boxicons.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdn.boxicons.com; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'sha256-Whj8/G2JtwDTXo4xELJWrfgoup0BJnZqBGlHPWsXB7A=' 'sha256-FxCMvWkxGeXDfsuu7CYgfY0H8/TEvH0YF9unePLLGeM=' 'sha256-QzWFZi+FLIx23tnm9SBU4aEgx4x8DsuASP07mfqol/c=' 'sha256-SaCkFfPruIdTXT8/97JArQmGxiJAL2o4bBDvSgJ5y3Q='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdn.boxicons.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdn.boxicons.com; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
