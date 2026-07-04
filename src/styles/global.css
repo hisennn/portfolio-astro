@@ -546,7 +546,6 @@ a {
   letter-spacing: 0.02em;
 }
 
-/* BRC Client Portal preview */
 .brc-preview-body {
   display: grid;
   grid-template-columns: 6.5rem minmax(0, 1fr);

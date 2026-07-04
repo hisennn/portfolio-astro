@@ -7,11 +7,13 @@ const texts = {
   pt: {
     title: 'Skills',
     workflow: [
-      'SQL',
+      'Modelagem SQL',
       'APIs REST',
-      'Design responsivo',
+      'Autenticação e permissões',
+      'Uploads e arquivos',
+      'Integrações externas',
       'Debugging',
-      'Ferramentas e fluxos com IA'
+      'Validação de resultados'
     ],
     soft: [
       'Organização',
@@ -27,11 +29,13 @@ const texts = {
   en: {
     title: 'Skills',
     workflow: [
-      'SQL',
+      'SQL modeling',
       'REST APIs',
-      'Responsive Design',
+      'Authentication and permissions',
+      'File uploads',
+      'Third-party integrations',
       'Debugging',
-      'AI tools and workflows'
+      'Output validation'
     ],
     soft: [
       'Organization',
@@ -66,8 +70,8 @@ const skills = [
   { name: 'Git', icon: 'devicon-git-plain' },
   { name: 'GitHub', icon: 'devicon-github-original' },
   { name: 'Figma', icon: 'devicon-figma-plain' },
-  { name: 'Claude', iconSrc: '/icons/claude.svg' },
-  { name: 'ChatGPT', iconSrc: '/icons/openai.svg' }
+  { name: 'Claude Code', iconSrc: '/icons/claude.svg' },
+  { name: 'OpenAI Codex / ChatGPT', iconSrc: '/icons/openai.svg' }
 ];
 
 const SkillItem = ({ skill }: { skill: typeof skills[0] }) => {

@@ -7,17 +7,17 @@ const texts = {
   pt: {
     title: 'Projetos',
     brcPortal:
-      'Portal full-stack privado para gerenciar clientes, obras, etapas, arquivos, comentários, escolhas de materiais, assinatura de contratos e dados de projetos. Inclui atualizações em tempo real com Ably, assinatura com SignWell e protótipo de chamada por voz com LiveKit.',
+      'Portal interno para manter clientes, projetos, fases, arquivos, comentários, escolha de materiais e comunicação no mesmo lugar. Também tem tempo real com Ably, assinatura de contratos com SignWell, protótipo de chamada de voz com LiveKit e dados em PostgreSQL.',
     kiromilog:
-      'Aplicativo social para acompanhar anime e mangá, com listas pessoais, favoritos, busca de títulos, personagens e usuários, perfis, follows, mensagens e upload de avatar.',
+      'Tracker social de anime e mangá com listas, favoritos, busca, perfis, seguidores, mensagens e avatar. Usa Neon Auth, Pusher, UploadThing e API Jikan.',
     coord:
-      'Ferramenta para salvar e organizar coordenadas no Minecraft, com uma experiência simples de lista e consulta rápida.',
+      'Ferramenta pequena para guardar coordenadas do Minecraft e achar tudo rápido depois, sem depender de anotações soltas.',
     baltre:
-      'Site responsivo para a Baltimore Re-Construction apresentar serviços, áreas atendidas e canais de contato, com deploy na Cloudflare e otimização para busca.',
+      'Site institucional da Baltimore Re-Construction para apresentar serviços, regiões atendidas e formas de contato, com páginas leves e ajustes de SEO técnico.',
     isaPsi:
-      'Site institucional para Isadora Tomazini Psicóloga apresentar atendimento presencial e online, áreas de atuação, informações profissionais e contato com formulário.',
+      'Site para psicóloga, separando atendimento presencial e online, áreas de atuação, informações profissionais e formulário de contato.',
     ana:
-      'Portfólio profissional para arquiteta, com foco em apresentação visual dos projetos e contato direto.',
+      'Portfólio para uma arquiteta independente, feito para destacar projetos e facilitar contato direto.',
     previewTitle: 'portal / overview',
     kiromilogPreviewTitle: 'tracker / social',
     brcBadge: 'Ativo',
@@ -33,17 +33,17 @@ const texts = {
   en: {
     title: 'Projects',
     brcPortal:
-      'Private full-stack portal for managing clients, projects, phases, files, comments, material selections, contract signing, and project data. Includes real-time updates with Ably, contract signing with SignWell, and a LiveKit voice-call prototype.',
+      'Internal portal for keeping clients, projects, phases, files, comments, material selections, and communication in one place. It also uses Ably for real-time updates, SignWell for contracts, a LiveKit voice-call prototype, and PostgreSQL for project data.',
     kiromilog:
-      'Social app for tracking anime and manga, with personal lists, favorites, title, character and user search, profiles, follows, messages, and avatar uploads.',
+      'Social anime and manga tracker with lists, favorites, search, profiles, follows, messages, and avatars. Uses Neon Auth, Pusher, UploadThing, and the Jikan API.',
     coord:
-      'Tool for saving and organizing Minecraft coordinates, with a simple list-based flow for quick lookup.',
+      'Small tool for saving Minecraft coordinates and finding them quickly later, without scattered notes.',
     baltre:
-      'Responsive company website for Baltimore Re-Construction, focused on services, service areas, and contact paths, deployed on Cloudflare and optimized for search.',
+      'Company website for Baltimore Re-Construction covering services, service areas, and contact paths, with lightweight pages and technical SEO adjustments.',
     isaPsi:
-      'Professional website for Isadora Tomazini Psicóloga, presenting in-person and online care, practice areas, professional information, and a contact form.',
+      'Website for a psychologist, separating in-person and online care, practice areas, professional information, and a contact form.',
     ana:
-      'Professional portfolio for an architect, focused on presenting project work clearly and making contact easy.',
+      'Portfolio for an independent architect, built to highlight projects and make direct contact easy.',
     previewTitle: 'portal / overview',
     kiromilogPreviewTitle: 'tracker / social',
     brcBadge: 'Active',

@@ -5,11 +5,11 @@ import { useLanguage } from '../hooks/useLanguage';
 const texts = {
   pt: {
     title: 'Sobre',
-    about: 'Sou desenvolvedor full-stack com experiência em construir e manter aplicações web em produção usando TypeScript, JavaScript, React, Node.js, PostgreSQL e Cloudflare.'
+    about: 'Desenvolvedor web full stack trabalhando principalmente com TypeScript, React, Node.js e PostgreSQL. Trabalho recente inclui sistemas internos, sites institucionais e projetos para clientes, passando por front-end, lógica da aplicação, recursos com banco de dados e deploy.'
   },
   en: {
     title: 'About',
-    about: 'Full-stack web developer with experience building and maintaining production web applications using TypeScript, JavaScript, React, Node.js, PostgreSQL, and Cloudflare.'
+    about: 'Full-stack web developer working mainly with TypeScript, React, Node.js, and PostgreSQL. Recent work includes internal systems, company websites, and client projects, covering frontend implementation, application logic, database-backed features, and deployment.'
   }
 } as const;
 

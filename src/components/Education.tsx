@@ -6,14 +6,14 @@ const texts = {
   pt: {
     title: 'Formação',
     status: 'Concluído',
-    uni: 'Claretiano',
-    uniCourse: 'Análise e Desenvolvimento de Sistemas',
+    uni: 'Centro Universitário Claretiano',
+    uniCourse: 'Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas',
     uniType: 'Tecnólogo'
   },
   en: {
     title: 'Education',
     status: 'Completed',
-    uni: 'Claretiano Brazil',
+    uni: 'Claretiano University Center',
     uniCourse: 'Systems Analysis and Development',
     uniType: 'Undergraduate Degree (Technologist)'
   }
