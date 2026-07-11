@@ -17,7 +17,7 @@ export default function About() {
   const { lang } = useLanguage();
 
   return (
-    <section>
+    <section className="about-section">
       <div className="flex flex-col gap-4">
         <h2 className="text-[15px] font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
           {texts[lang].title}

@@ -1,115 +1,134 @@
 'use client';
 
 import { useLanguage } from '../hooks/useLanguage';
-import { useRef } from 'react';
 
 const texts = {
   pt: {
     title: 'Skills',
-    workflow: [
-      'Modelagem SQL',
-      'APIs REST',
-      'Autenticação e permissões',
+    practicesTitle: 'Práticas',
+    practices: [
+      'Modelagem de dados',
+      'APIs e integrações',
+      'Autenticação e autorização',
       'Uploads e arquivos',
-      'Integrações externas',
       'Debugging',
-      'Validação de resultados'
+      'Deploy',
+      'Desenvolvimento assistido por agentes, com revisão de código e validação'
     ],
-    soft: [
-      'Organização',
-      'Trabalho em equipe',
-      'Proatividade',
-      'Resolução de problemas',
-      'Aprendizado contínuo',
-      'Conhecimentos em informática',
-      'Office 365',
-      'Google Docs'
+    workStyleTitle: 'Forma de trabalho',
+    workStyle: [
+      'Comunicação com clientes',
+      'Definição de escopo',
+      'Colaboração remota',
+      'Organização de entregas'
     ]
   },
   en: {
     title: 'Skills',
-    workflow: [
-      'SQL modeling',
-      'REST APIs',
-      'Authentication and permissions',
-      'File uploads',
-      'Third-party integrations',
+    practicesTitle: 'Practices',
+    practices: [
+      'Data modeling',
+      'APIs and integrations',
+      'Authentication and authorization',
+      'File handling',
       'Debugging',
-      'Output validation'
+      'Deployment',
+      'Agent-assisted development with code review and validation'
     ],
-    soft: [
-      'Organization',
-      'Teamwork',
-      'Proactivity',
-      'Problem solving',
-      'Continuous learning',
-      'IT knowledge',
-      'Office 365',
-      'Google Docs'
+    workStyleTitle: 'Working style',
+    workStyle: [
+      'Client communication',
+      'Scope definition',
+      'Remote collaboration',
+      'Delivery planning'
     ]
   }
 } as const;
 
-const skills = [
-  { name: 'JavaScript', icon: 'devicon-javascript-plain' },
-  { name: 'TypeScript', icon: 'devicon-typescript-plain' },
-  { name: 'Node.js', icon: 'devicon-nodejs-plain' },
-  { name: 'React', icon: 'devicon-react-original' },
-  { name: 'React Router', icon: 'devicon-reactrouter-plain' },
-  { name: 'Next.js', icon: 'devicon-nextjs-plain' },
-  { name: 'Astro', icon: 'devicon-astro-plain' },
-  { name: 'Tailwind', icon: 'devicon-tailwindcss-original' },
-  { name: 'npm', icon: 'devicon-npm-original-wordmark' },
-  { name: 'Bun', icon: 'devicon-bun-plain' },
-  { name: 'PostgreSQL', icon: 'devicon-postgresql-plain' },
-  { name: 'Neon', iconSrc: '/icons/neon.svg' },
-  { name: 'Supabase', icon: 'devicon-supabase-plain' },
-  { name: 'Drizzle', iconSrc: '/icons/drizzle.svg' },
-  { name: 'Vercel', icon: 'devicon-vercel-original' },
-  { name: 'Cloudflare', icon: 'devicon-cloudflare-plain' },
-  { name: 'Git', icon: 'devicon-git-plain' },
-  { name: 'GitHub', icon: 'devicon-github-original' },
-  { name: 'Figma', icon: 'devicon-figma-plain' },
-  { name: 'Claude Code', iconSrc: '/icons/claude.svg' },
-  { name: 'OpenAI Codex / ChatGPT', iconSrc: '/icons/openai.svg' }
+type Skill = {
+  name: string;
+  icon?: string;
+  iconSrc?: string;
+  iconText?: string;
+};
+
+const skillGroups: Array<{
+  title: { pt: string; en: string };
+  items: Skill[];
+}> = [
+  {
+    title: { pt: 'Frontend', en: 'Frontend' },
+    items: [
+      { name: 'TypeScript', icon: 'devicon-typescript-plain' },
+      { name: 'JavaScript', icon: 'devicon-javascript-plain' },
+      { name: 'React', icon: 'devicon-react-original' },
+      { name: 'React Router', icon: 'devicon-reactrouter-plain' },
+      { name: 'Next.js', icon: 'devicon-nextjs-plain' },
+      { name: 'Astro', icon: 'devicon-astro-plain' },
+      { name: 'Tailwind', icon: 'devicon-tailwindcss-original' }
+    ]
+  },
+  {
+    title: { pt: 'Backend e dados', en: 'Backend & data' },
+    items: [
+      { name: 'Node.js', icon: 'devicon-nodejs-plain' },
+      { name: 'PostgreSQL', icon: 'devicon-postgresql-plain' },
+      { name: 'Neon', iconSrc: '/icons/neon.svg' },
+      { name: 'Supabase', icon: 'devicon-supabase-plain' },
+      { name: 'Drizzle', iconSrc: '/icons/drizzle.svg' }
+    ]
+  },
+  {
+    title: { pt: 'Plataforma', en: 'Platform' },
+    items: [
+      { name: 'Cloudflare', icon: 'devicon-cloudflare-plain' },
+      { name: 'Vercel', icon: 'devicon-vercel-original' }
+    ]
+  },
+  {
+    title: { pt: 'Ferramentas', en: 'Tooling' },
+    items: [
+      { name: 'Git', icon: 'devicon-git-plain' },
+      { name: 'GitHub', icon: 'devicon-github-original' },
+      { name: 'npm', icon: 'devicon-npm-original-wordmark' },
+      { name: 'Bun', icon: 'devicon-bun-plain' },
+      { name: 'Figma', icon: 'devicon-figma-plain' }
+    ]
+  },
+  {
+    title: { pt: 'Ferramentas de IA', en: 'AI tooling' },
+    items: [
+      { name: 'Claude Code', iconSrc: '/icons/claude.svg' },
+      { name: 'OpenAI Codex / ChatGPT', iconSrc: '/icons/openai.svg' },
+      { name: 'Hermes Agent', iconText: 'H' }
+    ]
+  }
 ];
 
-const SkillItem = ({ skill }: { skill: typeof skills[0] }) => {
-  const tooltipRef = useRef<HTMLSpanElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!tooltipRef.current) return;
-    tooltipRef.current.style.left = `${e.clientX + 14}px`;
-    tooltipRef.current.style.top = `${e.clientY + 12}px`;
-  };
-
+const SkillItem = ({ skill }: { skill: Skill }) => {
   return (
-    <div 
-      className="group relative flex flex-col items-center justify-center p-1.5"
-      onMouseMove={handleMouseMove}
-    >
-      {'iconSrc' in skill ? (
+    <li className="skill-group-item">
+      {skill.iconSrc ? (
         <span
           aria-hidden="true"
-          className="size-7 bg-[var(--text-muted)] transition-all duration-200 group-hover:scale-110 group-hover:bg-[var(--text-secondary)]"
+          className="skill-group-icon bg-[var(--text-muted)]"
           style={{
             WebkitMask: `url(${skill.iconSrc}) center / contain no-repeat`,
             mask: `url(${skill.iconSrc}) center / contain no-repeat`
           }}
         />
-      ) : (
+      ) : skill.icon ? (
         <i
-          className={`${skill.icon} text-[28px] text-[var(--text-muted)] transition-all duration-200 group-hover:scale-110 group-hover:text-[var(--text-secondary)]`}
+          aria-hidden="true"
+          className={`${skill.icon} skill-group-glyph`}
         ></i>
+      ) : (
+        <span aria-hidden="true" className="skill-group-monogram">
+          {skill.iconText}
+        </span>
       )}
-      <span 
-        ref={tooltipRef}
-        className="opacity-0 group-hover:opacity-100 fixed z-50 text-[11px] font-body font-medium text-[var(--text-primary)] bg-[var(--bg-secondary)] px-1.5 py-0.5 border border-[var(--border)] pointer-events-none transition-opacity duration-150 whitespace-nowrap"
-        style={{ left: 0, top: 0 }}
-      >
-        {skill.name}
-      </span>
-    </div>
+      <span>{skill.name}</span>
+    </li>
   );
 };
 
@@ -126,20 +145,27 @@ export default function Skills() {
         <div className="flex flex-col gap-10">
           <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
             <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">Tech Stack</h3>
-            <div className="flex flex-wrap gap-x-5 gap-y-3">
-              {skills.map((skill) => (
-                 <SkillItem key={skill.name} skill={skill} />
+            <div className="skill-groups">
+              {skillGroups.map((group) => (
+                <div key={group.title.en} className="skill-group">
+                  <h4 className="skill-group-title">{group.title[lang]}</h4>
+                  <ul className="skill-group-list">
+                    {group.items.map((skill) => (
+                      <SkillItem key={skill.name} skill={skill} />
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
-            <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">Workflow</h3>
+            <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">{texts[lang].practicesTitle}</h3>
             <p className="text-base font-body font-normal text-[var(--text-secondary)] leading-relaxed">
-              {texts[lang].workflow.map((item, index) => (
-                <span key={index}>
+              {texts[lang].practices.map((item, index) => (
+                <span key={item} className="skill-inline-item">
                   {item}
-                  {index < texts[lang].workflow.length - 1 && (
+                  {index < texts[lang].practices.length - 1 && (
                     <span className="text-[var(--text-muted)] mx-1.5">·</span>
                   )}
                 </span>
@@ -148,12 +174,12 @@ export default function Skills() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
-            <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">Soft Skills</h3>
+            <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">{texts[lang].workStyleTitle}</h3>
             <p className="text-base font-body font-normal text-[var(--text-secondary)] leading-relaxed">
-              {texts[lang].soft.map((item, index) => (
-                <span key={index}>
+              {texts[lang].workStyle.map((item, index) => (
+                <span key={item} className="skill-inline-item">
                   {item}
-                  {index < texts[lang].soft.length - 1 && (
+                  {index < texts[lang].workStyle.length - 1 && (
                     <span className="text-[var(--text-muted)] mx-1.5">·</span>
                   )}
                 </span>
