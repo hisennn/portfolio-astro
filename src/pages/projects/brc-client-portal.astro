@@ -1,0 +1,225 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageChrome from "../../components/PageChrome";
+import ProjectMedia from "../../components/ProjectMedia.astro";
+import ProjectImage from "../../components/ProjectImage.astro";
+import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import dashboardImage from "../../assets/projects/brc-portal/dashboard.png";
+import clientSetupImage from "../../assets/projects/brc-portal/client-setup.png";
+import projectSetupImage from "../../assets/projects/brc-portal/project-setup.png";
+import projectIntakeImage from "../../assets/projects/brc-portal/project-intake.png";
+import projectWorkspaceImage from "../../assets/projects/brc-portal/project-workspace.png";
+import adminAssistantImage from "../../assets/projects/brc-portal/admin-assistant.png";
+import interfaceThemesImage from "../../assets/projects/brc-portal/interface-themes.png";
+
+const title = "BRC Client Portal | Projeto de Gabriel Lemes";
+const description =
+  "Portal de clientes e painel administrativo desenvolvido para a Baltimore Re-Construction, com gestão de projetos, documentos, materiais e comunicação.";
+const tech = [
+  "React Router 7",
+  "TypeScript",
+  "Cloudflare Workers",
+  "Neon Postgres",
+  "Drizzle ORM",
+  "Zod",
+  "Ably",
+  "SignWell",
+  "LiveKit",
+  "Vite",
+];
+const imageWidths = [640, 960, 1280, 1583];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "BRC Client Portal",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: "https://gabriellemes.com/projects/brc-client-portal/",
+  author: {
+    "@type": "Person",
+    name: "Gabriel Lemes",
+    url: "https://gabriellemes.com",
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/projects/brc-client-portal/"
+  imageAlt="BRC Client Portal project"
+  jsonLd={jsonLd}
+>
+  <PageChrome client:load>
+    <main class="project-detail-main">
+      <div class="project-detail-hero">
+        <nav class="project-detail-back" aria-label="Breadcrumb">
+          <a href="/#projects">
+            <span aria-hidden="true">←</span>
+            <span data-lang="pt">Voltar aos projetos</span>
+            <span data-lang="en">Back to projects</span>
+          </a>
+        </nav>
+
+        <article class="project-detail-intro">
+          <div class="project-detail-heading">
+            <p class="project-detail-kicker">
+              <span data-lang="pt">Projeto para cliente / aplicação web</span>
+              <span data-lang="en">Client project / web application</span>
+            </p>
+            <h1>BRC Client Portal</h1>
+            <p class="project-detail-lead">
+              <span data-lang="pt">
+                Portal de clientes e painel administrativo para acompanhar
+                projetos, documentos, materiais e comunicação.
+              </span>
+              <span data-lang="en">
+                Client portal and admin panel for managing projects, documents,
+                material selections, and communication.
+              </span>
+            </p>
+          </div>
+
+          <aside class="project-detail-meta" aria-label="Project details">
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">
+                <span data-lang="pt">Cliente</span>
+                <span data-lang="en">Client</span>
+              </span>
+              <span>Baltimore Re-Construction</span>
+            </div>
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">Stack</span>
+              <div class="project-detail-tech">
+                {tech.map((item) => <span>{item}</span>)}
+              </div>
+            </div>
+          </aside>
+        </article>
+      </div>
+
+      <section class="project-detail-overview">
+        <h2>
+          <span data-lang="pt">Visão geral</span>
+          <span data-lang="en">Overview</span>
+        </h2>
+        <div class="project-detail-overview-body">
+          <p>
+            <span data-lang="pt">
+              O BRC Client Portal liga o painel administrativo da Baltimore
+              Re-Construction à área usada pelos clientes. Cadastro, entrada do
+              projeto, arquivos, escolhas de materiais e conversas ficam ligados
+              ao mesmo projeto.
+            </span>
+            <span data-lang="en">
+              BRC Client Portal connects Baltimore Re-Construction's admin panel
+              to the client area. Client setup, project intake, files, material
+              selections, and conversations remain tied to the same project.
+            </span>
+          </p>
+          <p class="project-detail-note">
+            <span data-lang="pt">
+              Os dados pessoais exibidos nas imagens foram substituídos para
+              preservar a privacidade dos clientes.
+            </span>
+            <span data-lang="en">
+              Personal data shown in the screenshots was replaced to protect
+              client privacy.
+            </span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang="pt">Cadastro e ativação de clientes por e-mail, com acesso separado para administração e cliente.</span>
+              <span data-lang="en">Client setup and email activation, with separate admin and client access.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Entrada do projeto com contrato via SignWell, forma de pagamento, comprovante e aprovação.</span>
+              <span data-lang="en">Project intake with SignWell contracts, payment method, proof, and approval.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Área do projeto com fases, arquivos, fotos, escolhas de materiais e discussão.</span>
+              <span data-lang="en">Project workspace with phases, files, photos, material selections, and discussion.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Assistente administrativo limitado aos dados verificados do próprio portal.</span>
+              <span data-lang="en">Admin assistant limited to verified data from the portal itself.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="project-detail-gallery">
+        <ProjectMedia
+          index="01"
+          titlePt="Painel administrativo"
+          titleEn="Admin dashboard"
+          descriptionPt="Resumo de projetos e clientes, com status recentes e acesso às tarefas principais."
+          descriptionEn="Project and client summary with recent statuses and access to primary tasks."
+        >
+          <ProjectImage src={dashboardImage} alt="BRC Client Portal admin dashboard with projects, clients, and quick actions" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="02"
+          titlePt="Cadastro de clientes"
+          titleEn="Client setup"
+          descriptionPt="Cadastro de contato e endereço com envio do acesso inicial ao portal."
+          descriptionEn="Contact and address setup with initial portal access sent to the client."
+        >
+          <ProjectImage src={clientSetupImage} alt="BRC Client Portal form for creating a client and sending portal access" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="03"
+          titlePt="Criação de projetos"
+          titleEn="Project setup"
+          descriptionPt="Novo projeto vinculado a um cliente, com título e endereço da obra."
+          descriptionEn="New project linked to a client with its title and job-site address."
+        >
+          <ProjectImage src={projectSetupImage} alt="BRC Client Portal project list and create-project form" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="04"
+          titlePt="Entrada do projeto"
+          titleEn="Project intake"
+          descriptionPt="Acompanhamento do contrato, forma de pagamento, comprovante e liberação do projeto."
+          descriptionEn="Tracking for contract, payment method, payment proof, and project approval."
+        >
+          <ProjectImage src={projectIntakeImage} alt="BRC Client Portal project intake showing contract and payment steps" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="05"
+          titlePt="Área do projeto"
+          titleEn="Project workspace"
+          descriptionPt="Notas, fases, arquivos, escolhas do cliente e conversa reunidos na página do projeto."
+          descriptionEn="Notes, phases, files, client selections, and discussion on the project page."
+        >
+          <ProjectImage src={projectWorkspaceImage} alt="BRC Client Portal project workspace with phases, files, selections, and discussion" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="06"
+          titlePt="Assistente administrativo"
+          titleEn="Admin assistant"
+          descriptionPt="Consulta sobre clientes, projetos, ativações e escolhas usando dados do portal."
+          descriptionEn="Queries about clients, projects, activations, and selections using portal data."
+        >
+          <ProjectImage src={adminAssistantImage} alt="BRC admin assistant answering a question about project status" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="07"
+          titlePt="Temas da interface"
+          titleEn="Interface themes"
+          descriptionPt="Temas padrão, claro quente e escuro disponíveis nas configurações."
+          descriptionEn="Default, warm light, and dark themes available in settings."
+        >
+          <ProjectImage src={interfaceThemesImage} alt="BRC Client Portal settings with default, warm, and dark themes" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+      </div>
+    </main>
+    <ProjectImageViewer />
+  </PageChrome>
+</BaseLayout>

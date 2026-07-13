@@ -1,0 +1,198 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageChrome from "../../components/PageChrome";
+import ProjectMedia from "../../components/ProjectMedia.astro";
+import ProjectImage from "../../components/ProjectImage.astro";
+import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import servicesImage from "../../assets/projects/baltimore-reconstruction/services.webp";
+import workImage from "../../assets/projects/baltimore-reconstruction/work.webp";
+import contactImage from "../../assets/projects/baltimore-reconstruction/contact.webp";
+
+const title = "Baltimore Re-Construction | Projeto de Gabriel Lemes";
+const description =
+  "Site institucional desenvolvido para a Baltimore Re-Construction, com serviços, trabalhos realizados, áreas atendidas e contato.";
+const tech = ["Next.js 16", "TypeScript", "Tailwind", "Resend"];
+const imageWidths = [640, 960, 1400, 2175];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Baltimore Re-Construction",
+  url: "https://baltimorereconstruction.com/",
+  creator: {
+    "@type": "Person",
+    name: "Gabriel Lemes",
+    url: "https://gabriellemes.com",
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/projects/baltimore-reconstruction/"
+  imageAlt="Baltimore Re-Construction website project"
+  jsonLd={jsonLd}
+>
+  <PageChrome client:load>
+    <main class="project-detail-main">
+      <div class="project-detail-hero">
+        <nav class="project-detail-back" aria-label="Breadcrumb">
+          <a href="/#projects">
+            <span aria-hidden="true">←</span>
+            <span data-lang="pt">Voltar aos projetos</span>
+            <span data-lang="en">Back to projects</span>
+          </a>
+        </nav>
+
+        <article class="project-detail-intro">
+          <div class="project-detail-heading">
+            <p class="project-detail-kicker">
+              <span data-lang="pt">Projeto para cliente / site institucional</span>
+              <span data-lang="en">Client project / company website</span>
+            </p>
+            <h1>Baltimore Re-Construction</h1>
+            <p class="project-detail-lead">
+              <span data-lang="pt">
+                Site para apresentar os serviços da empresa, trabalhos realizados,
+                regiões atendidas e formas de contato.
+              </span>
+              <span data-lang="en">
+                Website presenting the company's services, completed work,
+                service areas, and contact options.
+              </span>
+            </p>
+            <a
+              class="project-detail-visit"
+              href="https://baltimorereconstruction.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span data-lang="pt">Abrir site</span>
+              <span data-lang="en">Open website</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <aside class="project-detail-meta" aria-label="Project details">
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">
+                <span data-lang="pt">Cliente</span>
+                <span data-lang="en">Client</span>
+              </span>
+              <span>Baltimore Re-Construction</span>
+            </div>
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">Stack</span>
+              <div class="project-detail-tech">
+                {tech.map((item) => <span>{item}</span>)}
+              </div>
+            </div>
+          </aside>
+        </article>
+      </div>
+
+      <section class="project-detail-overview">
+        <h2>
+          <span data-lang="pt">Visão geral</span>
+          <span data-lang="en">Overview</span>
+        </h2>
+        <div class="project-detail-overview-body">
+          <p>
+            <span data-lang="pt">
+              O site organiza o conteúdo da Baltimore Re-Construction em páginas
+              de serviços, trabalhos realizados e contato. A navegação direta
+              ajuda o visitante a entender o que a empresa faz e como solicitar
+              um orçamento.
+            </span>
+            <span data-lang="en">
+              The website organizes Baltimore Re-Construction's content into
+              services, completed work, and contact pages. Its direct navigation
+              helps visitors understand the company's work and request an estimate.
+            </span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang="pt">Serviços residenciais, comerciais, planejamento e acessibilidade.</span>
+              <span data-lang="en">Residential, commercial, planning, and accessibility services.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Galeria com reformas e trabalhos concluídos.</span>
+              <span data-lang="en">Gallery of renovations and completed work.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Formulário de contato conectado ao Resend.</span>
+              <span data-lang="en">Contact form connected to Resend.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Metadados, URLs canônicas e dados estruturados próprios para cada página.</span>
+              <span data-lang="en">Page-specific metadata, canonical URLs, and structured data.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="project-detail-gallery">
+        <ProjectMedia
+          index="01"
+          titlePt="Navegação do site"
+          titleEn="Website navigation"
+          descriptionPt="Visão da página inicial, apresentação da empresa e resumo dos serviços."
+          descriptionEn="Home page, company introduction, and service summary."
+        >
+          <video
+            data-project-video
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+            width="1920"
+            height="1080"
+          >
+            <source src="/projects/baltimore-reconstruction/site-overview.mp4" type="video/mp4" />
+          </video>
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="02"
+          titlePt="Serviços"
+          titleEn="Services"
+          descriptionPt="Categorias de serviço, escopo de cada uma e regiões atendidas."
+          descriptionEn="Service categories, their scope, and the areas served."
+        >
+          <ProjectImage src={servicesImage} alt="Baltimore Re-Construction services page with residential and commercial service categories" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="03"
+          titlePt="Trabalhos realizados"
+          titleEn="Completed work"
+          descriptionPt="Galeria de projetos residenciais concluídos em Baltimore."
+          descriptionEn="Gallery of completed residential projects in Baltimore."
+        >
+          <ProjectImage src={workImage} alt="Baltimore Re-Construction work page with a residential renovation gallery" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="04"
+          titlePt="Contato"
+          titleEn="Contact"
+          descriptionPt="Telefone, e-mail e formulário para pedidos de orçamento."
+          descriptionEn="Phone, email, and form for estimate requests."
+        >
+          <ProjectImage src={contactImage} alt="Baltimore Re-Construction contact page with phone, email, and inquiry form" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+        </ProjectMedia>
+      </div>
+    </main>
+    <ProjectImageViewer />
+
+    <script is:inline>
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.querySelectorAll("[data-project-video]").forEach(function (video) {
+        if (!reduceMotion) {
+          video.play().catch(function () {});
+        }
+      });
+    </script>
+  </PageChrome>
+</BaseLayout>

@@ -1,0 +1,106 @@
+<dialog
+  class="project-image-viewer"
+  data-project-image-viewer
+  aria-labelledby="project-image-viewer-caption"
+>
+  <p id="project-image-viewer-caption" class="sr-only" data-project-image-viewer-caption></p>
+  <button
+    class="project-image-viewer-close"
+    type="button"
+    data-project-image-viewer-close
+    autofocus
+  >
+    <span class="sr-only">
+      <span data-lang="pt">Fechar imagem</span>
+      <span data-lang="en">Close image</span>
+    </span>
+    <span aria-hidden="true">×</span>
+  </button>
+  <div class="project-image-viewer-canvas" data-project-image-viewer-canvas>
+    <button
+      class="project-image-viewer-zoom"
+      type="button"
+      data-project-image-viewer-zoom
+      aria-pressed="false"
+    >
+      <span class="sr-only">
+        <span data-lang="pt">Alternar tamanho da imagem</span>
+        <span data-lang="en">Toggle image size</span>
+      </span>
+      <img data-project-image-viewer-image alt="" />
+    </button>
+  </div>
+</dialog>
+
+<script is:inline>
+  var imageViewer = document.querySelector("[data-project-image-viewer]");
+
+  if (imageViewer instanceof HTMLDialogElement) {
+    var viewerImage = imageViewer.querySelector("[data-project-image-viewer-image]");
+    var viewerCaption = imageViewer.querySelector("[data-project-image-viewer-caption]");
+    var viewerClose = imageViewer.querySelector("[data-project-image-viewer-close]");
+    var viewerCanvas = imageViewer.querySelector("[data-project-image-viewer-canvas]");
+    var viewerZoom = imageViewer.querySelector("[data-project-image-viewer-zoom]");
+    var imageViewerTrigger = null;
+    var previousOverflow = "";
+
+    document.addEventListener("click", function (event) {
+      if (!(event.target instanceof Element)) return;
+
+      var trigger = event.target.closest("[data-project-image-trigger]");
+      if (!(trigger instanceof HTMLButtonElement)) return;
+      if (!(viewerImage instanceof HTMLImageElement)) return;
+
+      var source = trigger.dataset.projectImageSrc;
+      var alt = trigger.dataset.projectImageAlt || "";
+      if (!source) return;
+
+      imageViewerTrigger = trigger;
+      viewerImage.src = source;
+      viewerImage.alt = alt;
+      if (viewerCaption) viewerCaption.textContent = alt;
+      viewerZoom?.classList.remove("is-zoomed");
+      viewerZoom?.setAttribute("aria-pressed", "false");
+      previousOverflow = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = "hidden";
+      imageViewer.showModal();
+    });
+
+    viewerClose?.addEventListener("click", function () {
+      imageViewer.close();
+    });
+
+    imageViewer.addEventListener("click", function (event) {
+      if (event.target === imageViewer || event.target === viewerCanvas) {
+        imageViewer.close();
+      }
+    });
+
+    imageViewer.addEventListener("cancel", function (event) {
+      event.preventDefault();
+      imageViewer.close();
+    });
+
+    viewerZoom?.addEventListener("click", function () {
+      var isZoomed = viewerZoom.classList.toggle("is-zoomed");
+      viewerZoom.setAttribute("aria-pressed", String(isZoomed));
+    });
+
+    imageViewer.addEventListener("close", function () {
+      document.documentElement.style.overflow = previousOverflow;
+      viewerZoom?.classList.remove("is-zoomed");
+      viewerZoom?.setAttribute("aria-pressed", "false");
+
+      if (viewerImage instanceof HTMLImageElement) {
+        viewerImage.removeAttribute("src");
+        viewerImage.alt = "";
+      }
+      if (viewerCaption) viewerCaption.textContent = "";
+
+      if (imageViewerTrigger instanceof HTMLButtonElement) {
+        imageViewerTrigger.focus();
+      }
+      imageViewerTrigger = null;
+    });
+  }
+</script>

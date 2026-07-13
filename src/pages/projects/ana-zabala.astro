@@ -1,0 +1,216 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageChrome from "../../components/PageChrome";
+import ProjectMedia from "../../components/ProjectMedia.astro";
+import ProjectImage from "../../components/ProjectImage.astro";
+import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import ProjectThemeComparison from "../../components/ProjectThemeComparison.astro";
+import projectListImage from "../../assets/projects/ana-zabala/project-list.webp";
+import projectDetailImage from "../../assets/projects/ana-zabala/project-detail.webp";
+import themeLightImage from "../../assets/projects/ana-zabala/theme-light.webp";
+import themeDarkImage from "../../assets/projects/ana-zabala/theme-dark.webp";
+
+const title = "Ana Zabala Portfolio | Projeto de Gabriel Lemes";
+const description =
+  "Portfólio bilíngue desenvolvido para a arquiteta Ana Zabala, com projetos, experiência, formação e contato.";
+const tech = ["Next.js", "TypeScript", "Tailwind"];
+const imageWidths = [640, 960, 1400, 2170];
+const imageSizes = "(min-width: 900px) 760px, calc(100vw - 40px)";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Ana Zabala Portfolio",
+  url: "https://anazabala-arquiteta.vercel.app/",
+  creator: {
+    "@type": "Person",
+    name: "Gabriel Lemes",
+    url: "https://gabriellemes.com",
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/projects/ana-zabala/"
+  imageAlt="Ana Zabala architecture portfolio project"
+  jsonLd={jsonLd}
+>
+  <PageChrome client:load>
+    <main class="project-detail-main">
+      <div class="project-detail-hero">
+        <nav class="project-detail-back" aria-label="Breadcrumb">
+          <a href="/#projects">
+            <span aria-hidden="true">←</span>
+            <span data-lang="pt">Voltar aos projetos</span>
+            <span data-lang="en">Back to projects</span>
+          </a>
+        </nav>
+
+        <article class="project-detail-intro">
+          <div class="project-detail-heading">
+            <p class="project-detail-kicker">
+              <span data-lang="pt">Projeto para cliente / portfólio de arquitetura</span>
+              <span data-lang="en">Client project / architecture portfolio</span>
+            </p>
+            <h1>Ana Zabala Portfolio</h1>
+            <p class="project-detail-lead">
+              <span data-lang="pt">
+                Portfólio bilíngue para apresentar projetos, experiência e formação
+                da arquiteta Ana Zabala.
+              </span>
+              <span data-lang="en">
+                Bilingual portfolio presenting architect Ana Zabala's projects,
+                experience, and education.
+              </span>
+            </p>
+            <a
+              class="project-detail-visit"
+              href="https://anazabala-arquiteta.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span data-lang="pt">Abrir site</span>
+              <span data-lang="en">Open website</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <aside class="project-detail-meta" aria-label="Project details">
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">
+                <span data-lang="pt">Cliente</span>
+                <span data-lang="en">Client</span>
+              </span>
+              <span>Ana Zabala</span>
+            </div>
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">Stack</span>
+              <div class="project-detail-tech">
+                {tech.map((item) => <span>{item}</span>)}
+              </div>
+            </div>
+          </aside>
+        </article>
+      </div>
+
+      <section class="project-detail-overview">
+        <h2>
+          <span data-lang="pt">Visão geral</span>
+          <span data-lang="en">Overview</span>
+        </h2>
+        <div class="project-detail-overview-body">
+          <p>
+            <span data-lang="pt">
+              O site reúne os trabalhos da arquiteta em uma navegação direta,
+              com páginas próprias para cada projeto e conteúdo em português e inglês.
+            </span>
+            <span data-lang="en">
+              The website brings the architect's work into a direct navigation,
+              with dedicated pages for each project and content in Portuguese and English.
+            </span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang="pt">Galerias organizadas por projeto e ambiente.</span>
+              <span data-lang="en">Galleries organized by project and space.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Alternância entre os temas claro e escuro.</span>
+              <span data-lang="en">Light and dark theme switch.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Conteúdo disponível em português e inglês.</span>
+              <span data-lang="en">Content available in Portuguese and English.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Contato, currículo e LinkedIn acessíveis na página inicial.</span>
+              <span data-lang="en">Contact, résumé, and LinkedIn available from the home page.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="project-detail-gallery">
+        <ProjectMedia
+          index="01"
+          titlePt="Navegação do portfólio"
+          titleEn="Portfolio navigation"
+          descriptionPt="Percurso pelas principais seções e projetos do site."
+          descriptionEn="Navigation through the website's main sections and projects."
+        >
+          <video
+            data-project-video
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+            width="1920"
+            height="1080"
+          >
+            <source src="/projects/ana-zabala/site-overview.mp4" type="video/mp4" />
+          </video>
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="02"
+          titlePt="Temas claro e escuro"
+          titleEn="Light and dark themes"
+          descriptionPt="Arraste a divisória para comparar a composição e o contraste dos dois temas."
+          descriptionEn="Drag the divider to compare the composition and contrast of both themes."
+        >
+          <ProjectThemeComparison
+            id="ana-zabala-theme-comparison"
+            lightSrc={themeLightImage}
+            darkSrc={themeDarkImage}
+            lightAlt="Ana Zabala portfolio home page in light theme"
+            darkAlt="Ana Zabala portfolio home page in dark theme"
+            widths={imageWidths}
+            sizes={imageSizes}
+          />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="03"
+          titlePt="Seleção de projetos"
+          titleEn="Project selection"
+          descriptionPt="Página inicial com uma prévia visual de cada trabalho."
+          descriptionEn="Home page with a visual preview of each project."
+        >
+          <ProjectImage
+            src={projectListImage}
+            alt="Ana Zabala portfolio project selection page"
+            widths={imageWidths}
+            sizes={imageSizes}
+          />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="04"
+          titlePt="Galeria de projeto"
+          titleEn="Project gallery"
+          descriptionPt="Imagens, categorias de ambiente e informações técnicas em uma página própria."
+          descriptionEn="Images, space categories, and technical details on a dedicated page."
+        >
+          <ProjectImage
+            src={projectDetailImage}
+            alt="Ana Zabala portfolio apartment project gallery"
+            widths={imageWidths}
+            sizes={imageSizes}
+          />
+        </ProjectMedia>
+      </div>
+    </main>
+    <ProjectImageViewer />
+
+    <script is:inline>
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.querySelectorAll("[data-project-video]").forEach(function (video) {
+        if (!reduceMotion) {
+          video.play().catch(function () {});
+        }
+      });
+    </script>
+  </PageChrome>
+</BaseLayout>

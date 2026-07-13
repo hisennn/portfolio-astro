@@ -1,0 +1,30 @@
+---
+type Props = {
+  index: string;
+  titlePt: string;
+  titleEn: string;
+  descriptionPt: string;
+  descriptionEn: string;
+};
+
+const { index, titlePt, titleEn, descriptionPt, descriptionEn } = Astro.props;
+---
+
+<section class="project-detail-media-row">
+  <header class="project-detail-media-copy">
+    <span class="project-detail-media-index">{index}</span>
+    <div>
+      <h2>
+        <span data-lang="pt">{titlePt}</span>
+        <span data-lang="en">{titleEn}</span>
+      </h2>
+      <p>
+        <span data-lang="pt">{descriptionPt}</span>
+        <span data-lang="en">{descriptionEn}</span>
+      </p>
+    </div>
+  </header>
+  <div class="project-detail-media-frame">
+    <slot />
+  </div>
+</section>

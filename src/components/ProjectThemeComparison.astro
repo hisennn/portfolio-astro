@@ -1,0 +1,116 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+type Props = {
+  id: string;
+  lightSrc: ImageMetadata;
+  darkSrc: ImageMetadata;
+  lightAlt: string;
+  darkAlt: string;
+  widths: number[];
+  sizes: string;
+};
+
+const { id, lightSrc, darkSrc, lightAlt, darkAlt, widths, sizes } = Astro.props;
+const labelId = `${id}-label`;
+---
+
+<div id={id} class="project-theme-comparison" data-theme-comparison>
+  <div class="project-theme-comparison-image">
+    <Image
+      src={lightSrc}
+      alt={lightAlt}
+      widths={widths}
+      sizes={sizes}
+      format="webp"
+      quality="max"
+    />
+  </div>
+
+  <div class="project-theme-comparison-image project-theme-comparison-dark" aria-hidden="true">
+    <Image
+      src={darkSrc}
+      alt=""
+      widths={widths}
+      sizes={sizes}
+      format="webp"
+      quality="max"
+    />
+  </div>
+
+  <span class="project-theme-comparison-label project-theme-comparison-label-dark" aria-hidden="true">
+    <span data-lang="pt">Escuro</span>
+    <span data-lang="en">Dark</span>
+  </span>
+  <span class="project-theme-comparison-label project-theme-comparison-label-light" aria-hidden="true">
+    <span data-lang="pt">Claro</span>
+    <span data-lang="en">Light</span>
+  </span>
+
+  <div class="project-theme-comparison-divider" aria-hidden="true">
+    <span>‹</span><span>›</span>
+  </div>
+
+  <span id={labelId} class="sr-only">
+    <span data-lang="pt">Comparar os temas escuro e claro</span>
+    <span data-lang="en">Compare dark and light themes</span>
+  </span>
+  <input
+    type="range"
+    min="0"
+    max="100"
+    value="50"
+    aria-labelledby={labelId}
+    data-theme-comparison-range
+  />
+
+  <span class="sr-only">{darkAlt}</span>
+</div>
+
+<script is:inline>
+  document.querySelectorAll("[data-theme-comparison]").forEach(function (comparison) {
+    if (comparison.getAttribute("data-theme-comparison-ready") === "true") return;
+    comparison.setAttribute("data-theme-comparison-ready", "true");
+
+    var range = comparison.querySelector("[data-theme-comparison-range]");
+    if (!(range instanceof HTMLInputElement)) return;
+
+    var updateComparison = function () {
+      comparison.style.setProperty("--comparison-position", range.value + "%");
+    };
+
+    var dragging = false;
+    var setPosition = function (clientX) {
+      var bounds = comparison.getBoundingClientRect();
+      var position = Math.min(100, Math.max(0, ((clientX - bounds.left) / bounds.width) * 100));
+      range.value = String(Math.round(position));
+      updateComparison();
+    };
+
+    comparison.addEventListener("pointerdown", function (event) {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      dragging = true;
+      comparison.setPointerCapture(event.pointerId);
+      setPosition(event.clientX);
+    });
+
+    comparison.addEventListener("pointermove", function (event) {
+      if (dragging) setPosition(event.clientX);
+    });
+
+    comparison.addEventListener("pointerup", function (event) {
+      dragging = false;
+      if (comparison.hasPointerCapture(event.pointerId)) {
+        comparison.releasePointerCapture(event.pointerId);
+      }
+    });
+
+    comparison.addEventListener("pointercancel", function () {
+      dragging = false;
+    });
+
+    range.addEventListener("input", updateComparison);
+    updateComparison();
+  });
+</script>

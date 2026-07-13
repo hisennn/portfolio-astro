@@ -45,12 +45,9 @@ const texts = {
   }
 } as const;
 
-type Skill = {
-  name: string;
-  icon?: string;
-  iconSrc?: string;
-  iconText?: string;
-};
+type Skill =
+  | { name: string; icon: string; iconSrc?: never }
+  | { name: string; iconSrc: string; icon?: never };
 
 const skillGroups: Array<{
   title: { pt: string; en: string };
@@ -79,13 +76,6 @@ const skillGroups: Array<{
     ]
   },
   {
-    title: { pt: 'Plataforma', en: 'Platform' },
-    items: [
-      { name: 'Cloudflare', icon: 'devicon-cloudflare-plain' },
-      { name: 'Vercel', icon: 'devicon-vercel-original' }
-    ]
-  },
-  {
     title: { pt: 'Ferramentas', en: 'Tooling' },
     items: [
       { name: 'Git', icon: 'devicon-git-plain' },
@@ -100,7 +90,7 @@ const skillGroups: Array<{
     items: [
       { name: 'Claude Code', iconSrc: '/icons/claude.svg' },
       { name: 'OpenAI Codex / ChatGPT', iconSrc: '/icons/openai.svg' },
-      { name: 'Hermes Agent', iconText: 'H' }
+      { name: 'Hermes Agent', iconSrc: '/icons/hermesagent.svg' }
     ]
   }
 ];
@@ -117,15 +107,11 @@ const SkillItem = ({ skill }: { skill: Skill }) => {
             mask: `url(${skill.iconSrc}) center / contain no-repeat`
           }}
         />
-      ) : skill.icon ? (
+      ) : (
         <i
           aria-hidden="true"
           className={`${skill.icon} skill-group-glyph`}
         ></i>
-      ) : (
-        <span aria-hidden="true" className="skill-group-monogram">
-          {skill.iconText}
-        </span>
       )}
       <span>{skill.name}</span>
     </li>

@@ -1,0 +1,229 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageChrome from "../../components/PageChrome";
+import ProjectMedia from "../../components/ProjectMedia.astro";
+import ProjectImage from "../../components/ProjectImage.astro";
+import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import feedImage from "../../assets/projects/kiromilog/feed.png";
+import profileImage from "../../assets/projects/kiromilog/profile.png";
+
+const title = "Kiromilog | Projeto de Gabriel Lemes";
+const description =
+  "Detalhes do Kiromilog, tracker social de anime e mangá desenvolvido por Gabriel Lemes com Next.js, TypeScript, Neon e Jikan API.";
+const tech = [
+  "Next.js 16",
+  "TypeScript",
+  "Neon Auth",
+  "Neon Postgres",
+  "Drizzle",
+  "UploadThing",
+  "Pusher",
+  "Jikan API",
+];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Kiromilog",
+  applicationCategory: "EntertainmentApplication",
+  operatingSystem: "Web",
+  url: "https://gabriellemes.com/projects/kiromilog/",
+  sameAs: "https://kiromilog.vercel.app/",
+  author: {
+    "@type": "Person",
+    name: "Gabriel Lemes",
+    url: "https://gabriellemes.com",
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/projects/kiromilog/"
+  imageAlt="Kiromilog social anime and manga tracker project"
+  jsonLd={jsonLd}
+>
+  <PageChrome client:load>
+    <main class="project-detail-main">
+      <div class="project-detail-hero">
+        <nav class="project-detail-back" aria-label="Breadcrumb">
+          <a href="/#projects">
+            <span aria-hidden="true">←</span>
+            <span data-lang="pt">Voltar aos projetos</span>
+            <span data-lang="en">Back to projects</span>
+          </a>
+        </nav>
+
+        <article class="project-detail-intro">
+          <div class="project-detail-heading">
+          <p class="project-detail-kicker">
+            <span data-lang="pt">Projeto pessoal / aplicação web</span>
+            <span data-lang="en">Personal project / web application</span>
+          </p>
+          <h1>Kiromilog</h1>
+          <p class="project-detail-lead">
+            <span data-lang="pt">
+              Tracker social de anime e mangá com listas, busca, perfis,
+              seguidores, favoritos e mensagens.
+            </span>
+            <span data-lang="en">
+              Social anime and manga tracker with lists, search, profiles,
+              follows, favorites, and messages.
+            </span>
+          </p>
+          <a
+            class="project-detail-visit"
+            href="https://kiromilog.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span data-lang="pt">Abrir projeto</span>
+            <span data-lang="en">Open project</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          </div>
+
+          <aside class="project-detail-meta" aria-label="Project details">
+          <div class="project-detail-meta-row">
+            <span class="project-detail-meta-label">
+              <span data-lang="pt">Tipo</span>
+              <span data-lang="en">Type</span>
+            </span>
+            <span>
+              <span data-lang="pt">Aplicação full stack</span>
+              <span data-lang="en">Full-stack application</span>
+            </span>
+          </div>
+          <div class="project-detail-meta-row">
+            <span class="project-detail-meta-label">Stack</span>
+            <div class="project-detail-tech">
+              {tech.map((item) => <span>{item}</span>)}
+            </div>
+          </div>
+          </aside>
+        </article>
+      </div>
+
+      <section class="project-detail-overview">
+        <h2>
+          <span data-lang="pt">Visão geral</span>
+          <span data-lang="en">Overview</span>
+        </h2>
+        <div class="project-detail-overview-body">
+          <p>
+            <span data-lang="pt">
+              O Kiromilog reúne catálogo de anime e mangá, listas pessoais,
+              perfis e atividade de outros usuários em uma só aplicação.
+            </span>
+            <span data-lang="en">
+              Kiromilog brings anime and manga catalog browsing, personal lists,
+              profiles, and user activity into one application.
+            </span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang="pt">Busca de anime, mangá, personagens e usuários com dados da Jikan API.</span>
+              <span data-lang="en">Search for anime, manga, characters, and users with data from the Jikan API.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Perfis com listas, favoritos, seguidores e histórico de atividade.</span>
+              <span data-lang="en">Profiles with lists, favorites, followers, and activity history.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Autenticação e dados com Neon Auth, PostgreSQL e Drizzle.</span>
+              <span data-lang="en">Authentication and data with Neon Auth, PostgreSQL, and Drizzle.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Upload de avatar, mensagens e atualizações em tempo real.</span>
+              <span data-lang="en">Avatar uploads, messages, and real-time updates.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="project-detail-gallery">
+        <ProjectMedia
+          index="01"
+          titlePt="Busca e catálogo"
+          titleEn="Search and catalog"
+          descriptionPt="Pesquisa por anime, mangá, personagens e usuários, com resultados separados por tipo."
+          descriptionEn="Search across anime, manga, characters, and users, with results separated by type."
+        >
+          <video
+            data-project-video
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+            width="1920"
+            height="1080"
+          >
+            <source src="/projects/kiromilog/search-and-catalog.mp4" type="video/mp4" />
+          </video>
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="02"
+          titlePt="Perfis e conexões"
+          titleEn="Profiles and connections"
+          descriptionPt="Busca de usuários e fluxo de seguir perfis, refletindo as conexões no feed."
+          descriptionEn="User search and profile following, with those connections reflected in the feed."
+        >
+          <video
+            data-project-video
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+            width="1920"
+            height="1080"
+          >
+            <source src="/projects/kiromilog/profiles-and-follows.mp4" type="video/mp4" />
+          </video>
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="03"
+          titlePt="Perfil e biblioteca"
+          titleEn="Profile and library"
+          descriptionPt="Listas, estatísticas, favoritos e histórico de atividade reunidos no perfil."
+          descriptionEn="Lists, statistics, favorites, and activity history collected in the profile."
+        >
+          <ProjectImage
+            src={profileImage}
+            alt="Kiromilog profile page with anime and manga statistics, favorites, and activity history"
+            widths={[640, 960, 1400, 2168]}
+            sizes="(min-width: 900px) 760px, calc(100vw - 40px)"
+          />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="04"
+          titlePt="Feed de atividade"
+          titleEn="Activity feed"
+          descriptionPt="Atividades recentes de quem o usuário segue, com progresso, favoritos e itens em andamento."
+          descriptionEn="Recent activity from followed users, including progress, favorites, and current items."
+        >
+          <ProjectImage
+            src={feedImage}
+            alt="Kiromilog activity feed with recent anime and manga updates"
+            widths={[640, 960, 1400, 2168]}
+            sizes="(min-width: 900px) 760px, calc(100vw - 40px)"
+          />
+        </ProjectMedia>
+      </div>
+    </main>
+    <ProjectImageViewer />
+
+    <script is:inline>
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.querySelectorAll("[data-project-video]").forEach(function (video) {
+        if (!reduceMotion) {
+          video.play().catch(function () {});
+        }
+      });
+    </script>
+  </PageChrome>
+</BaseLayout>

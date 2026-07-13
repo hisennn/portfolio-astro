@@ -1,278 +1,470 @@
 'use client';
 
+import { motion, useReducedMotion } from 'motion/react';
+import { useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import BoxIcon from './BoxIcon';
 
 const texts = {
   pt: {
     title: 'Projetos',
-    brcPortal:
-      'Portal interno para manter clientes, projetos, fases, arquivos, comentários, escolha de materiais e comunicação no mesmo lugar. Também tem tempo real com Ably, assinatura de contratos com SignWell, protótipo de chamada de voz com LiveKit e dados em PostgreSQL.',
-    kiromilog:
-      'Tracker social de anime e mangá com listas, favoritos, busca, perfis, seguidores, mensagens e avatar. Usa Neon Auth, Pusher, UploadThing e API Jikan.',
-    coord:
-      'Ferramenta pequena para guardar coordenadas do Minecraft e achar tudo rápido depois, sem depender de anotações soltas.',
-    baltre:
-      'Site institucional da Baltimore Re-Construction para apresentar serviços, regiões atendidas e formas de contato, com páginas leves e ajustes de SEO técnico.',
-    isaPsi:
-      'Site para psicóloga, separando atendimento presencial e online, áreas de atuação, informações profissionais e formulário de contato.',
-    ana:
-      'Portfólio para uma arquiteta independente, feito para destacar projetos e facilitar contato direto.',
-    previewTitle: 'portal / overview',
-    kiromilogPreviewTitle: 'tracker / social',
-    brcBadge: 'Ativo',
-    clients: 'clientes',
-    projects: 'projetos',
-    files: 'arquivos',
-    realtime: 'tempo real',
+    hint: 'Navegue pelo leque ou selecione um projeto.',
+    previous: 'Projeto anterior',
+    next: 'Próximo projeto',
+    open: 'Abrir projeto',
+    portalPreview: 'portal / visão geral',
+    trackerPreview: 'tracker / social',
+    companyPreview: 'site / institucional',
+    portfolioPreview: 'portfólio / arquitetura',
+    active: 'Ativo',
     anime: 'anime',
     manga: 'mangá',
     favorites: 'favoritos',
-    messages: 'mensagens'
+    messages: 'mensagens',
+    brcPortal:
+      'Portal de clientes e operação para projetos, arquivos, escolhas e comunicação da Baltimore Re-Construction.',
+    kiromilog:
+      'Tracker social de anime e mangá com listas, perfis, favoritos, mensagens e atividade em tempo real.',
+    baltre:
+      'Site institucional focado em serviços, áreas atendidas, trabalhos realizados e contato.',
+    isaPsi:
+      'Site profissional para atendimento psicológico presencial e online.',
+    ana:
+      'Portfólio de arquitetura criado para destacar projetos e facilitar o contato direto.',
+    coord:
+      'Ferramenta direta para salvar, organizar e reencontrar coordenadas do Minecraft.'
   },
   en: {
     title: 'Projects',
-    brcPortal:
-      'Internal portal for keeping clients, projects, phases, files, comments, material selections, and communication in one place. It also uses Ably for real-time updates, SignWell for contracts, a LiveKit voice-call prototype, and PostgreSQL for project data.',
-    kiromilog:
-      'Social anime and manga tracker with lists, favorites, search, profiles, follows, messages, and avatars. Uses Neon Auth, Pusher, UploadThing, and the Jikan API.',
-    coord:
-      'Small tool for saving Minecraft coordinates and finding them quickly later, without scattered notes.',
-    baltre:
-      'Company website for Baltimore Re-Construction covering services, service areas, and contact paths, with lightweight pages and technical SEO adjustments.',
-    isaPsi:
-      'Website for a psychologist, separating in-person and online care, practice areas, professional information, and a contact form.',
-    ana:
-      'Portfolio for an independent architect, built to highlight projects and make direct contact easy.',
-    previewTitle: 'portal / overview',
-    kiromilogPreviewTitle: 'tracker / social',
-    brcBadge: 'Active',
-    clients: 'clients',
-    projects: 'projects',
-    files: 'files',
-    realtime: 'real time',
+    hint: 'Browse the fan or select a project.',
+    previous: 'Previous project',
+    next: 'Next project',
+    open: 'Open project',
+    portalPreview: 'portal / overview',
+    trackerPreview: 'tracker / social',
+    companyPreview: 'website / company',
+    portfolioPreview: 'portfolio / architecture',
+    active: 'Active',
     anime: 'anime',
     manga: 'manga',
     favorites: 'favorites',
-    messages: 'messages'
+    messages: 'messages',
+    brcPortal:
+      'Client and operations portal for Baltimore Re-Construction projects, files, selections, and communication.',
+    kiromilog:
+      'Social anime and manga tracker with lists, profiles, favorites, messages, and real-time activity.',
+    baltre:
+      'Company website focused on services, service areas, completed work, and contact.',
+    isaPsi:
+      'Professional website for in-person and online psychological care.',
+    ana:
+      'Architecture portfolio designed to highlight projects and simplify direct contact.',
+    coord:
+      'A focused tool for saving, organizing, and finding Minecraft coordinates.'
   }
 } as const;
 
 const projects = [
   {
     name: 'BRC Client Portal',
-    tech: ['React Router 7', 'TypeScript', 'Cloudflare Workers', 'Neon Postgres', 'Drizzle ORM', 'Zod', 'Ably', 'SignWell', 'LiveKit', 'Vite'],
+    href: '/projects/brc-client-portal/',
+    tech: ['React Router 7', 'Node.js', 'PostgreSQL', 'Cloudflare'],
     descKey: 'brcPortal' as const,
-    variant: 'featured' as const
+    visual: 'brc' as const
   },
   {
-    name: 'Kiromilog',
-    url: 'https://kiromilog.vercel.app/',
-    tech: ['Next.js 16', 'TypeScript', 'Neon Auth', 'Neon Postgres', 'Drizzle', 'UploadThing', 'Pusher', 'Jikan API'],
-    descKey: 'kiromilog' as const,
-    variant: 'kiromilog' as const
+    name: 'Baltimore Re-Construction',
+    href: '/projects/baltimore-reconstruction/',
+    tech: ['Next.js 16', 'TypeScript', 'Tailwind', 'Resend'],
+    descKey: 'baltre' as const,
+    visual: 'baltimore' as const
   },
   {
-    name: 'Baltimore Re-Construction Website',
-    url: 'https://baltimorereconstruction.com/',
-    tech: ['Astro', 'Tailwind', 'Cloudflare'],
-    descKey: 'baltre' as const
-  },
-  {
-    name: 'Isadora Tomazini Psicóloga',
-    url: 'https://isadoratomazini.com.br/',
-    tech: ['Astro', 'Cloudflare Pages Functions', 'Mailgun'],
-    descKey: 'isaPsi' as const
+    name: 'Isadora Tomazini',
+    href: 'https://isadoratomazini.com.br/',
+    tech: ['Astro', 'Cloudflare', 'Mailgun'],
+    descKey: 'isaPsi' as const,
+    visual: 'isadora' as const,
+    external: true
   },
   {
     name: 'Ana Zabala Portfolio',
-    url: 'https://anazabala-arquiteta.vercel.app/',
+    href: '/projects/ana-zabala/',
     tech: ['Next.js', 'TypeScript', 'Tailwind'],
-    descKey: 'ana' as const
+    descKey: 'ana' as const,
+    visual: 'ana' as const
   },
   {
-    name: 'Minecraft Coordinates Manager',
-    url: 'https://mc-coordinate-saver.vercel.app/',
-    tech: ['HTML', 'CSS', 'JS'],
-    descKey: 'coord' as const
+    name: 'Coordinates Manager',
+    href: 'https://mc-coordinate-saver.vercel.app/',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    descKey: 'coord' as const,
+    visual: 'coordinates' as const,
+    external: true
+  },
+  {
+    name: 'Kiromilog',
+    href: '/projects/kiromilog/',
+    tech: ['Next.js 16', 'TypeScript', 'Neon', 'Pusher'],
+    descKey: 'kiromilog' as const,
+    visual: 'kiromilog' as const
   }
-];
+] as const;
+
+function getCircularOffset(index: number, activeIndex: number) {
+  const total = projects.length;
+  let offset = (index - activeIndex + total) % total;
+
+  if (offset > total / 2) {
+    offset -= total;
+  }
+
+  return offset;
+}
+
+function getCardPose(offset: number) {
+  const distance = Math.abs(offset);
+
+  if (distance === 3) {
+    return {
+      x: '0px',
+      y: 'calc(var(--fan-step-y) * -0.45)',
+      rotate: 0,
+      scale: 0.72,
+      opacity: 0.45,
+      zIndex: 10
+    };
+  }
+
+  return {
+    x: `calc(var(--fan-step-x) * ${offset})`,
+    y: `calc(var(--fan-step-y) * ${distance})`,
+    rotate: offset * 6,
+    scale: distance === 0 ? 1 : distance === 1 ? 0.91 : 0.8,
+    opacity: distance === 0 ? 1 : distance === 1 ? 0.97 : 0.72,
+    zIndex: 60 - distance * 14
+  };
+}
+
+function ProjectVisual({
+  visual,
+  name,
+  copy
+}: {
+  visual: (typeof projects)[number]['visual'];
+  name: string;
+  copy: (typeof texts)[keyof typeof texts];
+}) {
+  if (visual === 'brc') {
+    return (
+      <div className="project-fan-handmade project-card-preview project-card-preview-brc" aria-hidden="true">
+        <div className="project-card-preview-head">
+          <div className="flex gap-1.5"><span /><span /><span /></div>
+          <strong>{copy.portalPreview}</strong>
+        </div>
+        <div className="brc-preview-body">
+          <div className="brc-preview-sidebar">
+            {(['bx-layout', 'bx-user', 'bx-folder', 'bx-file-blank'] as const).map((icon, index) => (
+              <div key={icon} className={`brc-preview-nav-item${index === 0 ? ' brc-preview-nav-active' : ''}`}>
+                <BoxIcon name={icon} size={10} />
+                <span className="brc-preview-nav-label" />
+              </div>
+            ))}
+          </div>
+          <div className="brc-preview-main">
+            <div className="brc-preview-card">
+              <div className="brc-preview-card-header">
+                <div className="brc-preview-card-title-row">
+                  <span className="brc-preview-skeleton brc-preview-card-name" />
+                  <span className="brc-preview-badge">{copy.active}</span>
+                </div>
+                <span className="brc-preview-skeleton brc-preview-card-sub" />
+              </div>
+              <div className="brc-preview-progress-track"><div className="brc-preview-progress-fill" /></div>
+              <div className="brc-preview-stats">
+                {(['bx-layer', 'bx-folder', 'bx-broadcast'] as const).map((icon) => (
+                  <span key={icon}>
+                    <BoxIcon name={icon} size={10} className="brc-stat-icon" />
+                    <span className="brc-preview-skeleton brc-preview-stat-label" />
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (visual === 'kiromilog') {
+    return (
+      <div className="project-fan-handmade project-card-preview project-card-preview-kiromilog" aria-hidden="true">
+        <div className="project-card-preview-head">
+          <div className="flex gap-1.5"><span /><span /><span /></div>
+          <strong>{copy.trackerPreview}</strong>
+        </div>
+        <div className="kiromilog-preview-body">
+          <div className="kiromilog-preview-main">
+            <img src="/sbqd-cape.webp" alt="" className="kiromilog-preview-cover" draggable={false} />
+            <div className="kiromilog-preview-copy"><span /><span /><span /></div>
+          </div>
+          <div className="kiromilog-preview-grid">
+            <span><BoxIcon name="bx-tv" size={13} />{copy.anime}</span>
+            <span><BoxIcon name="bx-book-open" size={13} />{copy.manga}</span>
+            <span><BoxIcon name="bx-heart" size={13} />{copy.favorites}</span>
+            <span><BoxIcon name="bx-message-circle" size={13} />{copy.messages}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (visual === 'baltimore') {
+    return (
+      <div className="project-fan-handmade project-card-preview baltimore-preview" aria-hidden="true">
+        <div className="project-card-preview-head">
+          <div className="flex gap-1.5"><span /><span /><span /></div>
+          <strong>{copy.companyPreview}</strong>
+        </div>
+        <div className="baltimore-preview-page">
+          <div className="baltimore-preview-nav">
+            <span className="baltimore-preview-mark">BRC</span>
+            <span>HOME</span>
+            <span>SERVICES</span>
+            <span>WORK</span>
+          </div>
+          <div className="baltimore-preview-hero">
+            <span>OUR SERVICES</span>
+            <strong>Built for<br />Baltimore.</strong>
+            <i />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (visual === 'ana') {
+    return (
+      <div className="project-fan-handmade project-card-preview ana-preview" aria-hidden="true">
+        <div className="project-card-preview-head">
+          <div className="flex gap-1.5"><span /><span /><span /></div>
+          <strong>{copy.portfolioPreview}</strong>
+        </div>
+        <div className="ana-preview-page">
+          <div className="ana-preview-nav">
+            <strong>ANA ZABALA</strong>
+            <span>PROJECTS</span>
+            <span>ABOUT</span>
+            <i />
+          </div>
+          <div className="ana-preview-hero">
+            <span>PORTFOLIO</span>
+            <strong>Ana<br /><em>Zabala</em></strong>
+            <i />
+            <p><span /><span /></p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div aria-hidden="true" className={`project-fan-graphic project-fan-graphic-${visual}`}>
+      <span className="project-fan-monogram">{name.slice(0, 2).toUpperCase()}</span>
+      <span className="project-fan-graphic-line" />
+      <span className="project-fan-graphic-line" />
+      <span className="project-fan-graphic-line" />
+    </div>
+  );
+}
 
 export default function Projects() {
   const { lang } = useLanguage();
+  const reduceMotion = useReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const draggedRef = useRef(false);
+  const pointerIdRef = useRef<number | null>(null);
+  const lastPointerXRef = useRef(0);
+  const dragRemainderRef = useRef(0);
+  const dragDistanceRef = useRef(0);
+  const dragThresholdRef = useRef(90);
+  const copy = texts[lang];
+
+  const move = (direction: -1 | 1) => {
+    setActiveIndex((current) => (current + direction + projects.length) % projects.length);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      move(-1);
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      move(1);
+    }
+  };
+
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0 || (event.target as Element).closest('.project-fan-control')) {
+      return;
+    }
+
+    pointerIdRef.current = event.pointerId;
+    lastPointerXRef.current = event.clientX;
+    dragRemainderRef.current = 0;
+    dragDistanceRef.current = 0;
+    dragThresholdRef.current = Math.max(72, Math.min(130, event.currentTarget.clientWidth * 0.1));
+    draggedRef.current = false;
+  };
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (pointerIdRef.current !== event.pointerId) {
+      return;
+    }
+
+    const delta = event.clientX - lastPointerXRef.current;
+    lastPointerXRef.current = event.clientX;
+    dragDistanceRef.current += Math.abs(delta);
+    dragRemainderRef.current += delta;
+
+    if (dragDistanceRef.current > 5) {
+      if (!draggedRef.current) {
+        draggedRef.current = true;
+        event.currentTarget.setPointerCapture(event.pointerId);
+      }
+
+      event.preventDefault();
+    }
+
+    const threshold = dragThresholdRef.current;
+
+    while (dragRemainderRef.current <= -threshold) {
+      move(1);
+      dragRemainderRef.current += threshold;
+    }
+
+    while (dragRemainderRef.current >= threshold) {
+      move(-1);
+      dragRemainderRef.current -= threshold;
+    }
+  };
+
+  const finishPointerDrag = (event: PointerEvent<HTMLDivElement>) => {
+    if (pointerIdRef.current !== event.pointerId) {
+      return;
+    }
+
+    pointerIdRef.current = null;
+    dragRemainderRef.current = 0;
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    window.setTimeout(() => {
+      draggedRef.current = false;
+    }, 0);
+  };
 
   return (
-    <section>
-      <div className="flex flex-col gap-6">
-        <h2 className="text-[15px] font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
-          {texts[lang].title}
-        </h2>
+    <section id="projects" className="project-fan-section" onKeyDown={handleKeyDown} tabIndex={0}>
+      <div className="project-fan-heading">
+        <h2>{copy.title}</h2>
+        <p>{copy.hint}</p>
+      </div>
 
-        <div className="w-full">
-          <div className="project-card-grid">
-            {projects.map((project) => {
-              const isLinked = 'url' in project && project.url;
-              const hasPreview = 'variant' in project && ['featured', 'kiromilog'].includes(project.variant);
-              const isFeatured = 'variant' in project && project.variant === 'featured';
-              const isKiromilog = 'variant' in project && project.variant === 'kiromilog';
-              const CardElement = isLinked ? 'a' : 'article';
-              const cardProps = isLinked
-                ? {
-                    href: project.url,
-                    target: '_blank',
-                    rel: 'noopener noreferrer'
-                  }
-                : {};
+      <div
+        className="project-fan-stage"
+        aria-roledescription="carousel"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={finishPointerDrag}
+        onPointerCancel={finishPointerDrag}
+        onPointerLeave={(event) => {
+          if (pointerIdRef.current === event.pointerId && !event.currentTarget.hasPointerCapture(event.pointerId)) {
+            pointerIdRef.current = null;
+          }
+        }}
+      >
+        <button className="project-fan-control project-fan-control-previous" type="button" onClick={() => move(-1)} aria-label={copy.previous}>
+          <BoxIcon name="bx-chevron-left" size={34} />
+        </button>
 
-              return (
-                <CardElement
-                  key={project.name}
-                  className={[
-                    'project-card',
-                    hasPreview ? 'project-card-featured' : '',
-                    isLinked ? 'project-card-linked' : '',
-                    !isLinked ? 'project-card-hoverable' : ''
-                  ].filter(Boolean).join(' ')}
-                  {...cardProps}
-                >
-                  <div className="project-card-body h-full justify-between">
-                    <div className="flex flex-col gap-3">
-                      {isLinked ? (
-                        <span className="project-link-shell">
-                          <span className="project-link-text text-[17px] font-body font-medium tracking-tight leading-snug">
-                            {project.name}
-                            <BoxIcon
-                              name="bx-arrow-up-right-stroke"
-                              size={13}
-                              className="project-link-icon shrink-0"
-                            />
-                          </span>
-                          <span aria-hidden="true" className="project-link-bar" />
-                        </span>
-                      ) : (
-                        <span className="project-link-static text-[17px] font-body font-medium tracking-tight leading-snug">
-                          {project.name}
-                        </span>
-                      )}
+        <div className="project-fan-deck">
+          {projects.map((project, index) => {
+            const offset = getCircularOffset(index, activeIndex);
+            const distance = Math.abs(offset);
+            const isActive = distance === 0;
+            const isPrimaryPosition = distance <= 1;
+            const isFrontPosition = distance <= 2;
+            const isRedSuit = index % 2 === 1;
+            const isExternal = 'external' in project && project.external;
 
-                      <p className="project-card-copy text-[15px] leading-[1.65]">
-                        {texts[lang][project.descKey]}
-                      </p>
+            return (
+              <motion.a
+                key={project.name}
+                href={project.href}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
+                className={`project-fan-card project-fan-card-${offset < 0 ? 'left' : offset > 0 ? 'right' : 'center'} project-fan-card-distance-${distance}${isFrontPosition ? ' project-fan-card-front' : ''}${isPrimaryPosition ? ' project-fan-card-primary' : ''}${isActive ? ' project-fan-card-active' : ''}`}
+                animate={getCardPose(offset)}
+                initial={false}
+                transition={reduceMotion ? { duration: 0 } : {
+                  x: { type: 'spring', stiffness: 235, damping: 28, mass: 0.78 },
+                  y: { type: 'spring', stiffness: 235, damping: 28, mass: 0.78 },
+                  rotate: { type: 'spring', stiffness: 235, damping: 28, mass: 0.78 },
+                  scale: { type: 'spring', stiffness: 235, damping: 28, mass: 0.78 },
+                  opacity: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
+                  zIndex: { duration: 0, delay: 0.12 }
+                }}
+                whileHover={!reduceMotion && isFrontPosition ? { opacity: 1 } : undefined}
+                whileFocus={!reduceMotion && isPrimaryPosition ? { opacity: 1 } : undefined}
+                aria-hidden={!isPrimaryPosition}
+                aria-label={`${copy.open}: ${project.name}`}
+                draggable={false}
+                tabIndex={isPrimaryPosition ? 0 : -1}
+                onClick={(event) => {
+                  if (draggedRef.current) event.preventDefault();
+                }}
+              >
+                <div className="project-fan-card-surface">
+                  <span className={`project-fan-card-corner project-fan-card-suit-${isRedSuit ? 'red' : 'black'}`} aria-hidden="true">
+                    <span className="project-fan-card-rank">{index + 1}</span>
+                    <BoxIcon name={isRedSuit ? 'bxf-diamond' : 'bxf-spade'} size={23} className="project-fan-card-suit-icon" />
+                  </span>
+                  <div className="project-fan-visual">
+                    <ProjectVisual copy={copy} name={project.name} visual={project.visual} />
+                  </div>
 
-                      {isFeatured && (
-                        <div className="project-card-preview project-card-preview-brc" aria-hidden="true">
-                          <div className="project-card-preview-head">
-                            <div className="flex gap-1.5">
-                              <span />
-                              <span />
-                              <span />
-                            </div>
-                            <strong>{texts[lang].previewTitle}</strong>
-                          </div>
-                          <div className="brc-preview-body">
-                            <div className="brc-preview-sidebar">
-                              {(['bx-layout', 'bx-user', 'bx-folder', 'bx-file-blank'] as const).map((icon, i) => (
-                                <div key={icon} className={`brc-preview-nav-item${i === 0 ? ' brc-preview-nav-active' : ''}`}>
-                                  <BoxIcon name={icon} size={10} />
-                                  <span className="brc-preview-nav-label" />
-                                </div>
-                              ))}
-                            </div>
-                            <div className="brc-preview-main">
-                              <div className="brc-preview-card">
-                                <div className="brc-preview-card-header">
-                                  <div className="brc-preview-card-title-row">
-                                    <span className="brc-preview-skeleton brc-preview-card-name" />
-                                    <span className="brc-preview-badge">{texts[lang].brcBadge}</span>
-                                  </div>
-                                  <span className="brc-preview-skeleton brc-preview-card-sub" />
-                                </div>
-                                <div className="brc-preview-progress-track">
-                                  <div className="brc-preview-progress-fill" />
-                                </div>
-                                <div className="brc-preview-stats">
-                                  <span>
-                                    <BoxIcon name="bx-layer" size={10} className="brc-stat-icon" />
-                                    <span className="brc-preview-skeleton brc-preview-stat-label" />
-                                  </span>
-                                  <span>
-                                    <BoxIcon name="bx-folder" size={10} className="brc-stat-icon" />
-                                    <span className="brc-preview-skeleton brc-preview-stat-label" />
-                                  </span>
-                                  <span>
-                                    <BoxIcon name="bx-broadcast" size={10} className="brc-stat-icon" />
-                                    <span className="brc-preview-skeleton brc-preview-stat-label" />
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {isKiromilog && (
-                        <div className="project-card-preview project-card-preview-kiromilog" aria-hidden="true">
-                          <div className="project-card-preview-head">
-                            <div className="flex gap-1.5">
-                              <span />
-                              <span />
-                              <span />
-                            </div>
-                            <strong>{texts[lang].kiromilogPreviewTitle}</strong>
-                          </div>
-                          <div className="kiromilog-preview-body">
-                            <div className="kiromilog-preview-main">
-                              <img
-                                src="/sbqd-cape.webp"
-                                alt=""
-                                className="kiromilog-preview-cover"
-                                loading="lazy"
-                              />
-                              <div className="kiromilog-preview-copy">
-                                <span />
-                                <span />
-                                <span />
-                              </div>
-                            </div>
-                            <div className="kiromilog-preview-grid">
-                              <span>
-                                <BoxIcon name="bx-tv" size={13} className="text-[var(--text-muted)]" />
-                                {texts[lang].anime}
-                              </span>
-                              <span>
-                                <BoxIcon name="bx-book-open" size={13} className="text-[var(--text-muted)]" />
-                                {texts[lang].manga}
-                              </span>
-                              <span>
-                                <BoxIcon name="bx-heart" size={13} className="text-[var(--text-muted)]" />
-                                {texts[lang].favorites}
-                              </span>
-                              <span>
-                                <BoxIcon name="bx-message-circle" size={13} className="text-[var(--text-muted)]" />
-                                {texts[lang].messages}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      )}
+                  <div className="project-fan-content">
+                    <div>
+                      <h3>{project.name}</h3>
+                      <p>{copy[project.descKey]}</p>
                     </div>
 
-                    <div className="project-card-footer">
-                      <div className="project-card-tech">
-                        {project.tech.map((item, index) => (
-                          <span key={item}>
-                            {item}
-                            {index < project.tech.length - 1 ? ',' : ''}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="project-fan-footer">
+                      <span>{project.tech.join(' · ')}</span>
+                      <BoxIcon name={isExternal ? 'bx-arrow-up-right-stroke' : 'bx-arrow-right-stroke'} size={16} />
                     </div>
                   </div>
-                </CardElement>
-              );
-            })}
-          </div>
+                </div>
+              </motion.a>
+            );
+          })}
         </div>
+
+        <button className="project-fan-control project-fan-control-next" type="button" onClick={() => move(1)} aria-label={copy.next}>
+          <BoxIcon name="bx-chevron-right" size={34} />
+        </button>
+      </div>
+
+      <div className="project-fan-status" aria-live="polite">
+        <span>{String(activeIndex + 1).padStart(2, '0')}</span>
+        <span aria-hidden="true" />
+        <span>{String(projects.length).padStart(2, '0')}</span>
+        <strong>{projects[activeIndex].name}</strong>
       </div>
     </section>
   );
