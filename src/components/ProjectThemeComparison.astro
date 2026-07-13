@@ -39,15 +39,6 @@ const labelId = `${id}-label`;
     />
   </div>
 
-  <span class="project-theme-comparison-label project-theme-comparison-label-dark" aria-hidden="true">
-    <span data-lang="pt">Escuro</span>
-    <span data-lang="en">Dark</span>
-  </span>
-  <span class="project-theme-comparison-label project-theme-comparison-label-light" aria-hidden="true">
-    <span data-lang="pt">Claro</span>
-    <span data-lang="en">Light</span>
-  </span>
-
   <div class="project-theme-comparison-divider" aria-hidden="true">
     <span>‹</span><span>›</span>
   </div>
@@ -90,13 +81,17 @@ const labelId = `${id}-label`;
 
     comparison.addEventListener("pointerdown", function (event) {
       if (event.pointerType === "mouse" && event.button !== 0) return;
+      event.preventDefault();
       dragging = true;
       comparison.setPointerCapture(event.pointerId);
+      range.focus({ preventScroll: true });
       setPosition(event.clientX);
     });
 
     comparison.addEventListener("pointermove", function (event) {
-      if (dragging) setPosition(event.clientX);
+      if (!dragging) return;
+      event.preventDefault();
+      setPosition(event.clientX);
     });
 
     comparison.addEventListener("pointerup", function (event) {
@@ -107,6 +102,10 @@ const labelId = `${id}-label`;
     });
 
     comparison.addEventListener("pointercancel", function () {
+      dragging = false;
+    });
+
+    comparison.addEventListener("lostpointercapture", function () {
       dragging = false;
     });
 

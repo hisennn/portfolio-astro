@@ -1706,7 +1706,9 @@ html[lang="en"] [data-lang="en"] {
   overflow: hidden;
   aspect-ratio: 2174 / 1369;
   background: #080808;
+  cursor: ew-resize;
   touch-action: pan-y;
+  user-select: none;
 }
 
 .project-theme-comparison-image {
@@ -1772,30 +1774,6 @@ html[lang="en"] [data-lang="en"] {
   left: 0.18rem;
 }
 
-.project-theme-comparison-label {
-  position: absolute;
-  z-index: 2;
-  top: 0.75rem;
-  padding: 0.35rem 0.5rem;
-  color: #fff;
-  background: rgba(12, 12, 12, 0.68);
-  font-family: var(--font-body);
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  text-transform: uppercase;
-  pointer-events: none;
-}
-
-.project-theme-comparison-label-dark {
-  left: 0.75rem;
-}
-
-.project-theme-comparison-label-light {
-  right: 0.75rem;
-}
-
 .project-theme-comparison input[type="range"] {
   position: absolute;
   z-index: 4;
@@ -1805,6 +1783,7 @@ html[lang="en"] [data-lang="en"] {
   margin: 0;
   opacity: 0;
   cursor: ew-resize;
+  pointer-events: none;
   touch-action: pan-y;
 }
 
