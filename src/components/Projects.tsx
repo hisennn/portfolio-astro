@@ -11,11 +11,14 @@ const texts = {
     hint: 'Navegue pelo leque ou selecione um projeto.',
     previous: 'Projeto anterior',
     next: 'Próximo projeto',
+    reset: 'Reiniciar baralho',
     open: 'Abrir projeto',
     portalPreview: 'portal / visão geral',
     trackerPreview: 'tracker / social',
     companyPreview: 'site / institucional',
     portfolioPreview: 'portfólio / arquitetura',
+    psychologyPreview: 'site / psicologia',
+    coordinatePreview: 'app / minecraft',
     active: 'Ativo',
     anime: 'anime',
     manga: 'mangá',
@@ -39,11 +42,14 @@ const texts = {
     hint: 'Browse the fan or select a project.',
     previous: 'Previous project',
     next: 'Next project',
+    reset: 'Reset deck',
     open: 'Open project',
     portalPreview: 'portal / overview',
     trackerPreview: 'tracker / social',
     companyPreview: 'website / company',
     portfolioPreview: 'portfolio / architecture',
+    psychologyPreview: 'website / psychology',
+    coordinatePreview: 'app / minecraft',
     active: 'Active',
     anime: 'anime',
     manga: 'manga',
@@ -75,17 +81,16 @@ const projects = [
   {
     name: 'Baltimore Re-Construction',
     href: '/projects/baltimore-reconstruction/',
-    tech: ['Next.js 16', 'TypeScript', 'Tailwind', 'Resend'],
+    tech: ['Astro 7', 'TypeScript', 'Tailwind', 'Cloudflare'],
     descKey: 'baltre' as const,
     visual: 'baltimore' as const
   },
   {
     name: 'Isadora Tomazini',
-    href: 'https://isadoratomazini.com.br/',
-    tech: ['Astro', 'Cloudflare', 'Mailgun'],
+    href: '/projects/isadora-tomazini/',
+    tech: ['Astro', 'JavaScript', 'CSS'],
     descKey: 'isaPsi' as const,
-    visual: 'isadora' as const,
-    external: true
+    visual: 'isadora' as const
   },
   {
     name: 'Ana Zabala Portfolio',
@@ -95,12 +100,11 @@ const projects = [
     visual: 'ana' as const
   },
   {
-    name: 'Coordinates Manager',
-    href: 'https://mc-coordinate-saver.vercel.app/',
+    name: 'Coordinate Saver',
+    href: '/projects/coordinate-saver/',
     tech: ['HTML', 'CSS', 'JavaScript'],
     descKey: 'coord' as const,
-    visual: 'coordinates' as const,
-    external: true
+    visual: 'coordinates' as const
   },
   {
     name: 'Kiromilog',
@@ -131,7 +135,7 @@ function getCardPose(offset: number) {
       y: 'calc(var(--fan-step-y) * -0.45)',
       rotate: 0,
       scale: 0.72,
-      opacity: 0.45,
+      opacity: 0.86,
       zIndex: 10
     };
   }
@@ -141,7 +145,7 @@ function getCardPose(offset: number) {
     y: `calc(var(--fan-step-y) * ${distance})`,
     rotate: offset * 6,
     scale: distance === 0 ? 1 : distance === 1 ? 0.91 : 0.8,
-    opacity: distance === 0 ? 1 : distance === 1 ? 0.97 : 0.72,
+    opacity: distance === 0 ? 1 : distance === 1 ? 0.995 : 0.92,
     zIndex: 60 - distance * 14
   };
 }
@@ -268,6 +272,65 @@ function ProjectVisual({
     );
   }
 
+  if (visual === 'isadora') {
+    return (
+      <div className="project-fan-handmade project-card-preview isadora-preview" aria-hidden="true">
+        <div className="project-card-preview-head">
+          <div className="flex gap-1.5"><span /><span /><span /></div>
+          <strong>{copy.psychologyPreview}</strong>
+        </div>
+        <div className="isadora-preview-page">
+          <div className="isadora-preview-nav">
+            <strong><i>I</i>T</strong>
+            <span>INÍCIO</span>
+            <span>SOBRE</span>
+            <span>CONTATO</span>
+          </div>
+          <div className="isadora-preview-hero">
+            <div className="isadora-preview-copy">
+              <span>PSICÓLOGA</span>
+              <strong>Cuidar da mente<br />é um ato de <em>coragem.</em></strong>
+              <i />
+              <p><span /><span /></p>
+            </div>
+            <div className="isadora-preview-portrait"><span /><i /></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (visual === 'coordinates') {
+    return (
+      <div className="project-fan-handmade project-card-preview coordinate-preview" aria-hidden="true">
+        <div className="project-card-preview-head">
+          <div className="flex gap-1.5"><span /><span /><span /></div>
+          <strong>{copy.coordinatePreview}</strong>
+        </div>
+        <div className="coordinate-preview-page">
+          <strong className="coordinate-preview-title">COORDINATE SAVER</strong>
+          <div className="coordinate-preview-form">
+            <div className="coordinate-preview-fields">
+              <span>NAME<i /></span>
+              <span>X<i /></span>
+              <span>Y<i /></span>
+              <span>Z<i /></span>
+            </div>
+            <div className="coordinate-preview-tools">
+              <span /><span /><span /><span />
+              <b>ADD</b>
+            </div>
+          </div>
+          <div className="coordinate-preview-table">
+            <div className="coordinate-preview-table-head"><span>NAME</span><span>X</span><span>Y</span><span>Z</span></div>
+            <div className="coordinate-preview-row coordinate-preview-row-blue"><strong>HOME</strong><span>-291</span><span>---</span><span>133</span></div>
+            <div className="coordinate-preview-row coordinate-preview-row-purple"><strong>CAVE</strong><span>-45</span><span>64</span><span>-95</span></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div aria-hidden="true" className={`project-fan-graphic project-fan-graphic-${visual}`}>
       <span className="project-fan-monogram">{name.slice(0, 2).toUpperCase()}</span>
@@ -307,7 +370,7 @@ export default function Projects() {
   };
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    if (event.button !== 0 || (event.target as Element).closest('.project-fan-control')) {
+    if (event.button !== 0 || (event.target as Element).closest('.project-fan-control, .project-fan-reset')) {
       return;
     }
 
@@ -389,7 +452,7 @@ export default function Projects() {
         }}
       >
         <button className="project-fan-control project-fan-control-previous" type="button" onClick={() => move(-1)} aria-label={copy.previous}>
-          <BoxIcon name="bx-chevron-left" size={34} />
+          <BoxIcon name="bx-chevron-left" size={40} />
         </button>
 
         <div className="project-fan-deck">
@@ -456,8 +519,24 @@ export default function Projects() {
         </div>
 
         <button className="project-fan-control project-fan-control-next" type="button" onClick={() => move(1)} aria-label={copy.next}>
-          <BoxIcon name="bx-chevron-right" size={34} />
+          <BoxIcon name="bx-chevron-right" size={40} />
         </button>
+
+        <div className="project-fan-reset-slot">
+          {activeIndex !== 0 && (
+            <motion.button
+              className="project-fan-reset"
+              type="button"
+              onClick={() => setActiveIndex(0)}
+              initial={reduceMotion ? false : { opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <BoxIcon name="bx-reset" size={18} />
+              <span>{copy.reset}</span>
+            </motion.button>
+          )}
+        </div>
       </div>
 
       <div className="project-fan-status" aria-live="polite">

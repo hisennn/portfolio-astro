@@ -1,0 +1,165 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageChrome from "../../components/PageChrome";
+import ProjectMedia from "../../components/ProjectMedia.astro";
+import ProjectImage from "../../components/ProjectImage.astro";
+import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import homeImage from "../../assets/projects/isadora-tomazini/home.png";
+import contactImage from "../../assets/projects/isadora-tomazini/contact.png";
+
+const title = "Isadora Tomazini | Projeto de Gabriel Lemes";
+const description =
+  "Site profissional desenvolvido para a psicóloga Isadora Tomazini, com apresentação do atendimento, áreas de atuação e contato.";
+const tech = ["Astro", "JavaScript", "CSS"];
+const imageWidths = [640, 960, 1400, 2175];
+const imageSizes = "(min-width: 900px) 760px, calc(100vw - 40px)";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Isadora Tomazini Psicóloga",
+  url: "https://isadoratomazini.com.br/",
+  creator: {
+    "@type": "Person",
+    name: "Gabriel Lemes",
+    url: "https://gabriellemes.com",
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/projects/isadora-tomazini/"
+  imageAlt="Isadora Tomazini psychologist website project"
+  jsonLd={jsonLd}
+>
+  <PageChrome client:load>
+    <main class="project-detail-main">
+      <div class="project-detail-hero">
+        <nav class="project-detail-back" aria-label="Breadcrumb">
+          <a href="/#projects">
+            <span aria-hidden="true">←</span>
+            <span data-lang="pt">Voltar aos projetos</span>
+            <span data-lang="en">Back to projects</span>
+          </a>
+        </nav>
+
+        <article class="project-detail-intro">
+          <div class="project-detail-heading">
+            <p class="project-detail-kicker">
+              <span data-lang="pt">Projeto para cliente / site profissional</span>
+              <span data-lang="en">Client project / professional website</span>
+            </p>
+            <h1>Isadora Tomazini</h1>
+            <p class="project-detail-lead">
+              <span data-lang="pt">
+                Site para apresentar o trabalho da psicóloga, explicar suas áreas de
+                atuação e facilitar o primeiro contato.
+              </span>
+              <span data-lang="en">
+                Website presenting the psychologist's work, areas of practice, and
+                direct ways to get in touch.
+              </span>
+            </p>
+            <a
+              class="project-detail-visit"
+              href="https://isadoratomazini.com.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span data-lang="pt">Abrir site</span>
+              <span data-lang="en">Open website</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <aside class="project-detail-meta" aria-label="Project details">
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">
+                <span data-lang="pt">Cliente</span>
+                <span data-lang="en">Client</span>
+              </span>
+              <span>Isadora Tomazini</span>
+            </div>
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">Stack</span>
+              <div class="project-detail-tech">
+                {tech.map((item) => <span>{item}</span>)}
+              </div>
+            </div>
+          </aside>
+        </article>
+      </div>
+
+      <section class="project-detail-overview">
+        <h2>
+          <span data-lang="pt">Visão geral</span>
+          <span data-lang="en">Overview</span>
+        </h2>
+        <div class="project-detail-overview-body">
+          <p>
+            <span data-lang="pt">
+              A experiência combina uma apresentação acolhedora com informações
+              objetivas sobre atendimento, trajetória profissional e contato.
+            </span>
+            <span data-lang="en">
+              The experience combines a welcoming presentation with clear information
+              about care, professional background, and contact options.
+            </span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang="pt">Layout responsivo para celular e desktop.</span>
+              <span data-lang="en">Responsive layout for mobile and desktop.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Áreas de atuação organizadas em acordeões.</span>
+              <span data-lang="en">Areas of practice organized in accordions.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Página dedicada à trajetória e abordagem profissional.</span>
+              <span data-lang="en">Dedicated page for professional background and approach.</span>
+            </li>
+            <li>
+              <span data-lang="pt">WhatsApp, e-mail e formulário reunidos na página de contato.</span>
+              <span data-lang="en">WhatsApp, email, and a form gathered on the contact page.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="project-detail-gallery">
+        <ProjectMedia
+          index="01"
+          titlePt="Apresentação e áreas de atuação"
+          titleEn="Introduction and areas of practice"
+          descriptionPt="Página inicial com proposta de atendimento, chamada para contato e temas trabalhados."
+          descriptionEn="Home page with the care approach, contact call to action, and key topics."
+        >
+          <ProjectImage
+            src={homeImage}
+            alt="Página inicial do site da psicóloga Isadora Tomazini"
+            widths={imageWidths}
+            sizes={imageSizes}
+          />
+        </ProjectMedia>
+
+        <ProjectMedia
+          index="02"
+          titlePt="Contato direto"
+          titleEn="Direct contact"
+          descriptionPt="Canais de atendimento e formulário organizados em uma única página."
+          descriptionEn="Contact channels and inquiry form organized on a single page."
+        >
+          <ProjectImage
+            src={contactImage}
+            alt="Página de contato do site da psicóloga Isadora Tomazini"
+            widths={imageWidths}
+            sizes={imageSizes}
+          />
+        </ProjectMedia>
+      </div>
+    </main>
+    <ProjectImageViewer />
+  </PageChrome>
+</BaseLayout>

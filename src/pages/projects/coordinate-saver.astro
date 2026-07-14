@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageChrome from "../../components/PageChrome";
+import ProjectMedia from "../../components/ProjectMedia.astro";
+import ProjectImage from "../../components/ProjectImage.astro";
+import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import overviewImage from "../../assets/projects/coordinate-saver/overview.png";
+
+const title = "Coordinate Saver | Projeto de Gabriel Lemes";
+const description =
+  "Aplicação web para salvar, organizar e copiar coordenadas do Minecraft diretamente no navegador.";
+const tech = ["HTML", "CSS", "JavaScript"];
+const imageWidths = [640, 960, 1400, 2173];
+const imageSizes = "(min-width: 900px) 760px, calc(100vw - 40px)";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Coordinate Saver",
+  url: "https://mc-coordinate-saver.vercel.app/",
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Web",
+  author: {
+    "@type": "Person",
+    name: "Gabriel Lemes",
+    url: "https://gabriellemes.com",
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/projects/coordinate-saver/"
+  imageAlt="Coordinate Saver web application project"
+  jsonLd={jsonLd}
+>
+  <PageChrome client:load>
+    <main class="project-detail-main">
+      <div class="project-detail-hero">
+        <nav class="project-detail-back" aria-label="Breadcrumb">
+          <a href="/#projects">
+            <span aria-hidden="true">←</span>
+            <span data-lang="pt">Voltar aos projetos</span>
+            <span data-lang="en">Back to projects</span>
+          </a>
+        </nav>
+
+        <article class="project-detail-intro">
+          <div class="project-detail-heading">
+            <p class="project-detail-kicker">
+              <span data-lang="pt">Projeto pessoal / utilitário web</span>
+              <span data-lang="en">Personal project / web utility</span>
+            </p>
+            <h1>Coordinate Saver</h1>
+            <p class="project-detail-lead">
+              <span data-lang="pt">
+                Uma ferramenta simples para guardar coordenadas do Minecraft e copiar
+                comandos de teleporte sem depender de conta ou servidor.
+              </span>
+              <span data-lang="en">
+                A simple tool for storing Minecraft coordinates and copying teleport
+                commands without an account or server.
+              </span>
+            </p>
+            <a
+              class="project-detail-visit"
+              href="https://mc-coordinate-saver.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span data-lang="pt">Abrir aplicação</span>
+              <span data-lang="en">Open application</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <aside class="project-detail-meta" aria-label="Project details">
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">
+                <span data-lang="pt">Tipo</span>
+                <span data-lang="en">Type</span>
+              </span>
+              <span>
+                <span data-lang="pt">Projeto pessoal</span>
+                <span data-lang="en">Personal project</span>
+              </span>
+            </div>
+            <div class="project-detail-meta-row">
+              <span class="project-detail-meta-label">Stack</span>
+              <div class="project-detail-tech">
+                {tech.map((item) => <span>{item}</span>)}
+              </div>
+            </div>
+          </aside>
+        </article>
+      </div>
+
+      <section class="project-detail-overview">
+        <h2>
+          <span data-lang="pt">Visão geral</span>
+          <span data-lang="en">Overview</span>
+        </h2>
+        <div class="project-detail-overview-body">
+          <p>
+            <span data-lang="pt">
+              Foi um dos meus primeiros projetos web: uma aplicação sem framework,
+              criada para praticar fundamentos enquanto resolvia uma necessidade real.
+            </span>
+            <span data-lang="en">
+              This was one of my first web projects: a framework-free application built
+              to practice the fundamentals while solving a real need.
+            </span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang="pt">Cadastro, edição e remoção de coordenadas.</span>
+              <span data-lang="en">Create, edit, and remove coordinates.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Persistência local no navegador.</span>
+              <span data-lang="en">Local persistence in the browser.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Cores para identificar locais rapidamente.</span>
+              <span data-lang="en">Colors for quickly identifying locations.</span>
+            </li>
+            <li>
+              <span data-lang="pt">Cópia do comando <code>/tp</code> com um clique.</span>
+              <span data-lang="en">One-click copy for the <code>/tp</code> command.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="project-detail-gallery">
+        <ProjectMedia
+          index="01"
+          titlePt="Coordenadas em um só lugar"
+          titleEn="Coordinates in one place"
+          descriptionPt="Formulário, identificação por cor e ações de copiar, editar e remover."
+          descriptionEn="Form, color identification, and actions to copy, edit, or remove entries."
+        >
+          <ProjectImage
+            src={overviewImage}
+            alt="Interface do Coordinate Saver com formulário e lista de coordenadas"
+            widths={imageWidths}
+            sizes={imageSizes}
+          />
+        </ProjectMedia>
+      </div>
+    </main>
+    <ProjectImageViewer />
+  </PageChrome>
+</BaseLayout>
