@@ -9,7 +9,7 @@ export default function PageChrome({ children }: { children: ReactNode }) {
   return (
     <LanguageProvider>
       <div className="site-shell min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
-        <Header />
+        <Header projectPage />
         {children}
         <Footer />
       </div>
