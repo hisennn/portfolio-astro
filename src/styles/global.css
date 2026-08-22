@@ -212,6 +212,16 @@ html[lang="en"] [data-lang="en"] {
   justify-self: end;
 }
 
+.theme-toggle,
+.project-fan-control {
+  border-radius: 9999px;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
 .project-header-back {
   display: inline-flex;
   align-items: center;

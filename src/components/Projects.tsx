@@ -168,7 +168,7 @@ function ProjectVisual({
         </div>
         <div className="brc-preview-body">
           <div className="brc-preview-sidebar">
-            {(['bx-layout', 'bx-user', 'bx-folder', 'bx-file-blank'] as const).map((icon, index) => (
+            {(['bx-layout', 'bx-user', 'bx-folder', 'bx-file'] as const).map((icon, index) => (
               <div key={icon} className={`brc-preview-nav-item${index === 0 ? ' brc-preview-nav-active' : ''}`}>
                 <BoxIcon name={icon} size={10} />
                 <span className="brc-preview-nav-label" />
@@ -186,7 +186,7 @@ function ProjectVisual({
               </div>
               <div className="brc-preview-progress-track"><div className="brc-preview-progress-fill" /></div>
               <div className="brc-preview-stats">
-                {(['bx-layer', 'bx-folder', 'bx-broadcast'] as const).map((icon) => (
+                {(['bx-layers', 'bx-folder', 'bx-broadcast'] as const).map((icon) => (
                   <span key={icon}>
                     <BoxIcon name={icon} size={10} className="brc-stat-icon" />
                     <span className="brc-preview-skeleton brc-preview-stat-label" />

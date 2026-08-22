@@ -53,7 +53,7 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
 
           <button
             onClick={toggleTheme}
-            className="flex size-9 cursor-pointer items-center justify-center text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+            className="theme-toggle flex size-9 cursor-pointer items-center justify-center text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
             aria-label="Toggle theme"
           >
             <BoxIcon name={isDarkTheme ? 'bx-sun' : 'bx-moon'} size={16} />
