@@ -25,17 +25,17 @@ const texts = {
     favorites: 'favoritos',
     messages: 'mensagens',
     brcPortal:
-      'Portal de clientes e operação para projetos, arquivos, escolhas e comunicação da Baltimore Re-Construction.',
+      'Desenvolvo o portal da Baltimore Re-Construction, usado para organizar clientes, projetos, arquivos, escolhas e comunicação.',
     kiromilog:
-      'Tracker social de anime e mangá com listas, perfis, favoritos, mensagens e atividade em tempo real.',
+      'Criei o Kiromilog para acompanhar animes e mangás, com listas, perfis, favoritos, mensagens e atualizações em tempo real.',
     baltre:
-      'Site institucional focado em serviços, áreas atendidas, trabalhos realizados e contato.',
+      'Criei o site da Baltimore Re-Construction para apresentar serviços, regiões atendidas, trabalhos realizados e formas de contato.',
     isaPsi:
-      'Site profissional para atendimento psicológico presencial e online.',
+      'Criei um site para apresentar o atendimento psicológico da Isadora Tomazini e facilitar o primeiro contato.',
     ana:
-      'Portfólio de arquitetura criado para destacar projetos e facilitar o contato direto.',
+      'Criei um portfólio de arquitetura para apresentar os projetos da Ana Zabala e facilitar o contato com possíveis clientes.',
     coord:
-      'Ferramenta direta para salvar, organizar e reencontrar coordenadas do Minecraft.'
+      'Criei uma ferramenta simples para salvar, organizar e reencontrar coordenadas do Minecraft.'
   },
   en: {
     title: 'Projects',
@@ -56,17 +56,17 @@ const texts = {
     favorites: 'favorites',
     messages: 'messages',
     brcPortal:
-      'Client and operations portal for Baltimore Re-Construction projects, files, selections, and communication.',
+      "I develop Baltimore Re-Construction's portal for organizing clients, projects, files, selections, and communication.",
     kiromilog:
-      'Social anime and manga tracker with lists, profiles, favorites, messages, and real-time activity.',
+      'I built Kiromilog to track anime and manga, with lists, profiles, favorites, messages, and real-time updates.',
     baltre:
-      'Company website focused on services, service areas, completed work, and contact.',
+      "I built Baltimore Re-Construction's website to present its services, service areas, completed work, and contact options.",
     isaPsi:
-      'Professional website for in-person and online psychological care.',
+      "I built a website to present Isadora Tomazini's psychology practice and make it easier to get in touch.",
     ana:
-      'Architecture portfolio designed to highlight projects and simplify direct contact.',
+      "I built an architecture portfolio to present Ana Zabala's projects and make it easy for potential clients to get in touch.",
     coord:
-      'A focused tool for saving, organizing, and finding Minecraft coordinates.'
+      'I built a simple tool for saving, organizing, and finding Minecraft coordinates.'
   }
 } as const;
 

@@ -4,7 +4,8 @@ import { useLanguage } from '../hooks/useLanguage';
 
 const texts = {
   pt: {
-    title: 'Skills',
+    title: 'Habilidades',
+    technologiesTitle: 'Tecnologias',
     practicesTitle: 'Práticas',
     practices: [
       'Modelagem de dados',
@@ -13,18 +14,19 @@ const texts = {
       'Uploads e arquivos',
       'Debugging',
       'Deploy',
-      'Desenvolvimento assistido por agentes, com revisão de código e validação'
+      'Uso de ferramentas de IA com revisão do código e conferência dos resultados'
     ],
     workStyleTitle: 'Forma de trabalho',
     workStyle: [
-      'Comunicação com clientes',
-      'Definição de escopo',
-      'Colaboração remota',
-      'Organização de entregas'
+      'Conversa direta com clientes',
+      'Definição clara do que será feito',
+      'Trabalho remoto',
+      'Organização de revisões e entregas'
     ]
   },
   en: {
     title: 'Skills',
+    technologiesTitle: 'Technologies',
     practicesTitle: 'Practices',
     practices: [
       'Data modeling',
@@ -33,14 +35,14 @@ const texts = {
       'File handling',
       'Debugging',
       'Deployment',
-      'Agent-assisted development with code review and validation'
+      'Use of AI tools with code review and result checks'
     ],
     workStyleTitle: 'Working style',
     workStyle: [
-      'Client communication',
-      'Scope definition',
-      'Remote collaboration',
-      'Delivery planning'
+      'Direct client communication',
+      'Clear agreement on what will be built',
+      'Remote work',
+      'Revision and delivery planning'
     ]
   }
 } as const;
@@ -76,7 +78,7 @@ const skillGroups: Array<{
     ]
   },
   {
-    title: { pt: 'Ferramentas', en: 'Tooling' },
+    title: { pt: 'Ferramentas', en: 'Tools' },
     items: [
       { name: 'Git', icon: 'devicon-git-plain' },
       { name: 'GitHub', icon: 'devicon-github-original' },
@@ -86,7 +88,7 @@ const skillGroups: Array<{
     ]
   },
   {
-    title: { pt: 'Ferramentas de IA', en: 'AI tooling' },
+    title: { pt: 'Ferramentas de IA', en: 'AI tools' },
     items: [
       { name: 'Claude Code', iconSrc: '/icons/claude.svg' },
       { name: 'OpenAI Codex / ChatGPT', iconSrc: '/icons/openai.svg' },
@@ -130,7 +132,7 @@ export default function Skills() {
 
         <div className="flex flex-col gap-10">
           <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
-            <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">Tech Stack</h3>
+            <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">{texts[lang].technologiesTitle}</h3>
             <div className="skill-groups">
               {skillGroups.map((group) => (
                 <div key={group.title.en} className="skill-group">

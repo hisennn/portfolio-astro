@@ -7,7 +7,7 @@ const texts = {
   pt: {
     greeting: 'Olá, sou',
     name: 'Gabriel Lemes',
-    role: 'Desenvolvedor Web Full-stack',
+    role: 'Desenvolvedor Web Full Stack',
     location: 'Batatais, SP, Brasil',
     downloadResume: 'Currículo',
     portuguese: 'Português',
@@ -35,7 +35,7 @@ export default function Hero() {
       ? '/gabriel-lemes-resume-eng.pdf'
       : '/gabriel-lemes-resume-ptbr.pdf';
   const resumeDownloadName =
-    lang === 'en' ? 'Gabriel Lemes Resume.pdf' : 'Gabriel Lemes Curriculo.pdf';
+    lang === 'en' ? 'Gabriel Lemes - Resume.pdf' : 'Gabriel Lemes - Currículo.pdf';
 
   return (
     <section className="hero-intro">

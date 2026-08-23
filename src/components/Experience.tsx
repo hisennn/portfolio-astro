@@ -22,14 +22,14 @@ const experiences = [
     date: { pt: 'out. 2025 - atual', en: 'Oct. 2025 - Present' },
     items: {
       pt: [
-        'Desenvolvo o portal interno da BRC para centralizar clientes, projetos, arquivos, comentários e comunicação',
-        'Mantenho o site público da empresa, ajustando conteúdo, páginas de marketing e SEO técnico quando necessário',
-        'Organizo dados de projetos e clientes entre planilhas, site e fluxo interno'
+        'Desenvolvo e mantenho a aplicação interna da BRC para gerenciar clientes, projetos, arquivos e comunicação.',
+        'Cuido do site público, dos deploys na Cloudflare, das atualizações de conteúdo, do SEO técnico e do Perfil da Empresa no Google (Google Business Profile).',
+        'Organizo planilhas e processos internos ligados aos dados de projetos e clientes.'
       ],
       en: [
-        "Build BRC's internal portal to keep clients, projects, files, comments, and communication in one place",
-        'Maintain the public company website, updating content, marketing pages, and technical SEO when needed',
-        'Keep project and client data organized across spreadsheets, the website, and the internal workflow'
+        "I build and maintain BRC's internal web application for managing clients, projects, files, and communication.",
+        'I maintain the company website, update its content and technical SEO, manage Cloudflare deployments, and look after its Google Business Profile.',
+        'I keep the spreadsheets and project records used by the team organized.'
       ]
     },
     locationDetails: { pt: 'Baltimore, MD, EUA', en: 'Baltimore, MD, USA' },
@@ -41,12 +41,12 @@ const experiences = [
     date: { pt: 'abr. 2025 - atual', en: 'Apr. 2025 - Present' },
     items: {
       pt: [
-        'Desenvolvo sites e pequenas aplicações em React e TypeScript, cuidando de interface, lógica de front-end e entrega',
-        'Trabalho direto com clientes para definir escopo, implementar ajustes e fechar o projeto'
+        'Desenvolvo sites responsivos e aplicações web de pequeno porte com React e TypeScript, incluindo layout, lógica de front-end e deploy.',
+        'Trabalho diretamente com clientes para definir escopo, implementar ajustes e entregar projetos de forma independente.'
       ],
       en: [
-        'Build websites and small React and TypeScript applications, covering interface work, frontend logic, and delivery',
-        'Work directly with clients to define scope, implement revisions, and finish the project'
+        'I build responsive websites and small web applications in React and TypeScript, from layout and frontend logic through deployment.',
+        'I work directly with clients to agree on the scope, make revisions, and deliver each project.'
       ]
     },
     locationDetails: { pt: 'Brasil', en: 'Brazil' },
@@ -58,12 +58,12 @@ const experiences = [
     date: { pt: 'mar. 2025 - jul. 2025', en: 'Mar. 2025 - Jul. 2025' },
     items: {
       pt: [
-        'Recriei em Next.js um site da Pluralsign originalmente desenvolvido em Ruby on Rails, preservando páginas e funcionalidades',
-        'Fiz atualizações no CMS Strapi e no front-end do site da Inovaice'
+        'Recriei em Next.js um site da Pluralsign originalmente desenvolvido em Ruby on Rails, preservando as páginas e funcionalidades existentes.',
+        'Fiz atualizações no CMS Strapi e no front-end do site da Inovaice.'
       ],
       en: [
-        'Rebuilt a Ruby on Rails website in Next.js for Pluralsign, preserving its existing pages and functionality',
-        "Made CMS and frontend updates to Inovaice's Strapi-based website"
+        'I rebuilt a Ruby on Rails website in Next.js for Pluralsign while preserving its existing pages and functionality.',
+        "I made CMS and frontend updates to Inovaice's Strapi-based website."
       ]
     },
     locationDetails: { pt: 'Batatais, SP, Brasil', en: 'Batatais, SP, Brazil' },
