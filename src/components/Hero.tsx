@@ -18,7 +18,7 @@ const texts = {
   en: {
     greeting: "Hi, I'm",
     name: 'Gabriel Lemes',
-    role: 'Full-stack Web Developer',
+    role: 'Full-Stack Web Developer',
     location: 'Batatais, SP, Brazil',
     downloadResume: 'Resume',
     portuguese: 'Portuguese',
@@ -32,8 +32,8 @@ export default function Hero() {
   const { lang } = useLanguage();
   const resumeHref =
     lang === 'en'
-      ? '/gabriel-lemes-resume-eng.pdf'
-      : '/gabriel-lemes-resume-ptbr.pdf';
+      ? '/gabriel-lemes-resume-dev-en.pdf'
+      : '/gabriel-lemes-curriculo-dev-pt-br.pdf';
   const resumeDownloadName =
     lang === 'en' ? 'Gabriel Lemes - Resume.pdf' : 'Gabriel Lemes - Currículo.pdf';
 

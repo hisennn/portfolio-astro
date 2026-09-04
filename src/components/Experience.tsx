@@ -18,18 +18,18 @@ const texts = {
 const experiences = [
   {
     company: 'Baltimore Re-Construction, LLC',
-    role: { pt: 'Desenvolvedor Web e Operações', en: 'Operations & Web Developer' },
-    date: { pt: 'out. 2025 - atual', en: 'Oct. 2025 - Present' },
+    role: { pt: 'Desenvolvedor Full Stack e Operações', en: 'Full-Stack Developer & Operations' },
+    date: { pt: 'out. 2025 - atual', en: 'Oct 2025 - Present' },
     items: {
       pt: [
-        'Desenvolvo e mantenho a aplicação interna da BRC para gerenciar clientes, projetos, arquivos e comunicação.',
-        'Cuido do site público, dos deploys na Cloudflare, das atualizações de conteúdo, do SEO técnico e do Perfil da Empresa no Google (Google Business Profile).',
-        'Organizo planilhas e processos internos ligados aos dados de projetos e clientes.'
+        'Desenvolvo e mantenho o BRC Client Portal, usado para organizar clientes, projetos, arquivos, seleções de materiais, contratos, notificações e comunicação.',
+        'Criei e mantenho o site da empresa, incluindo conteúdo, SEO técnico, deploys na Cloudflare e o Perfil da Empresa no Google.',
+        'Apoio as operações diárias organizando planilhas, documentos e informações de clientes, projetos, materiais e estimativas.'
       ],
       en: [
-        "I build and maintain BRC's internal web application for managing clients, projects, files, and communication.",
-        'I maintain the company website, update its content and technical SEO, manage Cloudflare deployments, and look after its Google Business Profile.',
-        'I keep the spreadsheets and project records used by the team organized.'
+        'Develop and maintain the BRC Client Portal for organizing clients, projects, files, material selections, contracts, notifications, and communication.',
+        'Built and maintain the company website, including content updates, technical SEO, Cloudflare deployments, and its Google Business Profile.',
+        'Support daily operations by organizing spreadsheets, documents, and information related to clients, projects, materials, and estimates.'
       ]
     },
     locationDetails: { pt: 'Baltimore, MD, EUA', en: 'Baltimore, MD, USA' },
@@ -38,15 +38,15 @@ const experiences = [
   {
     company: 'Freelancer',
     role: { pt: 'Desenvolvedor Web', en: 'Web Developer' },
-    date: { pt: 'abr. 2025 - atual', en: 'Apr. 2025 - Present' },
+    date: { pt: 'abr. 2025 - atual', en: 'Apr 2025 - Present' },
     items: {
       pt: [
-        'Desenvolvo sites responsivos e aplicações web de pequeno porte com React e TypeScript, incluindo layout, lógica de front-end e deploy.',
-        'Trabalho diretamente com clientes para definir escopo, implementar ajustes e entregar projetos de forma independente.'
+        'Desenvolvo sites responsivos e aplicações web para profissionais e pequenas empresas com React, Next.js, TypeScript e Tailwind CSS.',
+        'Levanto requisitos, defino o escopo, implemento ajustes e publico os projetos na Vercel.'
       ],
       en: [
-        'I build responsive websites and small web applications in React and TypeScript, from layout and frontend logic through deployment.',
-        'I work directly with clients to agree on the scope, make revisions, and deliver each project.'
+        'Build responsive websites and web applications for professionals and small businesses using React, Next.js, TypeScript, and Tailwind CSS.',
+        'Gather requirements, define scope, implement revisions, and deploy projects to Vercel.'
       ]
     },
     locationDetails: { pt: 'Brasil', en: 'Brazil' },
@@ -55,15 +55,15 @@ const experiences = [
   {
     company: 'Trail Dev',
     role: { pt: 'Estagiário em Desenvolvimento de Software', en: 'Software Development Intern' },
-    date: { pt: 'mar. 2025 - jul. 2025', en: 'Mar. 2025 - Jul. 2025' },
+    date: { pt: 'mar. 2025 - jul. 2025', en: 'Mar 2025 - Jul 2025' },
     items: {
       pt: [
         'Recriei em Next.js um site da Pluralsign originalmente desenvolvido em Ruby on Rails, preservando as páginas e funcionalidades existentes.',
         'Fiz atualizações no CMS Strapi e no front-end do site da Inovaice.'
       ],
       en: [
-        'I rebuilt a Ruby on Rails website in Next.js for Pluralsign while preserving its existing pages and functionality.',
-        "I made CMS and frontend updates to Inovaice's Strapi-based website."
+        'Rebuilt a Ruby on Rails website in Next.js for Pluralsign while preserving its existing pages and functionality.',
+        "Updated content and frontend components on Inovaice's Strapi-based website."
       ]
     },
     locationDetails: { pt: 'Batatais, SP, Brasil', en: 'Batatais, SP, Brazil' },

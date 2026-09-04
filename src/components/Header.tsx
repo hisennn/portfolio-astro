@@ -1,11 +1,21 @@
 'use client';
- 
+
+import { useRef, useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import BoxIcon from './BoxIcon';
- 
+
 export default function Header({ projectPage = false }: { projectPage?: boolean }) {
   const { language, setLanguage, isDarkTheme, toggleTheme } = useLanguage();
- 
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const languageMenuButton = useRef<HTMLButtonElement>(null);
+  const languageMenuPointerType = useRef<string | null>(null);
+
+  const selectLanguage = (nextLanguage: 'pt' | 'en') => {
+    setLanguage(nextLanguage);
+    setIsLanguageMenuOpen(false);
+    languageMenuButton.current?.focus({ preventScroll: true });
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg-primary)]">
       <div className={`site-header-inner max-w-[1100px] mx-auto px-5 md:px-6 py-3 ${projectPage ? 'site-header-project' : 'flex items-center justify-between'}`}>
@@ -22,33 +32,76 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
           Gabriel
         </a>
         <div className="site-header-controls flex items-center gap-3">
-          <div className="relative flex h-9 items-center overflow-hidden border border-[var(--border)] font-body text-[11px] font-medium tracking-wide select-none">
+          <div
+            className={`language-menu ${isLanguageMenuOpen ? 'is-open' : ''}`}
+            onPointerEnter={(event) => event.pointerType === 'mouse' && setIsLanguageMenuOpen(true)}
+            onPointerLeave={(event) => event.pointerType === 'mouse' && setIsLanguageMenuOpen(false)}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setIsLanguageMenuOpen(false);
+              }
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Escape') {
+                setIsLanguageMenuOpen(false);
+                languageMenuButton.current?.focus({ preventScroll: true });
+              }
+            }}
+          >
+            <button
+              ref={languageMenuButton}
+              type="button"
+              className="language-menu-trigger"
+              aria-expanded={isLanguageMenuOpen}
+              aria-haspopup="true"
+              aria-controls="language-menu-options"
+              onPointerDown={(event) => {
+                languageMenuPointerType.current = event.pointerType;
+              }}
+              onClick={() => {
+                setIsLanguageMenuOpen((isOpen) =>
+                  languageMenuPointerType.current === 'mouse' ? true : !isOpen
+                );
+                languageMenuPointerType.current = null;
+              }}
+            >
+              <span className="language-menu-code" aria-hidden="true">
+                {language === 'en' ? 'EN' : 'PT'}
+              </span>
+              <span className="language-menu-label">
+                {language === 'en' ? 'English' : 'Português'}
+              </span>
+              <BoxIcon name="bx-chevron-down" size={15} className="language-menu-chevron" />
+            </button>
+
             <div
-              className="absolute top-0 bottom-0 w-1/2 bg-[var(--text-primary)] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
-              style={{ transform: language === 'en' ? 'translateX(100%)' : 'translateX(0)' }}
-            />
-            <button
-              onClick={() => language !== 'pt' && setLanguage('pt')}
-              aria-pressed={language === 'pt'}
-              className={`relative z-10 px-2.5 h-full flex items-center justify-center cursor-pointer transition-colors duration-300 ${
-                language === 'pt'
-                  ? 'text-[var(--bg-primary)]'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
-              }`}
+              id="language-menu-options"
+              className="language-menu-panel"
+              aria-hidden={!isLanguageMenuOpen}
             >
-              PT
-            </button>
-            <button
-              onClick={() => language !== 'en' && setLanguage('en')}
-              aria-pressed={language === 'en'}
-              className={`relative z-10 px-2.5 h-full flex items-center justify-center cursor-pointer transition-colors duration-300 ${
-                language === 'en'
-                  ? 'text-[var(--bg-primary)]'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
-              }`}
-            >
-              EN
-            </button>
+              <div className="language-menu-surface">
+                <button
+                  type="button"
+                  className="language-menu-option"
+                  data-selected={language === 'pt'}
+                  tabIndex={isLanguageMenuOpen ? 0 : -1}
+                  onClick={() => selectLanguage('pt')}
+                >
+                  <span>Português</span>
+                  <span aria-hidden="true">PT</span>
+                </button>
+                <button
+                  type="button"
+                  className="language-menu-option"
+                  data-selected={language === 'en'}
+                  tabIndex={isLanguageMenuOpen ? 0 : -1}
+                  onClick={() => selectLanguage('en')}
+                >
+                  <span>English</span>
+                  <span aria-hidden="true">EN</span>
+                </button>
+              </div>
+            </div>
           </div>
 
           <button

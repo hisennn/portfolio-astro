@@ -13,15 +13,13 @@ const texts = {
       'Autenticação e autorização',
       'Uploads e arquivos',
       'Debugging',
-      'Deploy',
-      'Uso de ferramentas de IA com revisão do código e conferência dos resultados'
+      'Deploy'
     ],
     workStyleTitle: 'Forma de trabalho',
     workStyle: [
-      'Conversa direta com clientes',
-      'Definição clara do que será feito',
-      'Trabalho remoto',
-      'Organização de revisões e entregas'
+      'Comunicação direta com clientes',
+      'Definição de escopo',
+      'Acompanhamento de ajustes e entregas'
     ]
   },
   en: {
@@ -34,15 +32,13 @@ const texts = {
       'Authentication and authorization',
       'File handling',
       'Debugging',
-      'Deployment',
-      'Use of AI tools with code review and result checks'
+      'Deployment'
     ],
     workStyleTitle: 'Working style',
     workStyle: [
       'Direct client communication',
-      'Clear agreement on what will be built',
-      'Remote work',
-      'Revision and delivery planning'
+      'Scope definition',
+      'Client feedback and delivery'
     ]
   }
 } as const;

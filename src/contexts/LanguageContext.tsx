@@ -2,9 +2,11 @@
 import { createContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
+type Language = "pt" | "en";
+
 type LanguageContextType = {
-  language: string;
-  setLanguage: (lang: string) => void;
+  language: Language;
+  setLanguage: (lang: Language) => void;
   isDarkTheme: boolean;
   toggleTheme: () => void;
 };
@@ -17,15 +19,14 @@ export const LanguageContext = createContext<LanguageContextType>({
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState("pt");
+  const [language, setLanguageState] = useState<Language>("pt");
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language");
-    if (savedLanguage) {
-      setLanguageState(savedLanguage);
-      document.documentElement.setAttribute("lang", savedLanguage === "en" ? "en" : "pt-BR");
-    }
+    const language = savedLanguage === "en" ? "en" : "pt";
+    setLanguageState(language);
+    document.documentElement.setAttribute("lang", language === "en" ? "en" : "pt-BR");
 
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light") {
@@ -37,7 +38,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const setLanguage = (lang: string) => {
+  const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem("language", lang);
     document.documentElement.setAttribute("lang", lang === "en" ? "en" : "pt-BR");
