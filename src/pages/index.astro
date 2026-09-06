@@ -1,6 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import App from "../App";
+import { getImage } from "astro:assets";
+import type { ProjectPreviews } from "../components/Projects";
+import brc from "../assets/projects/brc-portal/dashboard.png";
+import kiromilog from "../assets/projects/kiromilog/feed.png";
+import baltimore from "../assets/projects/baltimore-reconstruction/services.webp";
+import ana from "../assets/projects/ana-zabala/project-list.webp";
+import isadora from "../assets/projects/isadora-tomazini/home.png";
+import coordinates from "../assets/projects/coordinate-saver/overview.png";
+
+const projectPreviews = Object.fromEntries(
+  await Promise.all(
+    Object.entries({ brc, kiromilog, baltimore, ana, isadora, coordinates }).map(async ([key, src]) => {
+      const image = await getImage({ src, width: 640, height: 400, fit: "cover", format: "webp", quality: 80 });
+      return [key, image.src];
+    })
+  )
+) as ProjectPreviews;
 
 const title = "Gabriel Lemes | Full-Stack Web Developer";
 const description =
@@ -34,5 +51,5 @@ const jsonLd = {
 ---
 
 <BaseLayout title={title} description={description} jsonLd={jsonLd}>
-  <App client:load />
+  <App client:load projectPreviews={projectPreviews} />
 </BaseLayout>

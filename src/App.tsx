@@ -4,21 +4,22 @@ import About from "./components/About";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
+import type { ProjectPreviews } from "./components/Projects";
 import Education from "./components/Education";
 import Footer from "./components/Footer";
 import { LanguageProvider } from "./contexts/LanguageContext";
 
-export default function App() {
+export default function App({ projectPreviews }: { projectPreviews: ProjectPreviews }) {
   return (
     <LanguageProvider>
       <div className="site-shell min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
         <Header />
-        <main className="max-w-[1100px] mx-auto px-5 md:px-6 pt-20 md:pt-28 pb-0 flex flex-col gap-[5.5rem] md:gap-[6.5rem]">
+        <main className="max-w-[1100px] mx-auto px-5 md:px-6 pt-12 md:pt-20 pb-0 flex flex-col gap-16 md:gap-20">
           <div className="hero-layout">
             <Hero />
             <About />
           </div>
-          <Projects />
+          <Projects previews={projectPreviews} />
           <Experience />
           <Skills />
           <Education />

@@ -19,7 +19,7 @@ export default function About() {
   return (
     <section className="about-section">
       <div className="flex flex-col gap-4">
-        <h2 className="text-[15px] font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
+        <h2 className="section-heading">
           {texts[lang].title}
         </h2>
         <p className="max-w-[680px] text-[var(--text-secondary)] text-base font-body font-normal leading-[1.7]">

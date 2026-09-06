@@ -83,6 +83,16 @@ const jsonLd = {
         </article>
       </div>
 
+      <ProjectMedia
+        index="01"
+        titlePt="Painel administrativo"
+        titleEn="Admin dashboard"
+        descriptionPt="Resumo de projetos e clientes, com status recentes e acesso às tarefas principais."
+        descriptionEn="Project and client summary with recent statuses and access to primary tasks."
+      >
+        <ProjectImage src={dashboardImage} alt="BRC Client Portal admin dashboard with projects, clients, and quick actions" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+      </ProjectMedia>
+
       <section class="project-detail-overview">
         <h2>
           <span data-lang="pt">Visão geral</span>
@@ -134,16 +144,6 @@ const jsonLd = {
       </section>
 
       <div class="project-detail-gallery">
-        <ProjectMedia
-          index="01"
-          titlePt="Painel administrativo"
-          titleEn="Admin dashboard"
-          descriptionPt="Resumo de projetos e clientes, com status recentes e acesso às tarefas principais."
-          descriptionEn="Project and client summary with recent statuses and access to primary tasks."
-        >
-          <ProjectImage src={dashboardImage} alt="BRC Client Portal admin dashboard with projects, clients, and quick actions" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
-        </ProjectMedia>
-
         <ProjectMedia
           index="02"
           titlePt="Cadastro de clientes"

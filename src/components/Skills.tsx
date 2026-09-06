@@ -122,7 +122,7 @@ export default function Skills() {
   return (
     <section className="w-full">
       <div className="flex flex-col gap-6">
-        <h2 className="text-[15px] font-body font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
+        <h2 className="section-heading">
           {texts[lang].title}
         </h2>
 

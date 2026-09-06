@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import BoxIcon from './BoxIcon';
 
@@ -7,11 +8,8 @@ const texts = {
   pt: {
     title: 'Projetos',
     open: 'Abrir projeto',
-    active: 'Ativo',
-    anime: 'anime',
-    manga: 'mangá',
-    favorites: 'favoritos',
-    messages: 'mensagens',
+    previous: 'Projeto anterior',
+    next: 'Próximo projeto',
     brcPortal:
       'Portal interno da Baltimore Re-Construction para organizar clientes, projetos, arquivos, seleções de materiais, contratos e comunicação.',
     kiromilog:
@@ -28,11 +26,8 @@ const texts = {
   en: {
     title: 'Projects',
     open: 'Open project',
-    active: 'Active',
-    anime: 'anime',
-    manga: 'manga',
-    favorites: 'favorites',
-    messages: 'messages',
+    previous: 'Previous project',
+    next: 'Next project',
     brcPortal:
       "Baltimore Re-Construction's internal portal for organizing clients, projects, files, material selections, contracts, and communication.",
     kiromilog:
@@ -93,183 +88,68 @@ const projects = [
   }
 ] as const;
 
-function PreviewChrome() {
-  return (
-    <div className="project-card-preview-head" aria-hidden="true">
-      <div className="project-preview-lights"><span /><span /><span /></div>
-    </div>
-  );
-}
+export type ProjectPreviews = Record<(typeof projects)[number]['visual'], string>;
 
-function ProjectVisual({
-  visual,
-  copy
-}: {
-  visual: (typeof projects)[number]['visual'];
-  copy: (typeof texts)[keyof typeof texts];
-}) {
-  if (visual === 'brc') {
-    return (
-      <div className="project-list-art project-card-preview project-card-preview-brc" aria-hidden="true">
-        <PreviewChrome />
-        <div className="brc-preview-body">
-          <div className="brc-preview-sidebar">
-            {(['bx-layout', 'bx-user', 'bx-folder', 'bx-file'] as const).map((icon, index) => (
-              <div key={icon} className={`brc-preview-nav-item${index === 0 ? ' brc-preview-nav-active' : ''}`}>
-                <BoxIcon name={icon} size={10} />
-                <span className="brc-preview-nav-label" />
-              </div>
-            ))}
-          </div>
-          <div className="brc-preview-main">
-            <div className="brc-preview-card">
-              <div className="brc-preview-card-header">
-                <div className="brc-preview-card-title-row">
-                  <span className="brc-preview-skeleton brc-preview-card-name" />
-                  <span className="brc-preview-badge">{copy.active}</span>
-                </div>
-                <span className="brc-preview-skeleton brc-preview-card-sub" />
-              </div>
-              <div className="brc-preview-progress-track"><div className="brc-preview-progress-fill" /></div>
-              <div className="brc-preview-stats">
-                {(['bx-layers', 'bx-folder', 'bx-broadcast'] as const).map((icon) => (
-                  <span key={icon}>
-                    <BoxIcon name={icon} size={10} className="brc-stat-icon" />
-                    <span className="brc-preview-skeleton brc-preview-stat-label" />
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (visual === 'kiromilog') {
-    return (
-      <div className="project-list-art project-card-preview project-card-preview-kiromilog" aria-hidden="true">
-        <PreviewChrome />
-        <div className="kiromilog-preview-body">
-          <div className="kiromilog-preview-main">
-            <img src="/sbqd-cape.webp" alt="" className="kiromilog-preview-cover" draggable={false} />
-            <div className="kiromilog-preview-copy"><span /><span /><span /></div>
-          </div>
-          <div className="kiromilog-preview-grid">
-            <span><BoxIcon name="bx-tv" size={13} />{copy.anime}</span>
-            <span><BoxIcon name="bx-book-open" size={13} />{copy.manga}</span>
-            <span><BoxIcon name="bx-heart" size={13} />{copy.favorites}</span>
-            <span><BoxIcon name="bx-message-circle" size={13} />{copy.messages}</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (visual === 'baltimore') {
-    return (
-      <div className="project-list-art project-card-preview baltimore-preview" aria-hidden="true">
-        <PreviewChrome />
-        <div className="baltimore-preview-page">
-          <div className="baltimore-preview-nav">
-            <span className="baltimore-preview-mark">BRC</span>
-            <span>HOME</span>
-            <span>SERVICES</span>
-            <span>WORK</span>
-          </div>
-          <div className="baltimore-preview-hero">
-            <span>OUR SERVICES</span>
-            <strong>Built for<br />Baltimore.</strong>
-            <i />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (visual === 'ana') {
-    return (
-      <div className="project-list-art project-card-preview ana-preview" aria-hidden="true">
-        <PreviewChrome />
-        <div className="ana-preview-page">
-          <div className="ana-preview-nav">
-            <strong>A/Z</strong>
-            <span>PROJECTS</span>
-            <span>ABOUT</span>
-            <i />
-          </div>
-          <div className="ana-preview-hero">
-            <span>PORTFOLIO</span>
-            <strong>Architecture<br /><em>&amp; interiors.</em></strong>
-            <i />
-            <p><span /><span /></p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (visual === 'isadora') {
-    return (
-      <div className="project-list-art project-card-preview isadora-preview" aria-hidden="true">
-        <PreviewChrome />
-        <div className="isadora-preview-page">
-          <div className="isadora-preview-nav">
-            <strong><i>I</i>T</strong>
-            <span>INÍCIO</span>
-            <span>SOBRE</span>
-            <span>CONTATO</span>
-          </div>
-          <div className="isadora-preview-hero">
-            <div className="isadora-preview-copy">
-              <span>PSICÓLOGA</span>
-              <strong>Cuidar da mente<br />é um ato de <em>coragem.</em></strong>
-              <i />
-              <p><span /><span /></p>
-            </div>
-            <div className="isadora-preview-portrait"><span /><i /></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="project-list-art project-card-preview coordinate-preview" aria-hidden="true">
-      <PreviewChrome />
-      <div className="coordinate-preview-page">
-        <strong className="coordinate-preview-title">COORDINATE SAVER</strong>
-        <div className="coordinate-preview-form">
-          <div className="coordinate-preview-fields">
-            <span>NAME<i /></span>
-            <span>X<i /></span>
-            <span>Y<i /></span>
-            <span>Z<i /></span>
-          </div>
-          <div className="coordinate-preview-tools">
-            <span /><span /><span /><span />
-            <b>ADD</b>
-          </div>
-        </div>
-        <div className="coordinate-preview-table">
-          <div className="coordinate-preview-table-head"><span>NAME</span><span>X</span><span>Y</span><span>Z</span></div>
-          <div className="coordinate-preview-row coordinate-preview-row-blue"><strong>HOME</strong><span>-291</span><span>---</span><span>133</span></div>
-          <div className="coordinate-preview-row coordinate-preview-row-purple"><strong>CAVE</strong><span>-45</span><span>64</span><span>-95</span></div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function Projects() {
+export default function Projects({ previews }: { previews: ProjectPreviews }) {
   const { lang } = useLanguage();
   const copy = texts[lang];
+  const listRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToProject = (index: number) => {
+    const list = listRef.current;
+    const project = list?.children[index] as HTMLElement | undefined;
+    if (!list || !project) return;
+
+    list.scrollTo({
+      left: project.offsetLeft,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+    });
+  };
 
   return (
     <section id="projects" className="project-list-section">
-      <h2 className="project-list-heading">{copy.title}</h2>
+      <div className="project-list-toolbar">
+        <h2 className="project-list-heading">{copy.title}</h2>
+        <div className="project-list-controls">
+          <span className="project-list-position" role="status" aria-atomic="true">
+            {String(activeIndex + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+          </span>
+          <button
+            type="button"
+            aria-label={copy.previous}
+            aria-controls="project-list"
+            disabled={activeIndex === 0}
+            onClick={() => scrollToProject(activeIndex - 1)}
+          >
+            <BoxIcon name="bx-chevron-left" size={18} />
+          </button>
+          <button
+            type="button"
+            aria-label={copy.next}
+            aria-controls="project-list"
+            disabled={activeIndex === projects.length - 1}
+            onClick={() => scrollToProject(activeIndex + 1)}
+          >
+            <BoxIcon name="bx-chevron-right" size={18} />
+          </button>
+        </div>
+      </div>
 
-      <div className="project-list">
+      <div
+        id="project-list"
+        ref={listRef}
+        className="project-list"
+        onScroll={(event) => {
+          const list = event.currentTarget;
+          const first = list.children[0] as HTMLElement;
+          const second = list.children[1] as HTMLElement;
+          const step = second.offsetLeft - first.offsetLeft;
+          if (step > 0) {
+            setActiveIndex(Math.max(0, Math.min(projects.length - 1, Math.round(list.scrollLeft / step))));
+          }
+        }}
+      >
         {projects.map((project, index) => (
           <a
             key={project.name}
@@ -282,7 +162,14 @@ export default function Projects() {
             </span>
 
             <div className="project-list-preview">
-              <ProjectVisual copy={copy} visual={project.visual} />
+              <img
+                src={previews[project.visual]}
+                alt=""
+                width={640}
+                height={400}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
 
             <div className="project-list-content">

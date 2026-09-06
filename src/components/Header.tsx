@@ -17,7 +17,7 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg-primary)]">
+    <header className="site-nav sticky top-0 z-50">
       <div className={`site-header-inner max-w-[1100px] mx-auto px-5 md:px-6 py-3 ${projectPage ? 'site-header-project' : 'flex items-center justify-between'}`}>
         {projectPage && (
           <a
@@ -52,6 +52,7 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
               ref={languageMenuButton}
               type="button"
               className="language-menu-trigger"
+              aria-label={language === 'en' ? 'English — change language' : 'Português — alterar idioma'}
               aria-expanded={isLanguageMenuOpen}
               aria-haspopup="true"
               aria-controls="language-menu-options"
@@ -65,9 +66,7 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
                 languageMenuPointerType.current = null;
               }}
             >
-              <span className="language-menu-code" aria-hidden="true">
-                {language === 'en' ? 'EN' : 'PT'}
-              </span>
+              <img className="language-flag" src={`/icons/flag-${language === 'en' ? 'us' : 'br'}.svg`} width={20} height={14} alt="" />
               <span className="language-menu-label">
                 {language === 'en' ? 'English' : 'Português'}
               </span>
@@ -87,8 +86,8 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
                   tabIndex={isLanguageMenuOpen ? 0 : -1}
                   onClick={() => selectLanguage('pt')}
                 >
+                  <img className="language-flag" src="/icons/flag-br.svg" width={20} height={14} alt="" />
                   <span>Português</span>
-                  <span aria-hidden="true">PT</span>
                 </button>
                 <button
                   type="button"
@@ -97,8 +96,8 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
                   tabIndex={isLanguageMenuOpen ? 0 : -1}
                   onClick={() => selectLanguage('en')}
                 >
+                  <img className="language-flag" src="/icons/flag-us.svg" width={20} height={14} alt="" />
                   <span>English</span>
-                  <span aria-hidden="true">EN</span>
                 </button>
               </div>
             </div>

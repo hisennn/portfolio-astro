@@ -97,7 +97,7 @@ export default function Hero() {
             href="https://github.com/Hisennn"
             target="_blank"
             rel="noopener noreferrer"
-            className="hero-action-link"
+            className="hero-action-link hero-action-primary"
             aria-label="GitHub"
           >
             <BoxIcon name="bxl-github" size={16} />
