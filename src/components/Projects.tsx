@@ -128,6 +128,7 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
     const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 280;
     const timeout = window.setTimeout(() => {
       elapsedRef.current = 0;
+      progressRef.current?.style.setProperty('--progress', '0');
       setImageIndexes(indexes => indexes.map((frame, index) => index === pendingIndex ? 0 : frame));
       setActiveIndex(pendingIndex);
       setPendingIndex(null);
@@ -185,14 +186,43 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
                   {project.tech.map(tech => <li key={tech}>{tech}</li>)}
                 </ul>
               </div>
-              <a className="project-showcase-image" href={project.href} aria-label={`${copy.open}: ${project.name}`}>
-                {previews[project.visual].map((src, frame) => (
-                  <img key={src} src={src} alt="" width={1200} height={750} loading="lazy" decoding="async"
-                    data-active={frame === imageIndexes[index]} />
-                ))}
-              </a>
             </article>
           ))}
+          <div className="project-browser">
+            <div className="project-browser-toolbar">
+              <div className="project-browser-tools">
+                <span className="project-browser-controls" aria-hidden="true"><i /><i /><i /></span>
+                <div className="project-browser-navigation">
+                  <button type="button" aria-label={lang === 'pt' ? 'Projeto anterior' : 'Previous project'}
+                    onClick={() => selectProject(((pendingIndex ?? activeIndex) + projects.length - 1) % projects.length)}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6" /></svg>
+                  </button>
+                  <button type="button" aria-label={lang === 'pt' ? 'Próximo projeto' : 'Next project'}
+                    onClick={() => selectProject(((pendingIndex ?? activeIndex) + 1) % projects.length)}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" /></svg>
+                  </button>
+                  <button type="button" aria-label={lang === 'pt' ? 'Reiniciar projeto' : 'Restart project'}
+                    onClick={() => setPendingIndex(activeIndex)}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 7v5h-5M20 12a8 8 0 1 0-2.3 5.7" /></svg>
+                  </button>
+                </div>
+              </div>
+              <span className="project-browser-address" aria-hidden="true">{projects[activeIndex].name}</span>
+              <span className="project-browser-menu" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.5" /><circle cx="12" cy="12" r="1.5" /><circle cx="12" cy="19" r="1.5" /></svg></span>
+            </div>
+            <div className="project-browser-viewport">
+              {projects.map((project, index) => (
+                <a key={project.name} className="project-showcase-image" href={project.href}
+                  aria-label={`${copy.open}: ${project.name}`} data-active={index === activeIndex}
+                  inert={index !== activeIndex} aria-hidden={index !== activeIndex}>
+                  {previews[project.visual].map((src, frame) => (
+                    <img key={src} src={src} alt="" width={1200} height={750} loading="lazy" decoding="async"
+                      data-active={frame === imageIndexes[index]} />
+                  ))}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
         <div className="project-showcase-controls">
           <div className="project-showcase-pagination" aria-label={copy.title}>
