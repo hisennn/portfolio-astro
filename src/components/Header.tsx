@@ -1,14 +1,24 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import BoxIcon from './BoxIcon';
 
 export default function Header({ projectPage = false }: { projectPage?: boolean }) {
   const { language, setLanguage, isDarkTheme, toggleTheme } = useLanguage();
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const languageMenuButton = useRef<HTMLButtonElement>(null);
   const languageMenuPointerType = useRef<string | null>(null);
+
+  useEffect(() => {
+    const updateScroll = () => {
+      setIsScrolled(current => window.scrollY > 80 ? true : window.scrollY < 16 ? false : current);
+    };
+    updateScroll();
+    window.addEventListener('scroll', updateScroll, { passive: true });
+    return () => window.removeEventListener('scroll', updateScroll);
+  }, []);
 
   const selectLanguage = (nextLanguage: 'pt' | 'en') => {
     setLanguage(nextLanguage);
@@ -17,8 +27,8 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
   };
 
   return (
-    <header className="site-nav sticky top-0 z-50">
-      <div className={`site-header-inner max-w-[1100px] mx-auto px-5 md:px-6 py-3 ${projectPage ? 'site-header-project' : 'flex items-center justify-between'}`}>
+    <header className="site-nav sticky top-0 z-50" data-scrolled={isScrolled}>
+      <div className={`site-header-inner max-w-[1100px] mx-auto px-5 md:px-6 ${projectPage ? 'site-header-project' : 'flex items-center justify-between'}`}>
         {projectPage && (
           <a
             href="/#projects"
