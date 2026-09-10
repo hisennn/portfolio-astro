@@ -14,6 +14,6 @@ npm run deploy
 
 ## Cloudflare
 
-This project uses Astro 6 and `wrangler` for Cloudflare Workers Assets hosting.
+The production domain `gabriellemes.com` is hosted by the Cloudflare Pages project `gabriel-lemes`. `npm run deploy` builds the site and publishes to its `main` production branch.
 
-OpenNext is only needed for deploying Next.js apps to Cloudflare. Since this folder is an Astro app and the portfolio is fully static/client-side, Cloudflare Workers Assets is the correct deployment path.
+The build generates CSP script hashes in `dist/_headers` from the emitted HTML. Always deploy the complete build output so the policy matches the scripts. `wrangler.jsonc` describes the separate Worker deployment, not the production Pages project.
