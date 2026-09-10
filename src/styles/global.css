@@ -937,7 +937,7 @@ html[lang="en"] [data-lang="en"] {
   color: var(--text-secondary);
   transform: rotate(-2deg);
   transform-origin: 1rem center;
-  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), color 250ms ease;
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), color 0.45s ease-in-out;
 }
 
 .project-fan-option::before {
@@ -947,7 +947,7 @@ html[lang="en"] [data-lang="en"] {
   inset: 0;
   clip-path: var(--fan-shape);
   background: var(--bg-secondary);
-  transition: background-color 300ms ease;
+  transition: background-color 0.55s ease-in-out;
 }
 
 .project-fan-option[aria-current="true"] {
@@ -1005,6 +1005,7 @@ html[lang="en"] [data-lang="en"] {
   background: var(--accent);
   transform: scaleX(var(--progress, 0));
   transform-origin: left;
+  transition: background-color 0.55s ease-in-out;
 }
 
 .project-showcase-play {
@@ -1096,6 +1097,7 @@ html[lang="en"] [data-lang="en"] {
   .project-fan-option::before,
   .project-fan-arrow,
   .project-showcase-progress,
+  .project-showcase-progress::before,
   .language-menu-panel,
   .language-menu-chevron,
   .project-header-back {
