@@ -137,6 +137,7 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
   }, [pendingIndex]);
 
   useEffect(() => {
+    progressRef.current?.style.setProperty('--progress', String(elapsedRef.current / DURATION));
     if (paused || !visible || !pageVisible || pendingIndex !== null) return;
     let previous = performance.now();
     let frameIndex = Math.floor(elapsedRef.current / DURATION * imageCount);
@@ -169,7 +170,24 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
     <section id="projects" className="project-list-section" ref={sectionRef} aria-labelledby="projects-heading">
       <h2 id="projects-heading" className="project-list-heading">{copy.title}</h2>
       <div className="project-showcase" aria-roledescription={lang === 'pt' ? 'carrossel' : 'carousel'}>
-        <div className="project-showcase-slides" data-changing={pendingIndex !== null} id="project-slides" onFocusCapture={() => setPaused(true)}>
+        <div className="project-showcase-controls">
+          <nav className="project-fan" aria-label={copy.title}>
+            {projects.map((project, index) => (
+              <a key={project.name} href={project.href} className="project-fan-option"
+                aria-current={index === (pendingIndex ?? activeIndex) ? 'true' : undefined}
+                aria-controls="project-slides"
+                onPointerEnter={event => { if (event.pointerType === 'mouse') selectProject(index); }}
+                onFocus={event => { if (event.currentTarget.matches(':focus-visible')) setPaused(true); selectProject(index); }}>
+                {index === activeIndex && pendingIndex === null && <span ref={progressRef} className="project-showcase-progress" aria-hidden="true" />}
+                <span className="project-fan-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <span className="project-fan-name">{project.name}</span>
+                <span className="project-fan-arrow" aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </nav>
+        </div>
+        <div className="project-showcase-slides" data-changing={pendingIndex !== null} id="project-slides"
+          onFocusCapture={event => { if (event.target.matches('a:focus-visible')) setPaused(true); }}>
           {projects.map((project, index) => (
             <article
               key={project.name}
@@ -208,7 +226,10 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
                 </div>
               </div>
               <span className="project-browser-address" aria-hidden="true">{projects[activeIndex].name}</span>
-              <span className="project-browser-menu" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.5" /><circle cx="12" cy="12" r="1.5" /><circle cx="12" cy="19" r="1.5" /></svg></span>
+              <button className="project-showcase-play" type="button" aria-label={paused ? copy.play : copy.pause}
+                title={paused ? copy.play : copy.pause} onClick={() => setPaused(value => !value)}>
+                <BoxIcon name={paused ? 'bx-play' : 'bx-pause'} size={18} />
+              </button>
             </div>
             <div className="project-browser-viewport">
               {projects.map((project, index) => (
@@ -223,22 +244,6 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
               ))}
             </div>
           </div>
-        </div>
-        <div className="project-showcase-controls">
-          <div className="project-showcase-pagination" aria-label={copy.title}>
-            {projects.map((project, index) => (
-              <button key={project.name} type="button" aria-label={project.name} aria-current={index === (pendingIndex ?? activeIndex) ? 'true' : undefined}
-                aria-controls="project-slides" onClick={() => selectProject(index)}>
-                <span className="project-showcase-dot">
-                  {index === activeIndex && <span ref={progressRef} className="project-showcase-progress" />}
-                </span>
-              </button>
-            ))}
-          </div>
-          <button className="project-showcase-play" type="button" aria-label={paused ? copy.play : copy.pause}
-            onClick={() => setPaused(value => !value)}>
-            <BoxIcon name={paused ? 'bx-play' : 'bx-pause'} size={18} />
-          </button>
         </div>
       </div>
     </section>
