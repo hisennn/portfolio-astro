@@ -22,7 +22,7 @@ export default function About() {
         <h2 className="section-heading">
           {texts[lang].title}
         </h2>
-        <p className="max-w-[680px] text-[var(--text-secondary)] text-base font-body font-normal leading-[1.7]">
+        <p className="max-w-[680px] text-[var(--text-secondary)] text-[length:var(--font-prose)] font-body font-normal leading-[1.7]">
           {texts[lang].about}
         </p>
       </div>

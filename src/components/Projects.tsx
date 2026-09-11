@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
-import BoxIcon from './BoxIcon';
+import Icon from './Icon';
 
 const texts = {
   pt: {
@@ -96,6 +96,8 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
   const { lang } = useLanguage();
   const copy = texts[lang];
   const sectionRef = useRef<HTMLElement>(null);
+  const draggedRef = useRef(false);
+  const fanRef = useRef<HTMLElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const elapsedRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -162,6 +164,92 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
     return () => window.cancelAnimationFrame(animationFrame);
   }, [activeIndex, imageCount, paused, visible, pageVisible, pendingIndex]);
 
+  useEffect(() => {
+    const fan = fanRef.current;
+    if (!fan) return;
+    const mobile = window.matchMedia('(max-width: 719px)');
+    let userScrolling = false;
+    let pointerDown = false;
+    let startX = 0;
+    let startScroll = 0;
+    let timeout: number | undefined;
+    const centerActive = () => {
+      if (!mobile.matches || userScrolling) return;
+      const option = fan.children[activeIndex] as HTMLElement;
+      fan.scrollTo({ left: option.offsetLeft - (fan.clientWidth - option.offsetWidth) / 2,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    };
+    const beginScroll = (event: Event) => {
+      if (!mobile.matches) return;
+      userScrolling = true;
+      pointerDown = event.type === 'pointerdown';
+      if (event instanceof PointerEvent) {
+        draggedRef.current = false;
+        startX = event.clientX;
+        startScroll = fan.scrollLeft;
+      }
+      setPaused(true);
+    };
+    const onScroll = () => {
+      if (!mobile.matches || !userScrolling) return;
+      window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        if (pointerDown) return;
+        const center = fan.scrollLeft + fan.clientWidth / 2;
+        const options = Array.from(fan.children) as HTMLElement[];
+        const closest = options.reduce((best, option, index) =>
+          Math.abs(option.offsetLeft + option.offsetWidth / 2 - center) <
+          Math.abs(options[best].offsetLeft + options[best].offsetWidth / 2 - center) ? index : best, 0);
+        userScrolling = false;
+        delete fan.dataset.dragging;
+        if (closest !== activeIndex) setPendingIndex(closest);
+      }, 150);
+    };
+    const movePointer = (event: PointerEvent) => {
+      if (!pointerDown || event.pointerType !== 'mouse') return;
+      const distance = event.clientX - startX;
+      if (Math.abs(distance) < 5 && !draggedRef.current) return;
+      draggedRef.current = true;
+      fan.dataset.dragging = 'true';
+      fan.setPointerCapture(event.pointerId);
+      event.preventDefault();
+      fan.scrollLeft = startScroll - distance;
+    };
+    const endScroll = () => {
+      pointerDown = false;
+      if (fan.dataset.dragging) {
+        const center = fan.scrollLeft + fan.clientWidth / 2;
+        const options = Array.from(fan.children) as HTMLElement[];
+        const target = options.reduce((best, option) =>
+          Math.abs(option.offsetLeft + option.offsetWidth / 2 - center) <
+          Math.abs(best.offsetLeft + best.offsetWidth / 2 - center) ? option : best);
+        fan.scrollTo({ left: target.offsetLeft - (fan.clientWidth - target.offsetWidth) / 2,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      }
+      onScroll();
+    };
+    const observer = new ResizeObserver(centerActive);
+    observer.observe(fan);
+    fan.addEventListener('pointerdown', beginScroll);
+    fan.addEventListener('pointermove', movePointer);
+    window.addEventListener('pointerup', endScroll);
+    window.addEventListener('pointercancel', endScroll);
+    fan.addEventListener('wheel', beginScroll, { passive: true });
+    fan.addEventListener('scroll', onScroll, { passive: true });
+    centerActive();
+    return () => {
+      window.clearTimeout(timeout);
+      observer.disconnect();
+      fan.removeEventListener('pointerdown', beginScroll);
+      fan.removeEventListener('pointermove', movePointer);
+      delete fan.dataset.dragging;
+      window.removeEventListener('pointerup', endScroll);
+      window.removeEventListener('pointercancel', endScroll);
+      fan.removeEventListener('wheel', beginScroll);
+      fan.removeEventListener('scroll', onScroll);
+    };
+  }, [activeIndex]);
+
   const selectProject = (index: number) => {
     setPendingIndex(index === activeIndex ? null : index);
   };
@@ -171,17 +259,24 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
       <h2 id="projects-heading" className="project-list-heading">{copy.title}</h2>
       <div className="project-showcase" aria-roledescription={lang === 'pt' ? 'carrossel' : 'carousel'}>
         <div className="project-showcase-controls">
-          <nav className="project-fan" aria-label={copy.title}>
+          <nav ref={fanRef} className="project-fan" aria-label={copy.title}>
             {projects.map((project, index) => (
-              <a key={project.name} href={project.href} className="project-fan-option"
+              <a key={project.name} href={project.href} className="project-fan-option" draggable={false}
                 aria-current={index === (pendingIndex ?? activeIndex) ? 'true' : undefined}
                 aria-controls="project-slides"
-                onPointerEnter={event => { if (event.pointerType === 'mouse') selectProject(index); }}
-                onFocus={event => { if (event.currentTarget.matches(':focus-visible')) setPaused(true); selectProject(index); }}>
+                onClick={event => {
+                  if (!window.matchMedia('(max-width: 719px)').matches) return;
+                  event.preventDefault();
+                  if (draggedRef.current) return;
+                  setPaused(true);
+                  selectProject(index);
+                }}
+                onPointerEnter={event => { if (event.pointerType === 'mouse' && window.matchMedia('(min-width: 720px)').matches) selectProject(index); }}
+                onFocus={event => { if (event.currentTarget.matches(':focus-visible')) { setPaused(true); selectProject(index); } }}>
                 {index === activeIndex && pendingIndex === null && <span ref={progressRef} className="project-showcase-progress" aria-hidden="true" />}
                 <span className="project-fan-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                 <span className="project-fan-name">{project.name}</span>
-                <span className="project-fan-arrow" aria-hidden="true">↗</span>
+                <span className="project-fan-arrow" aria-hidden="true"><Icon name="arrow-up-right" /></span>
               </a>
             ))}
           </nav>
@@ -198,7 +293,7 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
               aria-label={`${index + 1} / ${projects.length}`}
             >
               <div className="project-showcase-copy">
-                <h3><a href={project.href}>{project.name}<span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path className="project-arrow-shaft" d="M4 12h15" /><path d="m13 6 6 6-6 6" /></svg></span></a></h3>
+                <h3><a href={project.href}>{project.name}<span aria-hidden="true"><Icon name="arrow-right" size={16} /></span></a></h3>
                 <p>{copy[project.descKey]}</p>
                 <ul className="project-showcase-tech" aria-label={lang === 'pt' ? 'Tecnologias' : 'Technologies'}>
                   {project.tech.map(tech => <li key={tech}>{tech}</li>)}
@@ -213,23 +308,20 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
                 <div className="project-browser-navigation">
                   <button type="button" aria-label={lang === 'pt' ? 'Projeto anterior' : 'Previous project'}
                     onClick={() => selectProject(((pendingIndex ?? activeIndex) + projects.length - 1) % projects.length)}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6" /></svg>
+                    <Icon name="caret-left" size={18} />
                   </button>
                   <button type="button" aria-label={lang === 'pt' ? 'Próximo projeto' : 'Next project'}
                     onClick={() => selectProject(((pendingIndex ?? activeIndex) + 1) % projects.length)}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" /></svg>
+                    <Icon name="caret-right" size={18} />
                   </button>
-                  <button type="button" aria-label={lang === 'pt' ? 'Reiniciar projeto' : 'Restart project'}
-                    onClick={() => setPendingIndex(activeIndex)}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 7v5h-5M20 12a8 8 0 1 0-2.3 5.7" /></svg>
+                  <button className="project-showcase-play" type="button" aria-label={paused ? copy.play : copy.pause}
+                    title={paused ? copy.play : copy.pause} onClick={() => setPaused(value => !value)}>
+                    <Icon name={paused ? 'play' : 'pause'} size={18} />
                   </button>
                 </div>
               </div>
               <span className="project-browser-address" aria-hidden="true">{projects[activeIndex].name}</span>
-              <button className="project-showcase-play" type="button" aria-label={paused ? copy.play : copy.pause}
-                title={paused ? copy.play : copy.pause} onClick={() => setPaused(value => !value)}>
-                <BoxIcon name={paused ? 'bx-play' : 'bx-pause'} size={18} />
-              </button>
+
             </div>
             <div className="project-browser-viewport">
               {projects.map((project, index) => (

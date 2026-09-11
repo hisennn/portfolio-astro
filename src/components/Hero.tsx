@@ -1,7 +1,7 @@
 'use client';
 
 import { useLanguage } from '../hooks/useLanguage';
-import BoxIcon from './BoxIcon';
+import Icon from './Icon';
 
 const texts = {
   pt: {
@@ -50,13 +50,13 @@ export default function Hero() {
         <div className="hero-contact-grid">
           <a href="mailto:gabrielsilvarz@outlook.com" className="hero-contact-link">
             <span className="hero-icon">
-              <BoxIcon name="bx-envelope" size={15} />
+              <Icon name="envelope" size={15} />
             </span>
             <span>gabrielsilvarz@outlook.com</span>
           </a>
           <div className="hero-contact-item">
             <span className="hero-icon">
-              <BoxIcon name="bx-phone" size={15} />
+              <Icon name="phone" size={15} />
             </span>
             <span>+55 16 9 9390-9231</span>
           </div>
@@ -64,7 +64,7 @@ export default function Hero() {
 
         <div className="hero-meta-row">
           <span className="hero-icon">
-            <BoxIcon name="bx-message-circle-detail" size={15} />
+            <Icon name="translate" size={15} />
           </span>
           <span>
             {texts[lang].portuguese}{' '}
@@ -78,7 +78,7 @@ export default function Hero() {
         </div>
 
         <p className="hero-location">
-          <BoxIcon name="bx-location-pin" size={13} />
+          <Icon name="map-pin" size={13} />
           {texts[lang].location}
         </p>
 
@@ -90,7 +90,7 @@ export default function Hero() {
             className="hero-action-link"
             aria-label="LinkedIn"
           >
-            <BoxIcon name="bxl-linkedin" size={16} />
+            <Icon name="linkedin-logo" size={16} />
             LinkedIn
           </a>
           <a
@@ -100,7 +100,7 @@ export default function Hero() {
             className="hero-action-link hero-action-primary"
             aria-label="GitHub"
           >
-            <BoxIcon name="bxl-github" size={16} />
+            <Icon name="github-logo" size={16} />
             GitHub
           </a>
           <a
@@ -108,7 +108,7 @@ export default function Hero() {
             download={resumeDownloadName}
             className="hero-action-link"
           >
-            <BoxIcon name="bx-arrow-to-bottom-stroke" size={16} />
+            <Icon name="download-simple" size={16} />
             {texts[lang].downloadResume}
           </a>
         </div>

@@ -32,10 +32,10 @@ export default function Education() {
         <div className="education-record experience-timeline">
           <span aria-hidden="true" className="experience-timeline-dot absolute left-0 top-[9px] h-[9px] w-[9px] -translate-x-1/2 rounded-full" />
           <div className="flex flex-col gap-1">
-            <h3 className="text-[17px] font-body font-medium tracking-tight text-[var(--text-primary)]">
+            <h3 className="text-[length:var(--font-reading)] font-body font-medium tracking-tight text-[var(--text-primary)]">
               {texts[lang].uniCourse}
             </h3>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 font-body font-normal text-[13px] text-[var(--text-muted)]">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 font-body font-normal text-[length:var(--font-detail)] text-[var(--text-muted)]">
               <span>{texts[lang].uni}</span>
               <span className="hidden sm:inline">·</span>
               <span>{texts[lang].uniType}</span>

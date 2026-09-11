@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
-import BoxIcon from './BoxIcon';
+import Icon from './Icon';
 
 export default function Header({ projectPage = false }: { projectPage?: boolean }) {
   const { language, setLanguage, isDarkTheme, toggleTheme } = useLanguage();
@@ -34,7 +34,7 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
             href="/#projects"
             className="project-header-back font-body text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200"
           >
-            <BoxIcon name="bx-arrow-left" size={16} />
+            <Icon name="arrow-left" size={16} />
             <span>{language === 'en' ? 'Back' : 'Voltar'}</span>
           </a>
         )}
@@ -80,7 +80,7 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
               <span className="language-menu-label">
                 {language === 'en' ? 'English' : 'Português'}
               </span>
-              <BoxIcon name="bx-chevron-down" size={15} className="language-menu-chevron" />
+              <Icon name="caret-down" size={15} className="language-menu-chevron" />
             </button>
 
             <div
@@ -118,7 +118,7 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
             className="theme-toggle flex size-9 cursor-pointer items-center justify-center text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
             aria-label="Toggle theme"
           >
-            <BoxIcon name={isDarkTheme ? 'bx-sun' : 'bx-moon'} size={16} />
+            <Icon name={isDarkTheme ? 'sun' : 'moon'} size={16} />
           </button>
         </div>
       </div>

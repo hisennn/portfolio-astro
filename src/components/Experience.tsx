@@ -1,5 +1,6 @@
 'use client';
 
+import Icon from './Icon';
 import { useLanguage } from '../hooks/useLanguage';
 
 const texts = {
@@ -23,12 +24,14 @@ const experiences = [
     items: {
       pt: [
         'Desenvolvo e mantenho o BRC Client Portal, usado para organizar clientes, projetos, arquivos, seleções de materiais, contratos, notificações e comunicação.',
-        'Criei e mantenho o site da empresa, incluindo conteúdo, SEO técnico, deploys na Cloudflare e o Perfil da Empresa no Google.',
+        'Criei e mantenho o site da empresa, incluindo conteúdo, SEO técnico e deploys na Cloudflare.',
+        'Cuido do Perfil da Empresa no Google e do Instagram, além da comunicação com clientes.',
         'Apoio as operações diárias organizando planilhas, documentos e informações de clientes, projetos, materiais e estimativas.'
       ],
       en: [
         'Develop and maintain the BRC Client Portal for organizing clients, projects, files, material selections, contracts, notifications, and communication.',
-        'Built and maintain the company website, including content updates, technical SEO, Cloudflare deployments, and its Google Business Profile.',
+        'Built and maintain the company website, including content updates, technical SEO, and Cloudflare deployments.',
+        'Manage the Google Business Profile and Instagram account, and communicate with clients.',
         'Support daily operations by organizing spreadsheets, documents, and information related to clients, projects, materials, and estimates.'
       ]
     },
@@ -75,52 +78,30 @@ export default function Experience() {
   const { lang } = useLanguage();
 
   return (
-    <section>
-      <div className="flex flex-col gap-6">
-        <h2 className="section-heading">
-          {texts[lang].title}
-        </h2>
-
-        <div className="experience-timeline relative ml-0.5 flex flex-col gap-10 pl-6">
-          {experiences.map((exp) => (
-            <div key={exp.company} className="group relative flex flex-col gap-3">
-              <div className="experience-timeline-dot absolute left-[-24px] top-[9px] h-[9px] w-[9px] -translate-x-1/2 rounded-full transition-all duration-300 group-hover:scale-125" />
-
-              <div className="flex flex-col gap-1.5 md:flex-row md:items-start md:justify-between w-full">
-                <div className="flex min-w-0 flex-col gap-0.5">
-                  <h3 className="text-[17px] font-body font-medium text-[var(--text-primary)] tracking-tight leading-snug">
-                    {exp.role[lang]}
-                  </h3>
-
-                  <span className="text-[16px] font-body font-normal text-[var(--text-secondary)]">
-                    {exp.company}
-                  </span>
-
-                  {(exp.locationDetails || ('type' in exp && exp.type)) && (
-                    <div className="flex flex-wrap items-center gap-1 text-[13px] font-body font-normal text-[var(--text-muted)]">
-                      {exp.locationDetails && <span>{exp.locationDetails[lang]}</span>}
-                      {exp.locationDetails && 'type' in exp && exp.type && (
-                        <span>·</span>
-                      )}
-                      {'type' in exp && exp.type && <span>{texts[lang][exp.type]}</span>}
-                    </div>
-                  )}
+    <section id="experience" className="experience-section" aria-labelledby="experience-heading">
+      <div className="experience-clipboard">
+        <div className="experience-clip" aria-hidden="true" />
+        <div className="experience-document">
+          <h2 id="experience-heading" className="section-heading">{texts[lang].title}</h2>
+          <div className="experience-records">
+            {experiences.map((exp) => (
+              <article key={exp.company} className="experience-entry">
+                <div className="experience-entry-heading">
+                  <div className="experience-entry-meta">
+                    <h3>{exp.role[lang]}</h3>
+                    <p className="experience-company">{exp.company}</p>
+                    <p className="experience-place"><Icon name="map-pin" size={15} /><span>{exp.locationDetails[lang]} · {texts[lang][exp.type]}</span></p>
+                  </div>
+                  <p className="experience-date">{exp.date[lang]}</p>
                 </div>
-
-                <span className="text-[12px] font-body font-normal text-[var(--text-muted)] md:shrink-0 md:mt-0.5 self-start">
-                  {exp.date[lang]}
-                </span>
-              </div>
-
-              <ul className="text-[15px] font-body font-normal text-[var(--text-secondary)] leading-[1.7] space-y-1.5">
-                {exp.items[lang].map((item, i) => (
-                  <li key={i} className="relative pl-4 before:content-['–'] before:absolute before:left-0 before:text-[var(--text-muted)]">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                <ul>
+                  {exp.items[lang].map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

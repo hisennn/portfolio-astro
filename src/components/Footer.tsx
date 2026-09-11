@@ -1,7 +1,7 @@
 'use client';
 
 import { useLanguage } from '../hooks/useLanguage';
-import BoxIcon from './BoxIcon';
+import Icon from './Icon';
 
 const texts = {
   pt: {
@@ -29,11 +29,11 @@ export default function Footer() {
                   href="mailto:gabrielsilvarz@outlook.com"
                   className="hover:opacity-60 transition-opacity duration-200 flex items-center gap-1.5 w-fit"
                 >
-                  <BoxIcon name="bx-envelope" size={14} />
+                  <Icon name="envelope" size={14} />
                   gabrielsilvarz@outlook.com
                 </a>
                 <span className="flex items-center gap-1.5">
-                  <BoxIcon name="bx-phone" size={14} />
+                  <Icon name="phone" size={14} />
                   +55 16 9 9390-9231
                 </span>
               </div>
@@ -47,7 +47,7 @@ export default function Footer() {
                 className="text-[var(--text-muted)] hover:opacity-60 transition-opacity duration-200"
                 aria-label="LinkedIn"
               >
-                <BoxIcon name="bxl-linkedin" size={20} />
+                <Icon name="linkedin-logo" size={20} />
               </a>
               <a
                 href="https://github.com/Hisennn"
@@ -56,7 +56,7 @@ export default function Footer() {
                 className="text-[var(--text-muted)] hover:opacity-60 transition-opacity duration-200"
                 aria-label="GitHub"
               >
-                <BoxIcon name="bxl-github" size={20} />
+                <Icon name="github-logo" size={20} />
               </a>
             </div>
           </div>

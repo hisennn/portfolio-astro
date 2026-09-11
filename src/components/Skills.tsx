@@ -17,7 +17,7 @@ const texts = {
     ],
     workStyleTitle: 'Forma de trabalho',
     workStyle: [
-      'Comunicação direta com clientes',
+      'Atendimento e suporte ao cliente',
       'Definição de escopo',
       'Acompanhamento de ajustes e entregas'
     ]
@@ -36,7 +36,7 @@ const texts = {
     ],
     workStyleTitle: 'Working style',
     workStyle: [
-      'Direct client communication',
+      'Customer service and support',
       'Scope definition',
       'Client feedback and delivery'
     ]
@@ -128,7 +128,7 @@ export default function Skills() {
 
         <div className="flex flex-col gap-10">
           <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
-            <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">{texts[lang].technologiesTitle}</h3>
+            <h3 className="text-[length:var(--font-detail)] font-body font-medium text-[var(--text-muted)]">{texts[lang].technologiesTitle}</h3>
             <div className="skill-groups">
               {skillGroups.map((group) => (
                 <div key={group.title.en} className="skill-group">
@@ -144,8 +144,8 @@ export default function Skills() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
-            <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">{texts[lang].practicesTitle}</h3>
-            <p className="text-base font-body font-normal text-[var(--text-secondary)] leading-relaxed">
+            <h3 className="text-[length:var(--font-detail)] font-body font-medium text-[var(--text-muted)]">{texts[lang].practicesTitle}</h3>
+            <p className="text-[length:var(--font-prose)] font-body font-normal text-[var(--text-secondary)] leading-relaxed">
               {texts[lang].practices.map((item, index) => (
                 <span key={item} className="skill-inline-item">
                   {item}
@@ -158,8 +158,8 @@ export default function Skills() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
-            <h3 className="text-[13px] font-body font-medium text-[var(--text-muted)]">{texts[lang].workStyleTitle}</h3>
-            <p className="text-base font-body font-normal text-[var(--text-secondary)] leading-relaxed">
+            <h3 className="text-[length:var(--font-detail)] font-body font-medium text-[var(--text-muted)]">{texts[lang].workStyleTitle}</h3>
+            <p className="text-[length:var(--font-prose)] font-body font-normal text-[var(--text-secondary)] leading-relaxed">
               {texts[lang].workStyle.map((item, index) => (
                 <span key={item} className="skill-inline-item">
                   {item}
