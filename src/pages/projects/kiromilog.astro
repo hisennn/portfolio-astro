@@ -1,9 +1,11 @@
 ---
+import ProjectOverview from "../../components/ProjectOverview.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageChrome from "../../components/PageChrome";
 import ProjectMedia from "../../components/ProjectMedia.astro";
 import ProjectImage from "../../components/ProjectImage.astro";
 import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import ProjectNav from "../../components/ProjectNav.astro";
 import feedImage from "../../assets/projects/kiromilog/feed.png";
 import profileImage from "../../assets/projects/kiromilog/profile.png";
 
@@ -48,10 +50,6 @@ const jsonLd = {
       <div class="project-detail-hero">
         <article class="project-detail-intro">
           <div class="project-detail-heading">
-            <p class="project-detail-kicker">
-              <span data-lang="pt">Aplicação web</span>
-              <span data-lang="en">Web application</span>
-            </p>
             <h1>Kiromilog</h1>
             <p class="project-detail-lead">
               <span data-lang="pt">
@@ -77,21 +75,16 @@ const jsonLd = {
 
           <aside class="project-detail-meta" aria-label="Project details">
             <div class="project-detail-meta-row">
-              <span class="project-detail-meta-label">Stack</span>
+              <span class="project-detail-meta-label"><span data-lang="pt">Tecnologias</span><span data-lang="en">Technologies</span></span>
               <div class="project-detail-tech">
-                {tech.map((item) => <span>{item}</span>)}
+                {tech.join(", ")}
               </div>
             </div>
           </aside>
         </article>
       </div>
 
-      <section class="project-detail-overview">
-        <h2>
-          <span data-lang="pt">Visão geral</span>
-          <span data-lang="en">Overview</span>
-        </h2>
-        <div class="project-detail-overview-body">
+      <ProjectOverview>
           <ul>
             <li>
               <span data-lang="pt">Busca de anime, mangá, personagens e usuários com dados da Jikan API.</span>
@@ -110,12 +103,10 @@ const jsonLd = {
               <span data-lang="en">Avatar uploads, messages, and real-time updates.</span>
             </li>
           </ul>
-        </div>
-      </section>
+      </ProjectOverview>
 
       <div class="project-detail-gallery">
         <ProjectMedia
-          index="01"
           titlePt="Busca e catálogo"
           titleEn="Search and catalog"
           descriptionPt="Pesquisa por anime, mangá, personagens e usuários, com resultados separados por tipo."
@@ -136,7 +127,6 @@ const jsonLd = {
         </ProjectMedia>
 
         <ProjectMedia
-          index="02"
           titlePt="Perfis e conexões"
           titleEn="Profiles and connections"
           descriptionPt="Busca de usuários e fluxo de seguir perfis, refletindo as conexões no feed."
@@ -157,7 +147,6 @@ const jsonLd = {
         </ProjectMedia>
 
         <ProjectMedia
-          index="03"
           titlePt="Perfil e biblioteca"
           titleEn="Profile and library"
           descriptionPt="Listas, estatísticas, favoritos e histórico de atividade reunidos no perfil."
@@ -167,12 +156,11 @@ const jsonLd = {
             src={profileImage}
             alt="Kiromilog profile page with anime and manga statistics, favorites, and activity history"
             widths={[640, 960, 1400, 2168]}
-            sizes="(min-width: 900px) 760px, calc(100vw - 40px)"
+            sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)"
           />
         </ProjectMedia>
 
         <ProjectMedia
-          index="04"
           titlePt="Feed de atividade"
           titleEn="Activity feed"
           descriptionPt="Atividades recentes de quem o usuário segue, com progresso, favoritos e itens em andamento."
@@ -182,10 +170,19 @@ const jsonLd = {
             src={feedImage}
             alt="Kiromilog activity feed with recent anime and manga updates"
             widths={[640, 960, 1400, 2168]}
-            sizes="(min-width: 900px) 760px, calc(100vw - 40px)"
+            sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)"
           />
         </ProjectMedia>
       </div>
+
+      <ProjectNav
+        prevHref="/projects/brc-client-portal/"
+        prevPt="BRC Client Portal"
+        prevEn="BRC Client Portal"
+        nextHref="/projects/baltimore-reconstruction/"
+        nextPt="Baltimore Re-Construction"
+        nextEn="Baltimore Re-Construction"
+      />
     </main>
     <ProjectImageViewer />
 

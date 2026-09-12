@@ -1,16 +1,18 @@
 ---
+import ProjectOverview from "../../components/ProjectOverview.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageChrome from "../../components/PageChrome";
 import ProjectMedia from "../../components/ProjectMedia.astro";
 import ProjectImage from "../../components/ProjectImage.astro";
 import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import ProjectNav from "../../components/ProjectNav.astro";
 import servicesImage from "../../assets/projects/baltimore-reconstruction/services.webp";
 import workImage from "../../assets/projects/baltimore-reconstruction/work.webp";
 import contactImage from "../../assets/projects/baltimore-reconstruction/contact.webp";
 
 const title = "Baltimore Re-Construction | Projeto de Gabriel Lemes";
 const description =
-  "Site institucional desenvolvido para a Baltimore Re-Construction, com serviços, trabalhos realizados, áreas atendidas e contato.";
+  "Site institucional desenvolvido para a Baltimore Re-Construction, com serviÃ§os, trabalhos realizados, Ã¡reas atendidas e contato.";
 const tech = ["Astro 7", "TypeScript", "Tailwind", "Cloudflare", "Mailtrap"];
 const imageWidths = [640, 960, 1400, 2175];
 const jsonLd = {
@@ -38,15 +40,11 @@ const jsonLd = {
       <div class="project-detail-hero">
         <article class="project-detail-intro">
           <div class="project-detail-heading">
-            <p class="project-detail-kicker">
-              <span data-lang="pt">Site institucional</span>
-              <span data-lang="en">Company website</span>
-            </p>
             <h1>Baltimore Re-Construction</h1>
             <p class="project-detail-lead">
               <span data-lang="pt">
-                Criei o site para apresentar os serviços da empresa, os trabalhos
-                realizados, as regiões atendidas e as formas de contato.
+                Criei o site para apresentar os serviÃ§os da empresa, os trabalhos
+                realizados, as regiÃµes atendidas e as formas de contato.
               </span>
               <span data-lang="en">
                 I built the website to present the company's services, completed
@@ -67,24 +65,19 @@ const jsonLd = {
 
           <aside class="project-detail-meta" aria-label="Project details">
             <div class="project-detail-meta-row">
-              <span class="project-detail-meta-label">Stack</span>
+              <span class="project-detail-meta-label"><span data-lang="pt">Tecnologias</span><span data-lang="en">Technologies</span></span>
               <div class="project-detail-tech">
-                {tech.map((item) => <span>{item}</span>)}
+                {tech.join(", ")}
               </div>
             </div>
           </aside>
         </article>
       </div>
 
-      <section class="project-detail-overview">
-        <h2>
-          <span data-lang="pt">Visão geral</span>
-          <span data-lang="en">Overview</span>
-        </h2>
-        <div class="project-detail-overview-body">
+      <ProjectOverview>
           <p class="project-detail-note">
             <span data-lang="pt">
-              Além do site, também cuido do Perfil da Empresa no Google
+              AlÃ©m do site, tambÃ©m cuido do Perfil da Empresa no Google
               (Google Business Profile).
             </span>
             <span data-lang="en">
@@ -93,31 +86,29 @@ const jsonLd = {
           </p>
           <ul>
             <li>
-              <span data-lang="pt">Serviços residenciais, comerciais, planejamento e acessibilidade.</span>
+              <span data-lang="pt">ServiÃ§os residenciais, comerciais, planejamento e acessibilidade.</span>
               <span data-lang="en">Residential, commercial, planning, and accessibility services.</span>
             </li>
             <li>
-              <span data-lang="pt">Galeria com reformas e trabalhos concluídos.</span>
+              <span data-lang="pt">Galeria com reformas e trabalhos concluÃ­dos.</span>
               <span data-lang="en">Gallery of renovations and completed work.</span>
             </li>
             <li>
-              <span data-lang="pt">Formulário de contato integrado ao Mailtrap.</span>
+              <span data-lang="pt">FormulÃ¡rio de contato integrado ao Mailtrap.</span>
               <span data-lang="en">Contact form integrated with Mailtrap.</span>
             </li>
             <li>
-              <span data-lang="pt">Metadados, URLs canônicas e dados estruturados próprios para cada página.</span>
+              <span data-lang="pt">Metadados, URLs canÃ´nicas e dados estruturados prÃ³prios para cada pÃ¡gina.</span>
               <span data-lang="en">Page-specific metadata, canonical URLs, and structured data.</span>
             </li>
           </ul>
-        </div>
-      </section>
+      </ProjectOverview>
 
       <div class="project-detail-gallery">
         <ProjectMedia
-          index="01"
-          titlePt="Navegação do site"
+          titlePt="NavegaÃ§Ã£o do site"
           titleEn="Website navigation"
-          descriptionPt="Visão da página inicial, apresentação da empresa e resumo dos serviços."
+          descriptionPt="VisÃ£o da pÃ¡gina inicial, apresentaÃ§Ã£o da empresa e resumo dos serviÃ§os."
           descriptionEn="Home page, company introduction, and service summary."
         >
           <video
@@ -135,35 +126,41 @@ const jsonLd = {
         </ProjectMedia>
 
         <ProjectMedia
-          index="02"
-          titlePt="Serviços"
+          titlePt="ServiÃ§os"
           titleEn="Services"
-          descriptionPt="Categorias de serviço, escopo de cada uma e regiões atendidas."
+          descriptionPt="Categorias de serviÃ§o, escopo de cada uma e regiÃµes atendidas."
           descriptionEn="Service categories, their scope, and the areas served."
         >
-          <ProjectImage src={servicesImage} alt="Baltimore Re-Construction services page with residential and commercial service categories" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={servicesImage} alt="Baltimore Re-Construction services page with residential and commercial service categories" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
 
         <ProjectMedia
-          index="03"
           titlePt="Trabalhos realizados"
           titleEn="Completed work"
-          descriptionPt="Galeria de projetos residenciais concluídos em Baltimore."
+          descriptionPt="Galeria de projetos residenciais concluÃ­dos em Baltimore."
           descriptionEn="Gallery of completed residential projects in Baltimore."
         >
-          <ProjectImage src={workImage} alt="Baltimore Re-Construction work page with a residential renovation gallery" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={workImage} alt="Baltimore Re-Construction work page with a residential renovation gallery" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
 
         <ProjectMedia
-          index="04"
           titlePt="Contato"
           titleEn="Contact"
-          descriptionPt="Telefone, e-mail e formulário para pedidos de orçamento."
+          descriptionPt="Telefone, e-mail e formulÃ¡rio para pedidos de orÃ§amento."
           descriptionEn="Phone, email, and form for estimate requests."
         >
-          <ProjectImage src={contactImage} alt="Baltimore Re-Construction contact page with phone, email, and inquiry form" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={contactImage} alt="Baltimore Re-Construction contact page with phone, email, and inquiry form" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
       </div>
+
+      <ProjectNav
+        prevHref="/projects/kiromilog/"
+        prevPt="Kiromilog"
+        prevEn="Kiromilog"
+        nextHref="/projects/ana-zabala/"
+        nextPt="Ana Zabala Portfolio"
+        nextEn="Ana Zabala Portfolio"
+      />
     </main>
     <ProjectImageViewer />
 

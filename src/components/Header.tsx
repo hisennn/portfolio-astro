@@ -28,11 +28,11 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
 
   return (
     <header className="site-nav sticky top-0 z-50" data-scrolled={isScrolled}>
-      <div className={`site-header-inner max-w-[1100px] mx-auto px-5 md:px-6 ${projectPage ? 'site-header-project' : 'flex items-center justify-between'}`}>
+      <div className={`site-header-inner ${projectPage ? 'site-header-project' : 'flex items-center justify-between'}`}>
         {projectPage && (
           <a
             href="/#projects"
-            className="project-header-back font-body text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200"
+            className="project-header-back font-heading text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200"
           >
             <Icon name="arrow-left" size={16} />
             <span>{language === 'en' ? 'Back' : 'Voltar'}</span>

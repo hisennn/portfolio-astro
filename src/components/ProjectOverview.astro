@@ -1,0 +1,38 @@
+<details class="project-detail-overview">
+  <summary>
+    <span data-lang="pt">Sobre o desenvolvimento</span>
+    <span data-lang="en">About the development</span>
+  </summary>
+  <div class="project-detail-overview-body">
+    <slot />
+  </div>
+</details>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('.project-detail-overview').forEach(details => {
+    const summary = details.querySelector('summary')!;
+    let animation: Animation | undefined;
+    let expanded = details.open;
+
+    summary.addEventListener('click', event => {
+      event.preventDefault();
+      expanded = !expanded;
+      const startHeight = details.getBoundingClientRect().height;
+      animation?.cancel();
+      details.open = expanded;
+      const endHeight = details.getBoundingClientRect().height;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      details.open = true;
+      animation = details.animate(
+        [{ height: `${startHeight}px` }, { height: `${endHeight}px` }],
+        { duration: 280, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+      );
+      animation.onfinish = () => {
+        details.open = expanded;
+        animation = undefined;
+      };
+    });
+  });
+</script>

@@ -1,9 +1,11 @@
 ---
+import ProjectOverview from "../../components/ProjectOverview.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageChrome from "../../components/PageChrome";
 import ProjectMedia from "../../components/ProjectMedia.astro";
 import ProjectImage from "../../components/ProjectImage.astro";
 import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import ProjectNav from "../../components/ProjectNav.astro";
 import homeImage from "../../assets/projects/isadora-tomazini/home.png";
 import contactImage from "../../assets/projects/isadora-tomazini/contact.png";
 
@@ -12,7 +14,7 @@ const description =
   "Site profissional desenvolvido para a psicóloga Isadora Tomazini, com apresentação do atendimento, áreas de atuação e contato.";
 const tech = ["Astro", "JavaScript", "CSS"];
 const imageWidths = [640, 960, 1400, 2175];
-const imageSizes = "(min-width: 900px) 760px, calc(100vw - 40px)";
+const imageSizes = "(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)";
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -38,10 +40,6 @@ const jsonLd = {
       <div class="project-detail-hero">
         <article class="project-detail-intro">
           <div class="project-detail-heading">
-            <p class="project-detail-kicker">
-              <span data-lang="pt">Site profissional</span>
-              <span data-lang="en">Professional website</span>
-            </p>
             <h1>Isadora Tomazini</h1>
             <p class="project-detail-lead">
               <span data-lang="pt">
@@ -67,21 +65,16 @@ const jsonLd = {
 
           <aside class="project-detail-meta" aria-label="Project details">
             <div class="project-detail-meta-row">
-              <span class="project-detail-meta-label">Stack</span>
+              <span class="project-detail-meta-label"><span data-lang="pt">Tecnologias</span><span data-lang="en">Technologies</span></span>
               <div class="project-detail-tech">
-                {tech.map((item) => <span>{item}</span>)}
+                {tech.join(", ")}
               </div>
             </div>
           </aside>
         </article>
       </div>
 
-      <section class="project-detail-overview">
-        <h2>
-          <span data-lang="pt">Visão geral</span>
-          <span data-lang="en">Overview</span>
-        </h2>
-        <div class="project-detail-overview-body">
+      <ProjectOverview>
           <ul>
             <li>
               <span data-lang="pt">Áreas de atuação organizadas em acordeões.</span>
@@ -96,12 +89,10 @@ const jsonLd = {
               <span data-lang="en">WhatsApp, email, and a form gathered on the contact page.</span>
             </li>
           </ul>
-        </div>
-      </section>
+      </ProjectOverview>
 
       <div class="project-detail-gallery">
         <ProjectMedia
-          index="01"
           titlePt="Apresentação e áreas de atuação"
           titleEn="Introduction and areas of practice"
           descriptionPt="Página inicial com proposta de atendimento, chamada para contato e temas trabalhados."
@@ -116,7 +107,6 @@ const jsonLd = {
         </ProjectMedia>
 
         <ProjectMedia
-          index="02"
           titlePt="Contato direto"
           titleEn="Direct contact"
           descriptionPt="Canais de atendimento e formulário organizados em uma única página."
@@ -130,6 +120,15 @@ const jsonLd = {
           />
         </ProjectMedia>
       </div>
+
+      <ProjectNav
+        prevHref="/projects/ana-zabala/"
+        prevPt="Ana Zabala Portfolio"
+        prevEn="Ana Zabala Portfolio"
+        nextHref="/projects/coordinate-saver/"
+        nextPt="Coordinate Saver"
+        nextEn="Coordinate Saver"
+      />
     </main>
     <ProjectImageViewer />
   </PageChrome>

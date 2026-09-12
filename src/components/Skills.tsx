@@ -5,7 +5,6 @@ import { useLanguage } from '../hooks/useLanguage';
 const texts = {
   pt: {
     title: 'Habilidades',
-    technologiesTitle: 'Tecnologias',
     practicesTitle: 'Práticas',
     practices: [
       'Modelagem de dados',
@@ -24,7 +23,6 @@ const texts = {
   },
   en: {
     title: 'Skills',
-    technologiesTitle: 'Technologies',
     practicesTitle: 'Practices',
     practices: [
       'Data modeling',
@@ -95,11 +93,11 @@ const skillGroups: Array<{
 
 const SkillItem = ({ skill }: { skill: Skill }) => {
   return (
-    <li className="skill-group-item">
+    <li className="skill-card-item">
       {skill.iconSrc ? (
         <span
           aria-hidden="true"
-          className="skill-group-icon bg-[var(--text-muted)]"
+          className="skill-card-icon"
           style={{
             WebkitMask: `url(${skill.iconSrc}) center / contain no-repeat`,
             mask: `url(${skill.iconSrc}) center / contain no-repeat`
@@ -108,7 +106,7 @@ const SkillItem = ({ skill }: { skill: Skill }) => {
       ) : (
         <i
           aria-hidden="true"
-          className={`${skill.icon} skill-group-glyph`}
+          className={`${skill.icon} skill-card-glyph`}
         ></i>
       )}
       <span>{skill.name}</span>
@@ -120,56 +118,49 @@ export default function Skills() {
   const { lang } = useLanguage();
 
   return (
-    <section className="w-full">
-      <div className="flex flex-col gap-6">
-        <h2 className="section-heading">
-          {texts[lang].title}
-        </h2>
+    <section className="skills-section" aria-labelledby="skills-heading">
+      <h2 id="skills-heading" className="section-heading">{texts[lang].title}</h2>
 
-        <div className="flex flex-col gap-10">
-          <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
-            <h3 className="text-[length:var(--font-detail)] font-body font-medium text-[var(--text-muted)]">{texts[lang].technologiesTitle}</h3>
-            <div className="skill-groups">
-              {skillGroups.map((group) => (
-                <div key={group.title.en} className="skill-group">
-                  <h4 className="skill-group-title">{group.title[lang]}</h4>
-                  <ul className="skill-group-list">
-                    {group.items.map((skill) => (
-                      <SkillItem key={skill.name} skill={skill} />
-                    ))}
-                  </ul>
-                </div>
+      <div className="skill-cards">
+        {skillGroups.map((group) => (
+          <div key={group.title.en} className="skill-card">
+            <h3 className="skill-card-title">{group.title[lang]}</h3>
+            <ul className="skill-card-list">
+              {group.items.map((skill) => (
+                <SkillItem key={skill.name} skill={skill} />
               ))}
-            </div>
+            </ul>
           </div>
+        ))}
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
-            <h3 className="text-[length:var(--font-detail)] font-body font-medium text-[var(--text-muted)]">{texts[lang].practicesTitle}</h3>
-            <p className="text-[length:var(--font-prose)] font-body font-normal text-[var(--text-secondary)] leading-relaxed">
-              {texts[lang].practices.map((item, index) => (
-                <span key={item} className="skill-inline-item">
-                  {item}
-                  {index < texts[lang].practices.length - 1 && (
-                    <span className="text-[var(--text-muted)] mx-1.5">·</span>
-                  )}
-                </span>
-              ))}
-            </p>
-          </div>
+      <div className="skills-rows">
+        <div className="skills-row">
+          <h3>{texts[lang].practicesTitle}</h3>
+          <p>
+            {texts[lang].practices.map((item, index) => (
+              <span key={item} className="skill-inline-item">
+                {item}
+                {index < texts[lang].practices.length - 1 && (
+                  <span className="skills-sep" aria-hidden="true"> · </span>
+                )}
+              </span>
+            ))}
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4">
-            <h3 className="text-[length:var(--font-detail)] font-body font-medium text-[var(--text-muted)]">{texts[lang].workStyleTitle}</h3>
-            <p className="text-[length:var(--font-prose)] font-body font-normal text-[var(--text-secondary)] leading-relaxed">
-              {texts[lang].workStyle.map((item, index) => (
-                <span key={item} className="skill-inline-item">
-                  {item}
-                  {index < texts[lang].workStyle.length - 1 && (
-                    <span className="text-[var(--text-muted)] mx-1.5">·</span>
-                  )}
-                </span>
-              ))}
-            </p>
-          </div>
+        <div className="skills-row">
+          <h3>{texts[lang].workStyleTitle}</h3>
+          <p>
+            {texts[lang].workStyle.map((item, index) => (
+              <span key={item} className="skill-inline-item">
+                {item}
+                {index < texts[lang].workStyle.length - 1 && (
+                  <span className="skills-sep" aria-hidden="true"> · </span>
+                )}
+              </span>
+            ))}
+          </p>
         </div>
       </div>
     </section>

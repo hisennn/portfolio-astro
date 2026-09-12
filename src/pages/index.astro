@@ -10,28 +10,19 @@ import ana from "../assets/projects/ana-zabala/project-list.webp";
 import isadora from "../assets/projects/isadora-tomazini/home.png";
 import coordinates from "../assets/projects/coordinate-saver/overview.png";
 
-import brcWorkspace from "../assets/projects/brc-portal/project-workspace.png";
-import brcThemes from "../assets/projects/brc-portal/interface-themes.png";
-import kiromilogProfile from "../assets/projects/kiromilog/profile.png";
-import baltimoreWork from "../assets/projects/baltimore-reconstruction/work.webp";
-import baltimoreContact from "../assets/projects/baltimore-reconstruction/contact.webp";
-import anaDetail from "../assets/projects/ana-zabala/project-detail.webp";
-import anaTheme from "../assets/projects/ana-zabala/theme-light.webp";
-import isadoraContact from "../assets/projects/isadora-tomazini/contact.png";
-
 const projectPreviews = Object.fromEntries(
   await Promise.all(
     Object.entries({
-      brc: [brc, brcWorkspace, brcThemes],
-      kiromilog: [kiromilog, kiromilogProfile],
-      baltimore: [baltimore, baltimoreWork, baltimoreContact],
-      ana: [ana, anaDetail, anaTheme],
-      isadora: [isadora, isadoraContact],
-      coordinates: [coordinates],
-    }).map(async ([key, sources]) => [key, await Promise.all(sources.map(async (src) => {
+      brc,
+      kiromilog,
+      baltimore,
+      ana,
+      isadora,
+      coordinates,
+    }).map(async ([key, src]) => {
       const image = await getImage({ src, width: 1200, height: 750, fit: "contain", background: "#eceef1", format: "webp", quality: 80 });
-      return image.src;
-    }))])
+      return [key, image.src];
+    })
   )
 ) as ProjectPreviews;
 

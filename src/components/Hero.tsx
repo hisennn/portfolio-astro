@@ -40,10 +40,11 @@ export default function Hero() {
   return (
     <section className="hero-intro">
       <div className="hero-heading">
-        <p className="hero-kicker">{texts[lang].greeting}</p>
+        <p className="hero-kicker">
+          {texts[lang].greeting}
+        </p>
         <h1 className="hero-title">{texts[lang].name}</h1>
         <p className="hero-role">{texts[lang].role}</p>
-        <span className="hero-rule" aria-hidden="true" />
       </div>
 
       <div className="hero-panel">
@@ -60,6 +61,10 @@ export default function Hero() {
             </span>
             <span>+55 16 9 9390-9231</span>
           </div>
+          <p className="hero-location">
+            <Icon name="map-pin" size={13} />
+            {texts[lang].location}
+          </p>
         </div>
 
         <div className="hero-meta-row">
@@ -76,11 +81,6 @@ export default function Hero() {
             <span className="text-[var(--text-muted)]">{texts[lang].advanced}</span>
           </span>
         </div>
-
-        <p className="hero-location">
-          <Icon name="map-pin" size={13} />
-          {texts[lang].location}
-        </p>
 
         <div className="hero-actions">
           <a

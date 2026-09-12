@@ -14,11 +14,11 @@ export default function App({ projectPreviews }: { projectPreviews: ProjectPrevi
     <LanguageProvider>
       <div className="site-shell min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
         <Header />
-        <main className="max-w-[1100px] mx-auto px-5 md:px-6 pt-12 md:pt-20 pb-0 flex flex-col gap-16 md:gap-20">
+        <main className="home-main">
           <div className="hero-layout">
             <Hero />
-            <About />
           </div>
+          <About />
           <Projects previews={projectPreviews} />
           <Experience />
           <Skills />

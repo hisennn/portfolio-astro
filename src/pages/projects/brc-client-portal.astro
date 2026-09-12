@@ -1,9 +1,11 @@
 ---
+import ProjectOverview from "../../components/ProjectOverview.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageChrome from "../../components/PageChrome";
 import ProjectMedia from "../../components/ProjectMedia.astro";
 import ProjectImage from "../../components/ProjectImage.astro";
 import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import ProjectNav from "../../components/ProjectNav.astro";
 import dashboardImage from "../../assets/projects/brc-portal/dashboard.png";
 import clientSetupImage from "../../assets/projects/brc-portal/client-setup.png";
 import projectSetupImage from "../../assets/projects/brc-portal/project-setup.png";
@@ -55,10 +57,6 @@ const jsonLd = {
       <div class="project-detail-hero">
         <article class="project-detail-intro">
           <div class="project-detail-heading">
-            <p class="project-detail-kicker">
-              <span data-lang="pt">Aplicação interna</span>
-              <span data-lang="en">Internal application</span>
-            </p>
             <h1>BRC Client Portal</h1>
             <p class="project-detail-lead">
               <span data-lang="pt">
@@ -74,21 +72,16 @@ const jsonLd = {
 
           <aside class="project-detail-meta" aria-label="Project details">
             <div class="project-detail-meta-row">
-              <span class="project-detail-meta-label">Stack</span>
+              <span class="project-detail-meta-label"><span data-lang="pt">Tecnologias</span><span data-lang="en">Technologies</span></span>
               <div class="project-detail-tech">
-                {tech.map((item) => <span>{item}</span>)}
+                {tech.join(", ")}
               </div>
             </div>
           </aside>
         </article>
       </div>
 
-      <section class="project-detail-overview">
-        <h2>
-          <span data-lang="pt">Visão geral</span>
-          <span data-lang="en">Overview</span>
-        </h2>
-        <div class="project-detail-overview-body">
+      <ProjectOverview>
           <p>
             <span data-lang="pt">
               Conectei o painel administrativo da Baltimore Re-Construction à
@@ -130,80 +123,81 @@ const jsonLd = {
               <span data-lang="en">Admin assistant limited to verified data from the portal itself.</span>
             </li>
           </ul>
-        </div>
-      </section>
+      </ProjectOverview>
 
       <div class="project-detail-gallery">
         <ProjectMedia
-          index="01"
           titlePt="Painel administrativo"
           titleEn="Admin dashboard"
           descriptionPt="Resumo de projetos e clientes, com status recentes e acesso às tarefas principais."
           descriptionEn="Project and client summary with recent statuses and access to primary tasks."
         >
-          <ProjectImage src={dashboardImage} alt="BRC Client Portal admin dashboard with projects, clients, and quick actions" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={dashboardImage} alt="BRC Client Portal admin dashboard with projects, clients, and quick actions" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
 
         <ProjectMedia
-          index="02"
           titlePt="Cadastro de clientes"
           titleEn="Client setup"
           descriptionPt="Cadastro de contato e endereço com envio do acesso inicial ao portal."
           descriptionEn="Contact and address setup with initial portal access sent to the client."
         >
-          <ProjectImage src={clientSetupImage} alt="BRC Client Portal form for creating a client and sending portal access" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={clientSetupImage} alt="BRC Client Portal form for creating a client and sending portal access" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
 
         <ProjectMedia
-          index="03"
           titlePt="Criação de projetos"
           titleEn="Project setup"
           descriptionPt="Novo projeto vinculado a um cliente, com título e endereço da obra."
           descriptionEn="New project linked to a client with its title and job-site address."
         >
-          <ProjectImage src={projectSetupImage} alt="BRC Client Portal project list and create-project form" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={projectSetupImage} alt="BRC Client Portal project list and create-project form" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
 
         <ProjectMedia
-          index="04"
           titlePt="Entrada do projeto"
           titleEn="Project intake"
           descriptionPt="Acompanhamento do contrato, forma de pagamento, comprovante e liberação do projeto."
           descriptionEn="Tracking for contract, payment method, payment proof, and project approval."
         >
-          <ProjectImage src={projectIntakeImage} alt="BRC Client Portal project intake showing contract and payment steps" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={projectIntakeImage} alt="BRC Client Portal project intake showing contract and payment steps" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
 
         <ProjectMedia
-          index="05"
           titlePt="Área do projeto"
           titleEn="Project workspace"
           descriptionPt="Notas, fases, arquivos, escolhas do cliente e conversa reunidos na página do projeto."
           descriptionEn="Notes, phases, files, client selections, and discussion on the project page."
         >
-          <ProjectImage src={projectWorkspaceImage} alt="BRC Client Portal project workspace with phases, files, selections, and discussion" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={projectWorkspaceImage} alt="BRC Client Portal project workspace with phases, files, selections, and discussion" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
 
         <ProjectMedia
-          index="06"
           titlePt="Assistente administrativo"
           titleEn="Admin assistant"
           descriptionPt="Consulta sobre clientes, projetos, ativações e escolhas usando dados do portal."
           descriptionEn="Queries about clients, projects, activations, and selections using portal data."
         >
-          <ProjectImage src={adminAssistantImage} alt="BRC admin assistant answering a question about project status" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={adminAssistantImage} alt="BRC admin assistant answering a question about project status" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
 
         <ProjectMedia
-          index="07"
           titlePt="Temas da interface"
           titleEn="Interface themes"
           descriptionPt="Temas padrão, claro quente e escuro disponíveis nas configurações."
           descriptionEn="Default, warm light, and dark themes available in settings."
         >
-          <ProjectImage src={interfaceThemesImage} alt="BRC Client Portal settings with default, warm, and dark themes" widths={imageWidths} sizes="(min-width: 900px) 760px, calc(100vw - 40px)" />
+          <ProjectImage src={interfaceThemesImage} alt="BRC Client Portal settings with default, warm, and dark themes" widths={imageWidths} sizes="(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)" />
         </ProjectMedia>
       </div>
+
+      <ProjectNav
+        prevHref="/projects/coordinate-saver/"
+        prevPt="Coordinate Saver"
+        prevEn="Coordinate Saver"
+        nextHref="/projects/kiromilog/"
+        nextPt="Kiromilog"
+        nextEn="Kiromilog"
+      />
     </main>
     <ProjectImageViewer />
   </PageChrome>

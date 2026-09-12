@@ -5,11 +5,11 @@ import { useLanguage } from '../hooks/useLanguage';
 const texts = {
   pt: {
     title: 'Sobre',
-    about: 'Sou desenvolvedor web full stack e trabalho principalmente com TypeScript, React, Node.js e PostgreSQL. Desenvolvo e mantenho aplicações web, sites e sistemas internos, atuando no front-end, back-end, banco de dados e deploy.'
+    about: 'Sou desenvolvedor web. Crio e mantenho sites, aplicações e sistemas internos para empresas e profissionais. Cuido da interface, da organização dos dados e da publicação, além das melhorias no dia a dia.'
   },
   en: {
     title: 'About',
-    about: "I'm a full-stack web developer working mainly with TypeScript, React, Node.js, and PostgreSQL. I build and maintain web applications, websites, and internal systems across frontend, backend, databases, and deployment."
+    about: "I'm a web developer. I build and maintain websites, applications, and internal systems for businesses and professionals. My work covers interfaces, data, and getting projects online, along with ongoing improvements."
   }
 } as const;
 
@@ -17,12 +17,9 @@ export default function About() {
   const { lang } = useLanguage();
 
   return (
-    <section className="about-section">
-      <div className="flex flex-col gap-4">
-        <h2 className="section-heading">
-          {texts[lang].title}
-        </h2>
-        <p className="max-w-[680px] text-[var(--text-secondary)] text-[length:var(--font-prose)] font-body font-normal leading-[1.7]">
+    <section className="about-section" aria-label={texts[lang].title}>
+      <div className="about-inner">
+        <p className="about-text">
           {texts[lang].about}
         </p>
       </div>

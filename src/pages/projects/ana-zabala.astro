@@ -1,9 +1,11 @@
 ---
+import ProjectOverview from "../../components/ProjectOverview.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageChrome from "../../components/PageChrome";
 import ProjectMedia from "../../components/ProjectMedia.astro";
 import ProjectImage from "../../components/ProjectImage.astro";
 import ProjectImageViewer from "../../components/ProjectImageViewer.astro";
+import ProjectNav from "../../components/ProjectNav.astro";
 import ProjectThemeComparison from "../../components/ProjectThemeComparison.astro";
 import projectListImage from "../../assets/projects/ana-zabala/project-list.webp";
 import projectDetailImage from "../../assets/projects/ana-zabala/project-detail.webp";
@@ -12,10 +14,10 @@ import themeDarkImage from "../../assets/projects/ana-zabala/theme-dark.webp";
 
 const title = "Ana Zabala Portfolio | Projeto de Gabriel Lemes";
 const description =
-  "Portfólio bilíngue desenvolvido para a arquiteta Ana Zabala, com projetos, experiência, formação e contato.";
+  "PortfÃ³lio bilÃ­ngue desenvolvido para a arquiteta Ana Zabala, com projetos, experiÃªncia, formaÃ§Ã£o e contato.";
 const tech = ["Next.js", "TypeScript", "Tailwind"];
 const imageWidths = [640, 960, 1400, 2170];
-const imageSizes = "(min-width: 900px) 760px, calc(100vw - 40px)";
+const imageSizes = "(min-width: 1100px) 1200px, (min-width: 900px) 85vw, calc(100vw - 40px)";
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -41,15 +43,11 @@ const jsonLd = {
       <div class="project-detail-hero">
         <article class="project-detail-intro">
           <div class="project-detail-heading">
-            <p class="project-detail-kicker">
-              <span data-lang="pt">Portfólio de arquitetura</span>
-              <span data-lang="en">Architecture portfolio</span>
-            </p>
             <h1>Ana Zabala Portfolio</h1>
             <p class="project-detail-lead">
               <span data-lang="pt">
-                Criei um portfólio bilíngue para apresentar os projetos, a experiência
-                e a formação da arquiteta Ana Zabala.
+                Criei um portfÃ³lio bilÃ­ngue para apresentar os projetos, a experiÃªncia
+                e a formaÃ§Ã£o da arquiteta Ana Zabala.
               </span>
               <span data-lang="en">
                 I built a bilingual portfolio to present architect Ana Zabala's
@@ -70,44 +68,37 @@ const jsonLd = {
 
           <aside class="project-detail-meta" aria-label="Project details">
             <div class="project-detail-meta-row">
-              <span class="project-detail-meta-label">Stack</span>
+              <span class="project-detail-meta-label"><span data-lang="pt">Tecnologias</span><span data-lang="en">Technologies</span></span>
               <div class="project-detail-tech">
-                {tech.map((item) => <span>{item}</span>)}
+                {tech.join(", ")}
               </div>
             </div>
           </aside>
         </article>
       </div>
 
-      <section class="project-detail-overview">
-        <h2>
-          <span data-lang="pt">Visão geral</span>
-          <span data-lang="en">Overview</span>
-        </h2>
-        <div class="project-detail-overview-body">
+      <ProjectOverview>
           <ul>
             <li>
               <span data-lang="pt">Galerias organizadas por projeto e ambiente.</span>
               <span data-lang="en">Galleries organized by project and space.</span>
             </li>
             <li>
-              <span data-lang="pt">Alternância entre os temas claro e escuro.</span>
+              <span data-lang="pt">AlternÃ¢ncia entre os temas claro e escuro.</span>
               <span data-lang="en">Light and dark theme switch.</span>
             </li>
             <li>
-              <span data-lang="pt">Contato, currículo e LinkedIn acessíveis na página inicial.</span>
-              <span data-lang="en">Contact, résumé, and LinkedIn available from the home page.</span>
+              <span data-lang="pt">Contato, currÃ­culo e LinkedIn acessÃ­veis na pÃ¡gina inicial.</span>
+              <span data-lang="en">Contact, rÃ©sumÃ©, and LinkedIn available from the home page.</span>
             </li>
           </ul>
-        </div>
-      </section>
+      </ProjectOverview>
 
       <div class="project-detail-gallery">
         <ProjectMedia
-          index="01"
-          titlePt="Navegação do portfólio"
+          titlePt="NavegaÃ§Ã£o do portfÃ³lio"
           titleEn="Portfolio navigation"
-          descriptionPt="Percurso pelas principais seções e projetos do site."
+          descriptionPt="Percurso pelas principais seÃ§Ãµes e projetos do site."
           descriptionEn="Navigation through the website's main sections and projects."
         >
           <video
@@ -125,10 +116,9 @@ const jsonLd = {
         </ProjectMedia>
 
         <ProjectMedia
-          index="02"
           titlePt="Temas claro e escuro"
           titleEn="Light and dark themes"
-          descriptionPt="Arraste a divisória para comparar a composição e o contraste dos dois temas."
+          descriptionPt="Arraste a divisÃ³ria para comparar a composiÃ§Ã£o e o contraste dos dois temas."
           descriptionEn="Drag the divider to compare the composition and contrast of both themes."
         >
           <ProjectThemeComparison
@@ -143,10 +133,9 @@ const jsonLd = {
         </ProjectMedia>
 
         <ProjectMedia
-          index="03"
-          titlePt="Seleção de projetos"
+          titlePt="SeleÃ§Ã£o de projetos"
           titleEn="Project selection"
-          descriptionPt="Página inicial com uma prévia visual de cada trabalho."
+          descriptionPt="PÃ¡gina inicial com uma prÃ©via visual de cada trabalho."
           descriptionEn="Home page with a visual preview of each project."
         >
           <ProjectImage
@@ -158,10 +147,9 @@ const jsonLd = {
         </ProjectMedia>
 
         <ProjectMedia
-          index="04"
           titlePt="Galeria de projeto"
           titleEn="Project gallery"
-          descriptionPt="Imagens, categorias de ambiente e informações técnicas em uma página própria."
+          descriptionPt="Imagens, categorias de ambiente e informaÃ§Ãµes tÃ©cnicas em uma pÃ¡gina prÃ³pria."
           descriptionEn="Images, space categories, and technical details on a dedicated page."
         >
           <ProjectImage
@@ -172,6 +160,15 @@ const jsonLd = {
           />
         </ProjectMedia>
       </div>
+
+      <ProjectNav
+        prevHref="/projects/baltimore-reconstruction/"
+        prevPt="Baltimore Re-Construction"
+        prevEn="Baltimore Re-Construction"
+        nextHref="/projects/isadora-tomazini/"
+        nextPt="Isadora Tomazini"
+        nextEn="Isadora Tomazini"
+      />
     </main>
     <ProjectImageViewer />
 

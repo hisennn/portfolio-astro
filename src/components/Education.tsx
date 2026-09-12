@@ -24,25 +24,20 @@ export default function Education() {
 
   return (
     <section className="education-section" aria-labelledby="education-heading">
-      <div className="flex flex-col gap-6">
-        <h2 id="education-heading" className="section-heading">
-          {texts[lang].title}
-        </h2>
+      <h2 id="education-heading" className="section-heading">{texts[lang].title}</h2>
 
-        <div className="education-record experience-timeline">
-          <span aria-hidden="true" className="experience-timeline-dot absolute left-0 top-[9px] h-[9px] w-[9px] -translate-x-1/2 rounded-full" />
-          <div className="flex flex-col gap-1">
-            <h3 className="text-[length:var(--font-reading)] font-body font-medium tracking-tight text-[var(--text-primary)]">
-              {texts[lang].uniCourse}
-            </h3>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 font-body font-normal text-[length:var(--font-detail)] text-[var(--text-muted)]">
-              <span>{texts[lang].uni}</span>
-              <span className="hidden sm:inline">·</span>
-              <span>{texts[lang].uniType}</span>
-            </div>
-          </div>
-          <span className="education-status">{texts[lang].status}</span>
+      <div className="education-record">
+        <div className="education-main">
+          <h3>
+            {texts[lang].uniCourse}
+          </h3>
+          <p className="education-meta">
+            <span>{texts[lang].uni}</span>
+            <span aria-hidden="true"> · </span>
+            <span>{texts[lang].uniType}</span>
+          </p>
         </div>
+        <span className="education-status">{texts[lang].status}</span>
       </div>
     </section>
   );

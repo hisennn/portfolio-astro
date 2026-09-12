@@ -20,7 +20,7 @@ const experiences = [
   {
     company: 'Baltimore Re-Construction, LLC',
     role: { pt: 'Desenvolvedor Full Stack e Operações', en: 'Full-Stack Developer & Operations' },
-    date: { pt: 'out. 2025 - atual', en: 'Oct 2025 - Present' },
+    date: { pt: 'out. 2025 — atual', en: 'Oct 2025 — Present' },
     items: {
       pt: [
         'Desenvolvo e mantenho o BRC Client Portal, usado para organizar clientes, projetos, arquivos, seleções de materiais, contratos, notificações e comunicação.',
@@ -41,7 +41,7 @@ const experiences = [
   {
     company: 'Freelancer',
     role: { pt: 'Desenvolvedor Web', en: 'Web Developer' },
-    date: { pt: 'abr. 2025 - atual', en: 'Apr 2025 - Present' },
+    date: { pt: 'abr. 2025 — atual', en: 'Apr 2025 — Present' },
     items: {
       pt: [
         'Desenvolvo sites responsivos e aplicações web para profissionais e pequenas empresas com React, Next.js, TypeScript e Tailwind CSS.',
@@ -58,7 +58,7 @@ const experiences = [
   {
     company: 'Trail Dev',
     role: { pt: 'Estagiário em Desenvolvimento de Software', en: 'Software Development Intern' },
-    date: { pt: 'mar. 2025 - jul. 2025', en: 'Mar 2025 - Jul 2025' },
+    date: { pt: 'mar. 2025 — jul. 2025', en: 'Mar 2025 — Jul 2025' },
     items: {
       pt: [
         'Recriei em Next.js um site da Pluralsign originalmente desenvolvido em Ruby on Rails, preservando as páginas e funcionalidades existentes.',
@@ -79,30 +79,32 @@ export default function Experience() {
 
   return (
     <section id="experience" className="experience-section" aria-labelledby="experience-heading">
-      <div className="experience-clipboard">
-        <div className="experience-clip" aria-hidden="true" />
-        <div className="experience-document">
-          <h2 id="experience-heading" className="section-heading">{texts[lang].title}</h2>
-          <div className="experience-records">
-            {experiences.map((exp) => (
-              <article key={exp.company} className="experience-entry">
-                <div className="experience-entry-heading">
-                  <div className="experience-entry-meta">
-                    <h3>{exp.role[lang]}</h3>
-                    <p className="experience-company">{exp.company}</p>
-                    <p className="experience-place"><Icon name="map-pin" size={15} /><span>{exp.locationDetails[lang]} · {texts[lang][exp.type]}</span></p>
-                  </div>
-                  <p className="experience-date">{exp.date[lang]}</p>
+      <h2 id="experience-heading" className="section-heading">{texts[lang].title}</h2>
+      <div className="experience-records">
+        {experiences.map((exp) => (
+          <article key={exp.company} className="experience-entry">
+            <div className="experience-main">
+              <div className="experience-entry-heading">
+                <div className="experience-entry-meta">
+                  <h3>{exp.role[lang]}</h3>
+                  <p className="experience-company">{exp.company}</p>
+                  <p className="experience-place">
+                    <Icon name="map-pin" size={14} />
+                    <span>
+                      {exp.locationDetails[lang]} · {texts[lang][exp.type]}
+                    </span>
+                  </p>
                 </div>
-                <ul>
-                  {exp.items[lang].map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </div>
+                <p className="experience-date">{exp.date[lang]}</p>
+              </div>
+              <ul>
+                {exp.items[lang].map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );

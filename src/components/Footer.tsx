@@ -5,10 +5,16 @@ import Icon from './Icon';
 
 const texts = {
   pt: {
-    copyright: '© 2026 Gabriel Lemes'
+    ctaTitle: 'Vamos construir algo juntos?',
+    ctaNote: 'Respondo rápido por e-mail. Me chame para um site, sistema ou ajuste no seu projeto.',
+    ctaPrimary: 'Enviar e-mail',
+    copyright: `© ${new Date().getFullYear()} Gabriel Lemes`
   },
   en: {
-    copyright: '© 2026 Gabriel Lemes'
+    ctaTitle: "Let's build something together?",
+    ctaNote: 'I reply fast by email. Reach out for a website, system or tweaks to your project.',
+    ctaPrimary: 'Send email',
+    copyright: `© ${new Date().getFullYear()} Gabriel Lemes`
   }
 } as const;
 
@@ -16,56 +22,63 @@ export default function Footer() {
   const { lang } = useLanguage();
 
   return (
-    <footer className="mt-24 pb-16">
-      <div className="max-w-[1100px] mx-auto px-5 md:px-6">
-        <div className="border-t border-[var(--border)] pt-10 flex flex-col gap-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-            <div className="flex flex-col gap-2">
-              <span className="text-base font-body font-medium text-[var(--text-primary)]">
-                Gabriel Lemes
-              </span>
-              <div className="flex flex-col gap-1 font-body text-[14px] text-[var(--text-muted)] font-normal">
-                <a
-                  href="mailto:gabrielsilvarz@outlook.com"
-                  className="hover:opacity-60 transition-opacity duration-200 flex items-center gap-1.5 w-fit"
-                >
-                  <Icon name="envelope" size={14} />
-                  gabrielsilvarz@outlook.com
-                </a>
-                <span className="flex items-center gap-1.5">
-                  <Icon name="phone" size={14} />
-                  +55 16 9 9390-9231
-                </span>
-              </div>
-            </div>
-            
-            <div className="flex gap-4">
-              <a
-                href="https://www.linkedin.com/in/gabrieldslemes/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[var(--text-muted)] hover:opacity-60 transition-opacity duration-200"
-                aria-label="LinkedIn"
-              >
-                <Icon name="linkedin-logo" size={20} />
-              </a>
-              <a
-                href="https://github.com/Hisennn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[var(--text-muted)] hover:opacity-60 transition-opacity duration-200"
-                aria-label="GitHub"
-              >
-                <Icon name="github-logo" size={20} />
-              </a>
-            </div>
-          </div>
-          
-          <span className="text-[11px] font-body font-normal text-[var(--text-muted)] opacity-50">
-            {texts[lang].copyright}
-          </span>
+    <footer className="site-footer">
+      <div className="footer-cta">
+        <h2 className="footer-cta-title">{texts[lang].ctaTitle}</h2>
+        <p className="footer-cta-note">{texts[lang].ctaNote}</p>
+        <div className="footer-cta-actions">
+          <a href="mailto:gabrielsilvarz@outlook.com" className="footer-cta-primary">
+            <Icon name="envelope" size={16} />
+            {texts[lang].ctaPrimary}
+          </a>
         </div>
       </div>
+
+      <div className="footer-bottom">
+        <div className="footer-identity">
+          <span className="footer-name">
+            Gabriel Lemes
+          </span>
+          <div className="footer-contact">
+            <a
+              href="mailto:gabrielsilvarz@outlook.com"
+              className="footer-link"
+            >
+              <Icon name="envelope" size={14} />
+              gabrielsilvarz@outlook.com
+            </a>
+            <span className="footer-link-static">
+              <Icon name="phone" size={14} />
+              +55 16 9 9390-9231
+            </span>
+          </div>
+        </div>
+
+        <div className="footer-social">
+          <a
+            href="https://www.linkedin.com/in/gabrieldslemes/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-link"
+            aria-label="LinkedIn"
+          >
+            <Icon name="linkedin-logo" size={20} />
+          </a>
+          <a
+            href="https://github.com/Hisennn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-link"
+            aria-label="GitHub"
+          >
+            <Icon name="github-logo" size={20} />
+          </a>
+        </div>
+      </div>
+
+      <p className="footer-copy">
+        {texts[lang].copyright}
+      </p>
     </footer>
   );
 }

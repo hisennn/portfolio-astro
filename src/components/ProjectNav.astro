@@ -1,0 +1,51 @@
+---
+type Props = {
+  prevHref: string;
+  prevPt: string;
+  prevEn: string;
+  nextHref: string;
+  nextPt: string;
+  nextEn: string;
+};
+
+const { prevHref, prevPt, prevEn, nextHref, nextPt, nextEn } = Astro.props;
+---
+
+<nav class="project-detail-nav" aria-label="Project navigation">
+  <a href={prevHref} class="project-detail-nav-link">
+    <span aria-hidden="true">←</span>
+    <span>
+      <span class="project-detail-nav-label">
+        <span data-lang="pt">Anterior</span>
+        <span data-lang="en">Previous</span>
+      </span>
+      <br />
+      <span data-lang="pt">{prevPt}</span>
+      <span data-lang="en">{prevEn}</span>
+    </span>
+  </a>
+  <a href="/#projects" class="project-detail-nav-link">
+    <span>
+      <span class="project-detail-nav-label">
+        <span data-lang="pt">Todos</span>
+        <span data-lang="en">All</span>
+      </span>
+      <br />
+      <span data-lang="pt">Projetos</span>
+      <span data-lang="en">Projects</span>
+    </span>
+    <span aria-hidden="true">↑</span>
+  </a>
+  <a href={nextHref} class="project-detail-nav-link" style="text-align: right;">
+    <span>
+      <span class="project-detail-nav-label">
+        <span data-lang="pt">Próximo</span>
+        <span data-lang="en">Next</span>
+      </span>
+      <br />
+      <span data-lang="pt">{nextPt}</span>
+      <span data-lang="en">{nextEn}</span>
+    </span>
+    <span aria-hidden="true">→</span>
+  </a>
+</nav>
