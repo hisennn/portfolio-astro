@@ -8,15 +8,15 @@ const texts = {
     title: 'Projetos',
     open: 'Ver projeto',
     brcPortal:
-      'Portal interno da Baltimore Re-Construction para organizar clientes, projetos, arquivos, seleÃ§Ãµes de materiais, contratos e comunicaÃ§Ã£o.',
+      'Portal interno da Baltimore Re-Construction para organizar clientes, projetos, arquivos, seleções de materiais, contratos e comunicação.',
     kiromilog:
-      'AplicaÃ§Ã£o para acompanhar animes e mangÃ¡s, com listas, perfis, favoritos, mensagens e atualizaÃ§Ãµes em tempo real.',
+      'Aplicação para acompanhar animes e mangás, com listas, perfis, favoritos, mensagens e atualizações em tempo real.',
     baltre:
-      'Site institucional da Baltimore Re-Construction com serviÃ§os, regiÃµes atendidas, trabalhos realizados e canais de contato.',
+      'Site institucional da Baltimore Re-Construction com serviços, regiões atendidas, trabalhos realizados e canais de contato.',
     isaPsi:
-      'Site profissional da psicÃ³loga Isadora Tomazini, com apresentaÃ§Ã£o do atendimento e canais de contato.',
+      'Site profissional da psicóloga Isadora Tomazini, com apresentação do atendimento e canais de contato.',
     ana:
-      'PortfÃ³lio de arquitetura com os projetos da Ana Zabala e acesso direto aos canais de contato.',
+      'Portfólio de arquitetura com os projetos da Ana Zabala e acesso direto aos canais de contato.',
     coord:
       'Ferramenta para salvar, organizar e reencontrar coordenadas do Minecraft.'
   },
