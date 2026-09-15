@@ -5,14 +5,14 @@ import { useLanguage } from '../hooks/useLanguage';
 const texts = {
   pt: {
     title: 'Formação',
-    status: 'Concluído',
+    status: 'Concluído em jul. 2026',
     uni: 'Centro Universitário Claretiano',
     uniCourse: 'Análise e Desenvolvimento de Sistemas',
     uniType: 'Tecnólogo'
   },
   en: {
     title: 'Education',
-    status: 'Completed',
+    status: 'Completed Jul. 2026',
     uni: 'Claretiano University Center',
     uniCourse: 'Systems Analysis and Development',
     uniType: 'Technologist Degree'

@@ -5,14 +5,14 @@ import Icon from './Icon';
 
 const texts = {
   pt: {
-    ctaTitle: 'Vamos construir algo juntos?',
-    ctaNote: 'Respondo rápido por e-mail. Me chame para um site, sistema ou ajuste no seu projeto.',
+    ctaTitle: 'Entre em contato',
+    ctaNote: 'Fale comigo por e-mail sobre vagas, sites, aplicações web ou melhorias em um projeto existente.',
     ctaPrimary: 'Enviar e-mail',
     copyright: `© ${new Date().getFullYear()} Gabriel Lemes`
   },
   en: {
-    ctaTitle: "Let's build something together?",
-    ctaNote: 'I reply fast by email. Reach out for a website, system or tweaks to your project.',
+    ctaTitle: "Get in touch",
+    ctaNote: 'Email me about job opportunities, websites, web applications, or improvements to an existing project.',
     ctaPrimary: 'Send email',
     copyright: `© ${new Date().getFullYear()} Gabriel Lemes`
   }

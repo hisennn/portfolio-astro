@@ -18,7 +18,7 @@ const title = "BRC Client Portal | Projeto de Gabriel Lemes";
 const description =
   "Portal de clientes e painel administrativo desenvolvido para a Baltimore Re-Construction, com gestão de projetos, documentos, materiais e comunicação.";
 const tech = [
-  "React Router 7",
+  "React Router",
   "TypeScript",
   "Cloudflare Workers",
   "Neon Postgres",
@@ -26,7 +26,7 @@ const tech = [
   "Zod",
   "Ably",
   "SignWell",
-  "LiveKit",
+  "LiveKit (prototype)",
   "Vite",
 ];
 const imageWidths = [640, 960, 1280, 1583];
@@ -111,16 +111,16 @@ const jsonLd = {
               <span data-lang="en">Client setup and email activation, with separate admin and client access.</span>
             </li>
             <li>
-              <span data-lang="pt">Entrada do projeto com contrato via SignWell, forma de pagamento, comprovante e aprovação.</span>
-              <span data-lang="en">Project intake with SignWell contracts, payment method, proof, and approval.</span>
+              <span data-lang="pt">Entrada do projeto com assinatura eletrônica de contrato via SignWell, forma de pagamento, comprovante e aprovação.</span>
+              <span data-lang="en">Project intake with electronic contract signing through SignWell, payment method, proof of payment, and approval.</span>
             </li>
             <li>
               <span data-lang="pt">Área do projeto com fases, arquivos, fotos, escolhas de materiais e discussão.</span>
               <span data-lang="en">Project workspace with phases, files, photos, material selections, and discussion.</span>
             </li>
             <li>
-              <span data-lang="pt">Assistente administrativo limitado aos dados verificados do próprio portal.</span>
-              <span data-lang="en">Admin assistant limited to verified data from the portal itself.</span>
+              <span data-lang="pt">Assistente administrativo que consulta dados do portal.</span>
+              <span data-lang="en">Admin assistant that queries portal data.</span>
             </li>
           </ul>
       </ProjectOverview>

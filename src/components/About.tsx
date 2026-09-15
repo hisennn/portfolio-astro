@@ -5,11 +5,11 @@ import { useLanguage } from '../hooks/useLanguage';
 const texts = {
   pt: {
     title: 'Sobre',
-    about: 'Sou desenvolvedor web. Crio e mantenho sites, aplicações e sistemas internos para empresas e profissionais. Cuido da interface, da organização dos dados e da publicação, além das melhorias no dia a dia.'
+    about: 'Sou desenvolvedor web. Crio e mantenho sites, aplicações e sistemas internos para empresas e profissionais. Trabalho na interface, no banco de dados, nas integrações e na publicação dos projetos.'
   },
   en: {
     title: 'About',
-    about: "I'm a web developer. I build and maintain websites, applications, and internal systems for businesses and professionals. My work covers interfaces, data, and getting projects online, along with ongoing improvements."
+    about: "I'm a web developer. I build and maintain websites, applications, and internal systems for businesses and professionals. My work covers interfaces, databases, integrations, and deployment."
   }
 } as const;
 

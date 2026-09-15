@@ -19,19 +19,23 @@ const texts = {
 const experiences = [
   {
     company: 'Baltimore Re-Construction, LLC',
-    role: { pt: 'Desenvolvedor Full Stack e Operações', en: 'Full-Stack Developer & Operations' },
+    role: { pt: 'Desenvolvedor Web e Operações', en: 'Web Developer & Operations' },
     date: { pt: 'out. 2025 — atual', en: 'Oct 2025 — Present' },
     items: {
       pt: [
-        'Desenvolvo e mantenho o BRC Client Portal, usado para organizar clientes, projetos, arquivos, seleções de materiais, contratos, notificações e comunicação.',
+        'Desenvolvo e mantenho o Portal do Cliente BRC para gerenciar clientes, projetos, etapas, arquivos e seleção de materiais, com React Router, TypeScript e PostgreSQL.',
+        'Implementei autenticação, permissões de acesso, assinatura eletrônica de contratos com SignWell e atualizações em tempo real com Ably.',
+        'Mantenho testes automatizados com node:test e Playwright e um fluxo de testes, verificação de tipos, build e deploy no GitHub Actions.',
         'Criei e mantenho o site da empresa, incluindo conteúdo, SEO técnico e deploys na Cloudflare.',
-        'Cuido do Perfil da Empresa no Google e do Instagram, além da comunicação com clientes.',
+        'Cuido do Perfil da Empresa no Google e do Instagram, além da comunicação com clientes. O site recebeu contatos de potenciais clientes e cliques provenientes do perfil no Google.',
         'Apoio as operações diárias organizando planilhas, documentos e informações de clientes, projetos, materiais e estimativas.'
       ],
       en: [
-        'Develop and maintain the BRC Client Portal for organizing clients, projects, files, material selections, contracts, notifications, and communication.',
-        'Built and maintain the company website, including content updates, technical SEO, and Cloudflare deployments.',
-        'Manage the Google Business Profile and Instagram account, and communicate with clients.',
+        'Develop and maintain the BRC Client Portal for managing clients, projects, phases, files, and material selections, using React Router, TypeScript, and PostgreSQL.',
+        'Implemented authentication, access permissions, electronic contract signing with SignWell, and real-time updates with Ably.',
+        'Maintain automated tests with node:test and Playwright and a GitHub Actions workflow for testing, type checking, builds, and deployment.',
+        'Develop and maintain the company website, including content updates, technical SEO, and Cloudflare deployments.',
+        'Manage the Google Business Profile and Instagram account, and communicate with clients. The website has received prospective customer inquiries and clicks from the Google profile.',
         'Support daily operations by organizing spreadsheets, documents, and information related to clients, projects, materials, and estimates.'
       ]
     },
@@ -62,11 +66,11 @@ const experiences = [
     items: {
       pt: [
         'Recriei em Next.js um site da Pluralsign originalmente desenvolvido em Ruby on Rails, preservando as páginas e funcionalidades existentes.',
-        'Fiz atualizações no CMS Strapi e no front-end do site da Inovaice.'
+        'Atualizei o CMS Strapi e o front-end do site da Inovaice.'
       ],
       en: [
         'Rebuilt a Ruby on Rails website in Next.js for Pluralsign while preserving its existing pages and functionality.',
-        "Updated content and frontend components on Inovaice's Strapi-based website."
+        "Updated the Strapi CMS and frontend of Inovaice's website."
       ]
     },
     locationDetails: { pt: 'Batatais, SP, Brasil', en: 'Batatais, SP, Brazil' },

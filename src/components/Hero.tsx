@@ -13,7 +13,7 @@ const texts = {
     portuguese: 'Português',
     english: 'Inglês',
     native: 'nativo',
-    advanced: 'avançado'
+    englishLevel: 'boa compreensão de leitura e áudio; conversação e escrita em desenvolvimento'
   },
   en: {
     greeting: "Hi, I'm",
@@ -24,7 +24,7 @@ const texts = {
     portuguese: 'Portuguese',
     english: 'English',
     native: 'native',
-    advanced: 'C1 advanced'
+    englishLevel: 'good reading and listening comprehension; developing speaking and writing skills'
   }
 } as const;
 
@@ -32,10 +32,10 @@ export default function Hero() {
   const { lang } = useLanguage();
   const resumeHref =
     lang === 'en'
-      ? '/gabriel-lemes-resume-dev-en.pdf'
-      : '/gabriel-lemes-curriculo-dev-pt-br.pdf';
+      ? '/gabriel-lemes-resume-original.pdf'
+      : '/gabriel-lemes-resume-original-pt-br.pdf';
   const resumeDownloadName =
-    lang === 'en' ? 'Gabriel Lemes - Resume.pdf' : 'Gabriel Lemes - Currículo.pdf';
+    lang === 'en' ? 'Gabriel_CV_en.pdf' : 'Gabriel_CV_ptbr.pdf';
 
   return (
     <section className="hero-intro">
@@ -78,7 +78,7 @@ export default function Hero() {
           <span className="text-[var(--text-muted)]">/</span>
           <span>
             {texts[lang].english}{' '}
-            <span className="text-[var(--text-muted)]">{texts[lang].advanced}</span>
+            <span className="text-[var(--text-muted)]">{texts[lang].englishLevel}</span>
           </span>
         </div>
 

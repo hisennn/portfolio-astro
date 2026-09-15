@@ -42,7 +42,7 @@ const projects = [
   {
     name: 'BRC Client Portal',
     href: '/projects/brc-client-portal/',
-    tech: ['React Router 7', 'Node.js', 'PostgreSQL', 'Cloudflare'],
+    tech: ['React Router', 'TypeScript', 'PostgreSQL', 'Cloudflare'],
     descKey: 'brcPortal' as const,
     visual: 'brc' as const
   },
@@ -86,8 +86,7 @@ const projects = [
 type ProjectTech = (typeof projects)[number]['tech'][number];
 
 const techIcons: Record<Exclude<ProjectTech, 'Neon' | 'Pusher'>, string> = {
-  'React Router 7': 'devicon-reactrouter-plain',
-  'Node.js': 'devicon-nodejs-plain',
+  'React Router': 'devicon-reactrouter-plain',
   PostgreSQL: 'devicon-postgresql-plain',
   Cloudflare: 'devicon-cloudflare-plain',
   'Next.js 16': 'devicon-nextjs-plain',

@@ -12,10 +12,10 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-/gabriel-lemes-curriculo-dev-pt-br.pdf
+/gabriel-lemes-resume-original-pt-br.pdf
   X-Robots-Tag: noindex
-  Content-Disposition: attachment
+  Content-Disposition: attachment; filename="Gabriel_CV_ptbr.pdf"
 
-/gabriel-lemes-resume-dev-en.pdf
+/gabriel-lemes-resume-original.pdf
   X-Robots-Tag: noindex
-  Content-Disposition: attachment
+  Content-Disposition: attachment; filename="Gabriel_CV_en.pdf"

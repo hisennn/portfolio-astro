@@ -11,7 +11,8 @@ const texts = {
       'APIs e integrações',
       'Autenticação e autorização',
       'Uploads e arquivos',
-      'Debugging',
+      'Depuração',
+      'Testes automatizados e CI/CD',
       'Deploy'
     ],
     workStyleTitle: 'Forma de trabalho',
@@ -30,6 +31,7 @@ const texts = {
       'Authentication and authorization',
       'File handling',
       'Debugging',
+      'Automated testing and CI/CD',
       'Deployment'
     ],
     workStyleTitle: 'Working style',
@@ -50,7 +52,7 @@ const skillGroups: Array<{
   items: Skill[];
 }> = [
   {
-    title: { pt: 'Frontend', en: 'Frontend' },
+    title: { pt: 'Linguagens e front-end', en: 'Languages & frontend' },
     items: [
       { name: 'TypeScript', icon: 'devicon-typescript-plain' },
       { name: 'JavaScript', icon: 'devicon-javascript-plain' },
@@ -58,7 +60,7 @@ const skillGroups: Array<{
       { name: 'React Router', icon: 'devicon-reactrouter-plain' },
       { name: 'Next.js', icon: 'devicon-nextjs-plain' },
       { name: 'Astro', icon: 'devicon-astro-plain' },
-      { name: 'Tailwind', icon: 'devicon-tailwindcss-original' }
+      { name: 'Tailwind CSS', icon: 'devicon-tailwindcss-original' }
     ]
   },
   {
@@ -68,7 +70,7 @@ const skillGroups: Array<{
       { name: 'PostgreSQL', icon: 'devicon-postgresql-plain' },
       { name: 'Neon', iconSrc: '/icons/neon.svg' },
       { name: 'Supabase', icon: 'devicon-supabase-plain' },
-      { name: 'Drizzle', iconSrc: '/icons/drizzle.svg' }
+      { name: 'Drizzle ORM', iconSrc: '/icons/drizzle.svg' }
     ]
   },
   {
@@ -82,11 +84,10 @@ const skillGroups: Array<{
     ]
   },
   {
-    title: { pt: 'Ferramentas de IA', en: 'AI tools' },
+    title: { pt: 'Desenvolvimento assistido por IA', en: 'AI-assisted development' },
     items: [
       { name: 'Claude Code', iconSrc: '/icons/claude.svg' },
-      { name: 'OpenAI Codex / ChatGPT', iconSrc: '/icons/openai.svg' },
-      { name: 'Hermes Agent', iconSrc: '/icons/hermesagent.svg' }
+      { name: 'OpenAI Codex', iconSrc: '/icons/openai.svg' }
     ]
   }
 ];
