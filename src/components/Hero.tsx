@@ -13,7 +13,7 @@ const texts = {
     portuguese: 'Português',
     english: 'Inglês',
     native: 'nativo',
-    englishLevel: 'boa compreensão de leitura e áudio; conversação e escrita em desenvolvimento'
+    englishLevel: 'Limited working proficiency'
   },
   en: {
     greeting: "Hi, I'm",
@@ -24,7 +24,7 @@ const texts = {
     portuguese: 'Portuguese',
     english: 'English',
     native: 'native',
-    englishLevel: 'good reading and listening comprehension; developing speaking and writing skills'
+    englishLevel: 'Limited working proficiency'
   }
 } as const;
 
