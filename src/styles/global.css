@@ -1256,6 +1256,9 @@ a.footer-link:hover {
   display: flex;
   flex-direction: column;
   gap: clamp(3rem, 6vw, 5rem);
+  width: 100%;
+  max-width: calc(var(--page-max) + 2 * var(--page-gutter));
+  margin-inline: auto;
   padding: clamp(2rem, 5vw, 4rem) var(--page-gutter) clamp(4rem, 8vw, 6rem);
 }
 
