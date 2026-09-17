@@ -51,25 +51,27 @@ export default function Hero() {
         <div className="hero-contact-grid">
           <a href="mailto:gabrielsilvarz@outlook.com" className="hero-contact-link">
             <span className="hero-icon">
-              <Icon name="envelope" size={15} />
+              <Icon name="envelope" size={17} />
             </span>
             <span>gabrielsilvarz@outlook.com</span>
           </a>
-          <div className="hero-contact-item">
+          <a href="tel:+5516993909231" className="hero-contact-link">
             <span className="hero-icon">
-              <Icon name="phone" size={15} />
+              <Icon name="phone" size={17} />
             </span>
             <span>+55 16 9 9390-9231</span>
+          </a>
+          <div className="hero-location">
+            <span className="hero-icon">
+              <Icon name="map-pin" size={17} />
+            </span>
+            <span>{texts[lang].location}</span>
           </div>
-          <p className="hero-location">
-            <Icon name="map-pin" size={13} />
-            {texts[lang].location}
-          </p>
         </div>
 
         <div className="hero-meta-row">
           <span className="hero-icon">
-            <Icon name="translate" size={15} />
+            <Icon name="translate" size={17} />
           </span>
           <span>
             {texts[lang].portuguese}{' '}

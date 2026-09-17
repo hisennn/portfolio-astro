@@ -32,13 +32,13 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
         {projectPage && (
           <a
             href="/#projects"
-            className="project-header-back font-heading text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200"
+            className="project-header-back font-body text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200"
           >
             <Icon name="arrow-left" size={16} />
             <span>{language === 'en' ? 'Back' : 'Voltar'}</span>
           </a>
         )}
-        <a href="/" className="site-header-brand font-heading font-bold text-base tracking-tight text-[var(--text-primary)] hover:opacity-60 transition-opacity duration-200">
+        <a href="/" className="site-header-brand font-body font-bold text-base tracking-tight text-[var(--text-primary)] hover:opacity-60 transition-opacity duration-200">
           Gabriel
         </a>
         <div className="site-header-controls flex items-center gap-3">

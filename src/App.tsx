@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import HeroField from "./components/HeroField";
 import About from "./components/About";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
@@ -16,6 +17,7 @@ export default function App({ projectPreviews }: { projectPreviews: ProjectPrevi
         <Header />
         <main className="home-main">
           <div className="hero-layout">
+            <HeroField />
             <Hero />
           </div>
           <About />
