@@ -9,7 +9,7 @@ const texts = {
   },
   en: {
     title: 'About',
-    about: "I'm a web developer. I build and maintain websites, applications, and internal systems for businesses and professionals. My work covers interfaces, databases, integrations, and deployment."
+    about: "I'm a web developer who builds and maintains websites, applications, and internal systems for businesses and professionals. My work covers user interfaces, database management, integration, and deployment."
   }
 } as const;
 
