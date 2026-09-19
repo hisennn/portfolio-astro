@@ -32,7 +32,7 @@ export default function Hero() {
   const { lang } = useLanguage();
   const resumeHref =
     lang === 'en'
-      ? '/gabriel-lemes-resume-original.pdf'
+      ? '/gabriel-lemes-resume-original-en.pdf'
       : '/gabriel-lemes-resume-original-pt-br.pdf';
   const resumeDownloadName =
     lang === 'en' ? 'Gabriel_CV_en.pdf' : 'Gabriel_CV_ptbr.pdf';
