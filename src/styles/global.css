@@ -18,9 +18,9 @@
   --project-preview-bg: #eceef1;
   --accent-wash: color-mix(in srgb, var(--accent) 20%, var(--bg-primary));
   --card-radius: 20px;
-  --font-heading: "Literata", Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --font-heading: "Gambetta", Georgia, serif;
   --font-body: "Asap", sans-serif;
-  --font-editorial: "Literata", Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --font-editorial: "Gambetta", Georgia, serif;
   --font-reading: clamp(1rem, 0.975rem + 0.075vw, 1.0625rem);
   --font-prose: clamp(0.9375rem, 0.925rem + 0.05vw, 1rem);
   --font-detail: clamp(0.875rem, 0.85rem + 0.075vw, 0.9375rem);
