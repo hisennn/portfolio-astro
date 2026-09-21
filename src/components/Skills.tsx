@@ -87,7 +87,8 @@ const skillGroups: Array<{
     title: { pt: 'Desenvolvimento assistido por IA', en: 'AI-assisted development' },
     items: [
       { name: 'Claude Code', iconSrc: '/icons/claude.svg' },
-      { name: 'OpenAI Codex', iconSrc: '/icons/openai.svg' }
+      { name: 'OpenAI Codex', iconSrc: '/icons/openai.svg' },
+      { name: 'Hermes Agent', iconSrc: '/icons/hermesagent.svg' }
     ]
   }
 ];

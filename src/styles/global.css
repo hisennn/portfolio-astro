@@ -2072,7 +2072,16 @@ a.footer-link:hover span {
 @media (max-width: 719px) {
   .project-detail-nav {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-detail-nav-link {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .project-detail-nav-link:last-child {
+    justify-content: flex-end;
   }
 
   .project-detail-nav-link:nth-child(2) {
@@ -2096,6 +2105,18 @@ a.footer-link:hover span {
   .home-main > .hero-layout {
     min-height: 84svh;
     padding-top: 5.5rem;
+  }
+
+  .hero-layout > .hero-floral {
+    top: 0;
+    right: -12%;
+    bottom: auto;
+    width: 85%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+    opacity: 0.38;
+    mask-image: linear-gradient(to right, transparent, #000 65%), linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
   }
 
   .hero-content {
