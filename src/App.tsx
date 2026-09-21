@@ -6,8 +6,11 @@ import type { ProjectPreviews } from "./components/Projects";
 import Education from "./components/Education";
 import Footer from "./components/Footer";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { useImageDrift } from "./hooks/useImageDrift";
 
 export default function App({ projectPreviews }: { projectPreviews: ProjectPreviews }) {
+  useImageDrift();
+
   return (
     <LanguageProvider>
       <div className="site-shell min-h-screen text-[var(--text-primary)]">

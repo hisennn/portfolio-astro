@@ -63,48 +63,6 @@ const imageUrl = image.startsWith("http") ? image : new URL(image, siteUrl).toSt
 
       })();
     </script>
-    <script is:inline>
-      (function () {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        var SCALE_RANGE = 0.07;
-        var imgs = [];
-        var frame = 0;
-        function collect() {
-          imgs = Array.prototype.slice.call(
-            document.querySelectorAll(".project-card-media img, .project-detail-media-frame img, .hero-floral")
-          );
-        }
-        function update() {
-          frame = 0;
-          if (!imgs.length || !imgs[0].isConnected) collect();
-          if (!imgs.length) return;
-          var vh = window.innerHeight || 1;
-          for (var i = 0; i < imgs.length; i++) {
-            var el = imgs[i];
-            var r = el.parentElement.getBoundingClientRect();
-            if (r.bottom < 0 || r.top > vh || !r.height) continue;
-            var p = (r.top + r.height / 2 - vh / 2) / vh;
-            if (p > 0.5) p = 0.5; else if (p < -0.5) p = -0.5;
-            el.style.setProperty("--drift", (p * 2 * el.offsetHeight * SCALE_RANGE).toFixed(1) + "px");
-          }
-        }
-        function schedule() {
-          if (!frame) frame = requestAnimationFrame(update);
-        }
-        function start() {
-          collect();
-          update();
-          window.addEventListener("scroll", schedule, { passive: true });
-          window.addEventListener("resize", schedule);
-          window.addEventListener("load", function () { collect(); schedule(); });
-        }
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", start);
-        } else {
-          start();
-        }
-      })();
-    </script>
     <link rel="canonical" href={canonicalUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
