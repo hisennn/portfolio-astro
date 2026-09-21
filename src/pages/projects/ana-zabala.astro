@@ -1,5 +1,6 @@
 ---
 import ProjectOverview from "../../components/ProjectOverview.astro";
+import ProjectIntro from "../../components/ProjectIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageChrome from "../../components/PageChrome";
 import ProjectMedia from "../../components/ProjectMedia.astro";
@@ -40,6 +41,7 @@ const jsonLd = {
 >
   <PageChrome client:load>
     <main class="project-detail-main">
+      <ProjectIntro>
       <div class="project-detail-hero">
         <article class="project-detail-intro">
           <div class="project-detail-heading">
@@ -93,6 +95,7 @@ const jsonLd = {
             </li>
           </ul>
       </ProjectOverview>
+      </ProjectIntro>
 
       <div class="project-detail-gallery">
         <ProjectMedia

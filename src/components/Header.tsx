@@ -5,8 +5,10 @@ import { useLanguage } from '../hooks/useLanguage';
 import Icon from './Icon';
 
 export default function Header({ projectPage = false }: { projectPage?: boolean }) {
-  const { language, setLanguage, isDarkTheme, toggleTheme } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPastHero, setIsPastHero] = useState(false);
+  const [isPastContent, setIsPastContent] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const languageMenuButton = useRef<HTMLButtonElement>(null);
   const languageMenuPointerType = useRef<string | null>(null);
@@ -20,6 +22,56 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
     return () => window.removeEventListener('scroll', updateScroll);
   }, []);
 
+  useEffect(() => {
+    const hero = document.querySelector(projectPage ? '.project-detail-band' : '.project-featured-group');
+
+    let heroObserver: IntersectionObserver | null = null;
+    if (hero) {
+      heroObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.target === hero) {
+              setIsPastHero(entry.boundingClientRect.bottom <= 0);
+            }
+          }
+        },
+        { threshold: [0, 0.05] }
+      );
+      heroObserver.observe(hero);
+    }
+
+    const HIDE_AT = 0.98;
+    let frame = 0;
+    const updatePastContent = () => {
+      frame = 0;
+      const lift = document.querySelector('.site-lift') as HTMLElement | null;
+      if (!lift) {
+        setIsPastContent(false);
+        return;
+      }
+      const viewportH = window.innerHeight || 1;
+      const liftBottom = lift.offsetTop + lift.offsetHeight;
+      const gap = document.documentElement.scrollHeight - liftBottom;
+      const progress = gap > 0
+        ? (window.scrollY + viewportH - liftBottom) / gap
+        : 1;
+      setIsPastContent(gap > 0 && progress >= HIDE_AT);
+    };
+    const schedulePastContent = () => {
+      if (!frame) frame = requestAnimationFrame(updatePastContent);
+    };
+
+    updatePastContent();
+    window.addEventListener('scroll', schedulePastContent, { passive: true });
+    window.addEventListener('resize', schedulePastContent);
+    return () => {
+      heroObserver?.disconnect();
+      window.removeEventListener('scroll', schedulePastContent);
+      window.removeEventListener('resize', schedulePastContent);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [projectPage]);
+
   const selectLanguage = (nextLanguage: 'pt' | 'en') => {
     setLanguage(nextLanguage);
     setIsLanguageMenuOpen(false);
@@ -27,21 +79,28 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
   };
 
   return (
-    <header className="site-nav sticky top-0 z-50" data-scrolled={isScrolled}>
+    <header className="site-nav top-0 z-50" data-scrolled={isScrolled} data-past-hero={isPastHero} data-past-content={isPastContent}>
       <div className={`site-header-inner ${projectPage ? 'site-header-project' : 'flex items-center justify-between'}`}>
         {projectPage && (
           <a
             href="/#projects"
-            className="project-header-back font-body text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200"
+            className="project-header-back"
           >
-            <Icon name="arrow-left" size={16} />
+            <Icon name="arrow-left" size={14} />
             <span>{language === 'en' ? 'Back' : 'Voltar'}</span>
           </a>
         )}
-        <a href="/" className="site-header-brand font-body font-bold text-base tracking-tight text-[var(--text-primary)] hover:opacity-60 transition-opacity duration-200">
+        <a href="/" className="site-header-brand">
           Gabriel
         </a>
-        <div className="site-header-controls flex items-center gap-3">
+        {!projectPage && (
+          <nav className="site-header-links" aria-label={language === 'en' ? 'Main navigation' : 'Navegação principal'}>
+            <a href="#projects">{language === 'en' ? 'Work' : 'Projetos'}</a>
+            <a href="#experience">{language === 'en' ? 'Experience' : 'Experiência'}</a>
+            <a href="#contact">{language === 'en' ? 'Contact' : 'Contato'}</a>
+          </nav>
+        )}
+        <div className="site-header-controls flex items-center gap-2">
           <div
             className={`language-menu ${isLanguageMenuOpen ? 'is-open' : ''}`}
             onPointerEnter={(event) => event.pointerType === 'mouse' && setIsLanguageMenuOpen(true)}
@@ -76,11 +135,10 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
                 languageMenuPointerType.current = null;
               }}
             >
-              <img className="language-flag" src={`/icons/flag-${language === 'en' ? 'us' : 'br'}.svg`} width={20} height={14} alt="" />
               <span className="language-menu-label">
-                {language === 'en' ? 'English' : 'Português'}
+                {language === 'en' ? 'EN' : 'PT'}
               </span>
-              <Icon name="caret-down" size={15} className="language-menu-chevron" />
+              <Icon name="caret-down" size={13} className="language-menu-chevron" />
             </button>
 
             <div
@@ -96,8 +154,15 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
                   tabIndex={isLanguageMenuOpen ? 0 : -1}
                   onClick={() => selectLanguage('pt')}
                 >
-                  <img className="language-flag" src="/icons/flag-br.svg" width={20} height={14} alt="" />
+                  <span className="language-flag-mono" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.2">
+                      <rect x="0.6" y="0.6" width="14.8" height="14.8" />
+                      <polygon points="8,2.8 13.2,8 8,13.2 2.8,8" />
+                      <circle cx="8" cy="8" r="2.2" />
+                    </svg>
+                  </span>
                   <span>Português</span>
+                  {language === 'pt' && <Icon name="check" size={12} className="language-menu-check ml-auto" />}
                 </button>
                 <button
                   type="button"
@@ -106,20 +171,23 @@ export default function Header({ projectPage = false }: { projectPage?: boolean 
                   tabIndex={isLanguageMenuOpen ? 0 : -1}
                   onClick={() => selectLanguage('en')}
                 >
-                  <img className="language-flag" src="/icons/flag-us.svg" width={20} height={14} alt="" />
+                  <span className="language-flag-mono" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.2">
+                      <rect x="0.6" y="0.6" width="14.8" height="14.8" />
+                      <rect x="0.6" y="0.6" width="6.6" height="6.6" fill="currentColor" />
+                      <line x1="7.2" y1="2.6" x2="15.4" y2="2.6" />
+                      <line x1="7.2" y1="5" x2="15.4" y2="5" />
+                      <line x1="0.6" y1="9.4" x2="15.4" y2="9.4" />
+                      <line x1="0.6" y1="12.2" x2="15.4" y2="12.2" />
+                    </svg>
+                  </span>
                   <span>English</span>
+                  {language === 'en' && <Icon name="check" size={12} className="language-menu-check ml-auto" />}
                 </button>
               </div>
             </div>
           </div>
 
-          <button
-            onClick={toggleTheme}
-            className="theme-toggle flex size-9 cursor-pointer items-center justify-center text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
-            aria-label="Toggle theme"
-          >
-            <Icon name={isDarkTheme ? 'sun' : 'moon'} size={16} />
-          </button>
         </div>
       </div>
     </header>

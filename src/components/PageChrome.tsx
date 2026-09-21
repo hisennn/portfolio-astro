@@ -8,9 +8,11 @@ import { LanguageProvider } from '../contexts/LanguageContext';
 export default function PageChrome({ children }: { children: ReactNode }) {
   return (
     <LanguageProvider>
-      <div className="site-shell min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
-        <Header projectPage />
-        {children}
+      <div className="site-shell min-h-screen text-[var(--text-primary)]">
+        <div className="site-lift">
+          <Header projectPage />
+          {children}
+        </div>
         <Footer />
       </div>
     </LanguageProvider>

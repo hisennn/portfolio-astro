@@ -6,6 +6,7 @@ import Icon from './Icon';
 const texts = {
   pt: {
     title: 'Projetos',
+    otherProjects: 'Outros projetos',
     open: 'Ver projeto',
     brcPortal:
       'Portal interno da Baltimore Re-Construction para organizar clientes, projetos, arquivos, seleções de materiais, contratos e comunicação.',
@@ -22,6 +23,7 @@ const texts = {
   },
   en: {
     title: 'Projects',
+    otherProjects: 'Other projects',
     open: 'View project',
     brcPortal:
       "Baltimore Re-Construction's internal portal for organizing clients, projects, files, material selections, contracts, and communication.",
@@ -108,50 +110,61 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
 
   return (
     <section id="projects" className="project-list-section" aria-labelledby="projects-heading">
-      <h2 id="projects-heading" className="section-heading">{copy.title}</h2>
+      {[projects.slice(0, 2), projects.slice(2)].map((group, groupIndex) => (
+        <div key={groupIndex} className={groupIndex === 0 ? 'project-featured-group' : 'project-compact-group'}>
+          {groupIndex === 0 && <img className="project-landscape" src="/images/medieval-meadow.png" alt="" aria-hidden="true" width={1536} height={1024} loading="lazy" decoding="async" />}
+          {groupIndex === 0 && <div className="project-section-heading">
+            <h2 id="projects-heading" className="section-heading">{copy.title}</h2>
+          </div>}
+          {groupIndex === 1 && <p className="project-group-label">{copy.otherProjects}</p>}
 
-      <div className="project-grid">
-        {projects.map((item, i) => (
-          <article key={item.href} className="project-card">
-            <a
-              href={item.href}
-              className="project-card-media"
-              aria-label={`${copy.open}: ${item.name}`}
-            >
-              <img
-                src={previews[item.visual]}
-                alt=""
-                width={1200}
-                height={750}
-                loading={i < 3 ? 'eager' : 'lazy'}
-                decoding="async"
-              />
-            </a>
-            <div className="project-card-body">
-              <h3 className="project-card-title">
-                <a href={item.href}>
-                  <span>{item.name}</span>
-                  <Icon name="arrow-up-right" size={20} className="project-card-arrow" />
+          <div className="project-grid">
+            {group.map((item) => (
+              <article key={item.href} className={`project-card ${groupIndex === 0 ? 'project-card-featured' : 'project-card-compact'}`}>
+                <div className="project-card-body">
+                  <h3 className="project-card-title">
+                    <a href={item.href}>
+                      <span>{item.name}</span>
+                    </a>
+                  </h3>
+                  {groupIndex === 0 && <p className="project-card-desc">{copy[item.descKey]}</p>}
+                  <ul className="project-card-tech" aria-label={lang === 'pt' ? 'Tecnologias' : 'Technologies'}>
+                    {item.tech.map((tech) => (
+                      <li key={tech} title={tech}>
+                        {tech === 'Neon' || tech === 'Pusher' ? (
+                          <span className="project-tech-icon" aria-hidden="true" style={{
+                            mask: `url(/icons/${tech.toLowerCase()}.svg) center / contain no-repeat`,
+                            WebkitMask: `url(/icons/${tech.toLowerCase()}.svg) center / contain no-repeat`
+                          }} />
+                        ) : <i className={techIcons[tech]} aria-hidden="true" />}
+                        <span className={groupIndex === 0 ? undefined : 'sr-only'}>{tech}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a href={item.href} className="project-card-link" aria-label={`${copy.open}: ${item.name}`}>
+                    <span>{copy.open}</span>
+                    <Icon name="arrow-up-right" size={14} className="project-card-arrow" />
+                  </a>
+                </div>
+                <a
+                  href={item.href}
+                  className="project-card-media"
+                  aria-label={`${copy.open}: ${item.name}`}
+                >
+                  <img
+                    src={previews[item.visual]}
+                    alt=""
+                    width={1200}
+                    height={750}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </a>
-              </h3>
-              <p className="project-card-desc">{copy[item.descKey]}</p>
-              <ul className="project-card-tech" aria-label={lang === 'pt' ? 'Tecnologias' : 'Technologies'}>
-                {item.tech.map((tech) => (
-                  <li key={tech}>
-                    {tech === 'Neon' || tech === 'Pusher' ? (
-                      <span className="project-tech-icon" aria-hidden="true" style={{
-                        mask: `url(/icons/${tech.toLowerCase()}.svg) center / contain no-repeat`,
-                        WebkitMask: `url(/icons/${tech.toLowerCase()}.svg) center / contain no-repeat`
-                      }} />
-                    ) : <i className={techIcons[tech]} aria-hidden="true" />}
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </article>
-        ))}
-      </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
     </section>
   );
 }

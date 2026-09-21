@@ -26,15 +26,15 @@ const imageUrl = image.startsWith("http") ? image : new URL(image, siteUrl).toSt
 ---
 
 <!doctype html>
-<html lang="pt-BR" data-theme="dark" class="theme-loading">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Gabriel Lemes" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#1d1e1b" />
-    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#001080" />
+    <meta name="color-scheme" content="light" />
     <meta http-equiv="Content-Language" content="pt-BR, en" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
@@ -55,28 +55,54 @@ const imageUrl = image.startsWith("http") ? image : new URL(image, siteUrl).toSt
       (function () {
         var root = document.documentElement;
         try {
-          var theme = localStorage.getItem("theme");
           var language = localStorage.getItem("language");
-          root.setAttribute("data-theme", theme === "light" ? "light" : "dark");
           root.setAttribute("lang", language === "en" ? "en" : "pt-BR");
         } catch (_) {
-          root.setAttribute("data-theme", "dark");
           root.setAttribute("lang", "pt-BR");
         }
 
-        function unlockTransitions() {
-          requestAnimationFrame(function () {
-            root.classList.remove("theme-loading");
-          });
+      })();
+    </script>
+    <script is:inline>
+      (function () {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var SCALE_RANGE = 0.07;
+        var imgs = [];
+        var frame = 0;
+        function collect() {
+          imgs = Array.prototype.slice.call(
+            document.querySelectorAll(".project-card-media img, .project-detail-media-frame img, .hero-floral")
+          );
         }
-
+        function update() {
+          frame = 0;
+          if (!imgs.length || !imgs[0].isConnected) collect();
+          if (!imgs.length) return;
+          var vh = window.innerHeight || 1;
+          for (var i = 0; i < imgs.length; i++) {
+            var el = imgs[i];
+            var r = el.parentElement.getBoundingClientRect();
+            if (r.bottom < 0 || r.top > vh || !r.height) continue;
+            var p = (r.top + r.height / 2 - vh / 2) / vh;
+            if (p > 0.5) p = 0.5; else if (p < -0.5) p = -0.5;
+            el.style.setProperty("--drift", (p * 2 * el.offsetHeight * SCALE_RANGE).toFixed(1) + "px");
+          }
+        }
+        function schedule() {
+          if (!frame) frame = requestAnimationFrame(update);
+        }
+        function start() {
+          collect();
+          update();
+          window.addEventListener("scroll", schedule, { passive: true });
+          window.addEventListener("resize", schedule);
+          window.addEventListener("load", function () { collect(); schedule(); });
+        }
         if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", unlockTransitions);
+          document.addEventListener("DOMContentLoaded", start);
         } else {
-          unlockTransitions();
+          start();
         }
-
-        setTimeout(unlockTransitions, 100);
       })();
     </script>
     <link rel="canonical" href={canonicalUrl} />
@@ -84,7 +110,7 @@ const imageUrl = image.startsWith("http") ? image : new URL(image, siteUrl).toSt
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Asap:wght@400;500;600;700;800&family=Ysabeau:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400..800;1,400..800&family=Encode+Sans+Condensed:wght@400;500;600;700;800;900&display=swap"
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2.2" />
     <link rel="sitemap" href="/sitemap.xml" />

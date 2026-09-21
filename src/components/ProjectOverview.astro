@@ -2,6 +2,11 @@
   <summary>
     <span data-lang="pt">Sobre o desenvolvimento</span>
     <span data-lang="en">About the development</span>
+    <svg class="overview-toggle-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+      <path class="overview-toggle-stem" d="M8 2v11" />
+      <path class="overview-toggle-left" d="M3 8l5 5" />
+      <path class="overview-toggle-right" d="M13 8l-5 5" />
+    </svg>
   </summary>
   <div class="project-detail-overview-body">
     <slot />
@@ -17,6 +22,7 @@
     summary.addEventListener('click', event => {
       event.preventDefault();
       expanded = !expanded;
+      details.dataset.expanded = String(expanded);
       const startHeight = details.getBoundingClientRect().height;
       animation?.cancel();
       details.open = expanded;
