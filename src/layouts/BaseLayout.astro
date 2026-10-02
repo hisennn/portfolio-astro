@@ -54,13 +54,16 @@ const imageUrl = image.startsWith("http") ? image : new URL(image, siteUrl).toSt
     <script is:inline>
       (function () {
         var root = document.documentElement;
+        var language;
         try {
-          var language = localStorage.getItem("language");
-          root.setAttribute("lang", language === "en" ? "en" : "pt-BR");
+          language = localStorage.getItem("language");
         } catch (_) {
-          root.setAttribute("lang", "pt-BR");
         }
-
+        if (language !== "pt" && language !== "en") {
+          var browserLanguage = navigator.languages?.[0] || navigator.language || "pt";
+          language = /^pt(?:-|$)/i.test(browserLanguage) ? "pt" : "en";
+        }
+        root.setAttribute("lang", language === "en" ? "en" : "pt-BR");
       })();
     </script>
     <link rel="canonical" href={canonicalUrl} />

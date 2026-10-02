@@ -18,16 +18,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("pt");
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem("language");
-    const language = savedLanguage === "en" ? "en" : "pt";
+    const language = document.documentElement.lang === "en" ? "en" : "pt";
     setLanguageState(language);
-    document.documentElement.setAttribute("lang", language === "en" ? "en" : "pt-BR");
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem("language", lang);
     document.documentElement.setAttribute("lang", lang === "en" ? "en" : "pt-BR");
+    try {
+      localStorage.setItem("language", lang);
+    } catch (_) {
+    }
   };
 
   return (
