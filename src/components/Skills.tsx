@@ -5,8 +5,15 @@ import { useLanguage } from '../hooks/useLanguage';
 const texts = {
   pt: {
     title: 'Habilidades',
+    productivityTitle: 'Produtividade e organização',
+    productivity: [
+      'Pacote Office (Word, Excel e PowerPoint)',
+      'Google Workspace (Docs, Sheets, Slides e Drive)'
+    ],
     practicesTitle: 'Práticas',
     practices: [
+      'Interfaces responsivas',
+      'SEO técnico',
       'Modelagem de dados',
       'APIs e integrações',
       'Autenticação e autorização',
@@ -19,13 +26,21 @@ const texts = {
     workStyle: [
       'Atendimento e suporte ao cliente',
       'Definição de escopo',
+      'Organização de planilhas e documentos',
       'Acompanhamento de ajustes e entregas'
     ]
   },
   en: {
     title: 'Skills',
+    productivityTitle: 'Productivity and organization',
+    productivity: [
+      'Microsoft Office (Word, Excel and PowerPoint)',
+      'Google Workspace (Docs, Sheets, Slides and Drive)'
+    ],
     practicesTitle: 'Practices',
     practices: [
+      'Responsive interfaces',
+      'Technical SEO',
       'Data modeling',
       'APIs and integrations',
       'Authentication and authorization',
@@ -38,6 +53,7 @@ const texts = {
     workStyle: [
       'Customer service and support',
       'Scope definition',
+      'Spreadsheet and document organization',
       'Client feedback and delivery'
     ]
   }
@@ -80,7 +96,8 @@ const skillGroups: Array<{
       { name: 'GitHub', icon: 'devicon-github-original' },
       { name: 'npm', icon: 'devicon-npm-original-wordmark' },
       { name: 'Bun', icon: 'devicon-bun-plain' },
-      { name: 'Figma', icon: 'devicon-figma-plain' }
+      { name: 'Figma', icon: 'devicon-figma-plain' },
+      { name: 'Cloudflare', icon: 'devicon-cloudflare-plain' }
     ]
   },
   {
@@ -137,6 +154,20 @@ export default function Skills() {
       </div>
 
       <div className="skills-rows">
+        <div className="skills-row skills-row-wide">
+          <h3>{texts[lang].productivityTitle}</h3>
+          <p>
+            {texts[lang].productivity.map((item, index) => (
+              <span key={item} className="skill-inline-item">
+                {item}
+                {index < texts[lang].productivity.length - 1 && (
+                  <span className="skills-sep" aria-hidden="true"> · </span>
+                )}
+              </span>
+            ))}
+          </p>
+        </div>
+
         <div className="skills-row">
           <h3>{texts[lang].practicesTitle}</h3>
           <p>

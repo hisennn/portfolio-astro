@@ -112,7 +112,7 @@ export default function Projects({ previews }: { previews: ProjectPreviews }) {
     <section id="projects" className="project-list-section" aria-labelledby="projects-heading">
       {[projects.slice(0, 2), projects.slice(2)].map((group, groupIndex) => (
         <div key={groupIndex} className={groupIndex === 0 ? 'project-featured-group' : 'project-compact-group'}>
-          {groupIndex === 0 && <img className="project-landscape" src="/images/medieval-meadow.png" alt="" aria-hidden="true" width={1536} height={1024} loading="lazy" decoding="async" />}
+          {groupIndex === 0 && <img className="project-landscape" src="/images/fantasy-cliff-castle.webp" alt="" aria-hidden="true" width={1536} height={1024} loading="lazy" decoding="async" />}
           {groupIndex === 0 && <div className="project-section-heading">
             <h2 id="projects-heading" className="section-heading">{copy.title}</h2>
           </div>}
